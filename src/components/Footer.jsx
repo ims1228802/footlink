@@ -13,7 +13,7 @@ export default function Footer() {
           <li>
             <Link href="...">이용약관</Link>
             <Link href="...">개인정보 처리방침</Link>
-            <Link href="...">고객센터1111</Link>
+            <Link href="...">고객센터</Link>
           </li>
         </ul>
         <div className="footer-txt">
