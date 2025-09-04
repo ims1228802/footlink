@@ -12,7 +12,7 @@ export default function Footer() {
         <ul className="footer-menu">
           <li>
             <Link href="...">이용약관</Link>
-            <Link href="...">개인정보 처리방침</Link>
+            <Link href="...">개인정보 처리방침123</Link>
             <Link href="...">고객센터</Link>
           </li>
         </ul>
