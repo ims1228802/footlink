@@ -28,7 +28,7 @@ function groupBy(matches) {
 {
   /*찜한매치 그룹화*/
 }
-const grouped = groupBy(LikeMatchs);
+const grouped = groupBy(likeMatchs);
 
 export default function LikeMachs() {
   return (
