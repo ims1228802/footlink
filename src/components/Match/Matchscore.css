@@ -1,0 +1,17 @@
+.score-board {
+  display: flex; 
+  flex-direction: column; 
+  width: 479px;
+  padding: 20px;
+  text-align: center;
+}
+.score-board p{
+  width: 52px;
+}
+
+.team-result,
+.result-score {
+  display: flex; 
+  justify-content: space-around;
+  width: 100%;
+}
