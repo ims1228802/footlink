@@ -1,7 +1,9 @@
-import logoHeader from "../assets/layout/logo_Header.svg";
-import menuHeader from "../assets/layout/menu_Header.svg";
-import { BsSearch,BsShield,BsDiagram2,BsPerson } from "react-icons/bs";
-import '../css/Header.css';
+import LogoHeader from "../assets/layout/Logo_Header.svg";
+import Menu_Header from "../assets/layout/Menu_Header.svg";
+import Search from "../assets/layout/Search.svg";
+import Shield from "../assets/layout/Shield.svg";
+import Calendar from "../assets/layout/Calendar.svg";
+import User from "../assets/layout/User.svg";
 
 export default function Header() {
   return (
@@ -9,17 +11,17 @@ export default function Header() {
       <div id="header">
           <div className="header-menu">
             <button className="header-nav-btn" type="button">
-              <img src={menuHeader} alt="menuHeader" />
+              <img src={Menu_Header} alt="MenuIcon" />
             </button>
           </div>
           <div className="header-logo">
             <button className="header-logo-btn">
-              <img src={logoHeader} alt="HeaderLogo" />
+              <img src={LogoHeader} alt="HeaderLogo" />
             </button>
           </div>
           <div className="header-search">
             <div className="header-search-bar">
-              <BsSearch />
+              <img src={Search} alt="SearchIcon" />
               <input
                 type="search"
                 placeholder="지역,구장,팀이름으로 찾기"
@@ -28,17 +30,17 @@ export default function Header() {
           </div>
           <div className="header-team-icon">
             <button className="header-team">
-              <BsShield />
+              <img src={Shield} alt="ShieldIcon" />
             </button>
           </div>
           <div className="header-match-icon">
             <button className="header-match">
-              <BsDiagram2 />
+              <img src={Calendar} alt="MatchIcon" />
             </button>
           </div>
           <div className="header-mypage-icon">
             <button className="header-mypage">
-              <BsPerson />
+              <img src={User} alt="UserIcon" />
             </button>
           </div>
       </div>

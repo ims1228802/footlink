@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIos from "../../assets/icon/ArrowBackIos.svg";
 
-export default function SignUpForm() {
+export default function SignUp() {
   const [form, setForm] = useState({
     email: "",
     password: "",
