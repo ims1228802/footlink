@@ -18,7 +18,7 @@ export default function LoginPage() {
   return (
     <div>
       <img src={logoHeader} alt="로고" />
-      <p>로그인하고 팀을 만나세요.</p>
+      <p>로그인하고 팀을 만나세요..</p>
 
       <form onSubmit={handleLogin}>
         <input
