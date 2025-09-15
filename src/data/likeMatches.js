@@ -1,8 +1,7 @@
-{
-  /*더미데이터*/
-}
 
-export const LikeMatchs = [
+  /*더미데이터*/
+
+export const LikeMatches = [
   {
     matchNum: "051",
     date: "2025-07-30",
