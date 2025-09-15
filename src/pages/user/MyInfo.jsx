@@ -1,8 +1,8 @@
 import { user, matchStats } from "../../data/user";
 import Game from "../../assets/icon/Game.svg?react";
-import Starrate from "../../assets/icon/Starrate.svg?react";
-import History from "../../assets/icon/History.svg?react";
-import Share from "../../assets/icon/Share.svg?react";
+import Starrate from "../../assets/icon/Starrate.svg";
+import History from "../../assets/icon/History.svg";
+import Share from "../../assets/icon/Share.svg";
 
 export default function MyPage() {
   return (
