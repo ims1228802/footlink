@@ -1,5 +1,5 @@
-import { likeMatchs } from "../../data/user";
-import { Love } from "../../assets/icon";
+import likeMatches from "../../data/likeMatches"; 
+import love from "../../assets/icon/love.svg";  
 
 {
   /*
@@ -28,7 +28,7 @@ function groupBy(matches) {
 {
   /*찜한매치 그룹화*/
 }
-const grouped = groupBy(likeMatchs);
+const grouped = groupBy(likeMatches);
 
 export default function LikeMachs() {
   return (

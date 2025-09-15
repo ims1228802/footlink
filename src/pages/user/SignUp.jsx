@@ -59,11 +59,24 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // birthYear, birthMonth, birthDay → birth(YYYY-MM-DD)로 합치기
-    const birth = `${form.birthYear}-${form.birthMonth.padStart(
-      2,
+    // ✅ 생년월일 조합 및 유효성 검사
+    const birth = `${form.birthYear?.padStart(
+      4,
       "0"
-    )}-${form.birthDay.padStart(2, "0")}`;
+    )}-${form.birthMonth?.padStart(2, "0")}-${form.birthDay?.padStart(2, "0")}`;
+
+    const dateObj = new Date(birth);
+    const isValidDate =
+      !isNaN(dateObj.getTime()) &&
+      Number(form.birthMonth) >= 1 &&
+      Number(form.birthMonth) <= 12 &&
+      Number(form.birthDay) >= 1 &&
+      Number(form.birthDay) <= 31;
+
+    if (!isValidDate) {
+      alert("올바른 생년월일을 입력해주세요 (예: 1998-05-21)");
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -75,7 +88,7 @@ export default function SignUp() {
       confirmPassword: form.confirmPassword,
       name: form.name,
       phone: form.phone,
-      birth, // ✅ 하나로 합쳐진 값
+      birth, // 하나로 합쳐진 값
       gender: form.gender,
       city: form.city,
       district: form.district,

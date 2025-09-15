@@ -3,10 +3,13 @@ import Menu_Header from "../assets/layout/Menu_Header.svg";
 import Search from "../assets/layout/Search.svg";
 import Shield from "../assets/layout/Shield.svg";
 import Calendar from "../assets/layout/Calendar.svg";
+import { useNavigate } from "react-router-dom";
 import User from "../assets/layout/User.svg";
 import "../css/Header.css";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <header className="header">
       <div className="header-container">
@@ -20,7 +23,7 @@ export default function Header() {
 
           {/* 로고 */}
           <div className="header-section header-logo">
-            <button className="header-btn header-btn-logo">
+            <button className="header-btn header-btn-logo" onClick={() => navigate("/main")}>
               <img src={LogoHeader} alt="Header Logo" />
             </button>
           </div>
@@ -44,13 +47,22 @@ export default function Header() {
 
           {/* 아이콘 영역 */}
           <div className="header-section header-icons">
-            <button className="header-btn header-btn-team">
+            <button
+              className="header-btn header-btn-team"
+              onClick={() => navigate("/teamList")}
+            >
               <img src={Shield} alt="Shield Icon" />
             </button>
-            <button className="header-btn header-btn-match">
+            <button
+              className="header-btn header-btn-match"
+              onClick={() => navigate("/match")}
+            >
               <img src={Calendar} alt="Match Icon" />
             </button>
-            <button className="header-btn header-btn-user">
+            <button
+              className="header-btn header-btn-user"
+              onClick={() => navigate("/login")}
+            >
               <img src={User} alt="User Icon" />
             </button>
           </div>

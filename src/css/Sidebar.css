@@ -1,0 +1,9 @@
+#sidebar {
+  width: 220px;
+  background-color: #1f252e;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

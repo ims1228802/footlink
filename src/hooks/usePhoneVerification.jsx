@@ -9,7 +9,7 @@ export default function usePhoneVerification() {
     request(async () => {
       // 중복 체크
       const data = await apiFetch(
-        `http://localhost/api/check-phone?phone=${phone}`
+        `/api/check-phone?phone=${phone}`
       );
       if (data.exists) {
         alert("이미 등록된 휴대폰 번호입니다.");
@@ -17,7 +17,7 @@ export default function usePhoneVerification() {
       }
 
       // 인증번호 요청
-      await apiFetch(`http://localhost/api/phone/request`, {
+      await apiFetch(`/api/phone/request`, {
         method: "POST",
         body: JSON.stringify({ phone }),
       });
