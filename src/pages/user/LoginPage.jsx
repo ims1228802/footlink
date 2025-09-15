@@ -3,10 +3,10 @@ import google from "../../assets/login/google.svg";
 import kakao from "../../assets/login/kakao.svg";
 import naver from "../../assets/login/naver.svg";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/LoginPage.css";
 import useForm from "../../hooks/useForm";
-// import axios from "axios";
+import axios from "axios";
 
 export default function LoginPage() {
   // 유효성 검사 함수
@@ -24,12 +24,12 @@ export default function LoginPage() {
     return errors;
   };
 
-  const { values, errors, handleChange, handleSubmit ,setValues} = useForm(
+  const { values, errors, handleChange, handleSubmit, setValues } = useForm(
     { email: "", password: "", remember: false }, // 초기값
     validate
   );
 
-   // 아이디 저장 불러오기
+  // 아이디 저장 불러오기
   useEffect(() => {
     const savedEmail = localStorage.getItem("savedEmail");
     if (savedEmail) {
@@ -43,17 +43,18 @@ export default function LoginPage() {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:8080/login", {
+      const response = await axios.post("http://localhost:8080/api/login", {
         email: formData.email,
         password: formData.password,
       });
 
-      if (response.data.success) {
+      if (response.data) {
         alert("로그인 성공");
       } else {
         alert("가입된 회원이 없습니다");
       }
     } catch (error) {
+      console.error(error)
       alert("로그인요청실패");
     }
   };
