@@ -11,9 +11,9 @@ export default function Footer() {
         </div>
         <ul className="footer-menu">
           <li>
-            <Link href="...">이용약관</Link>
-            <Link href="...">개인정보 처리방침</Link>
-            <Link href="...">고객센터</Link>
+            <Link to="...">이용약관</Link>
+            <Link to="...">개인정보 처리방침</Link>
+            <Link to="...">고객센터</Link>
           </li>
         </ul>
         <div className="footer-txt">

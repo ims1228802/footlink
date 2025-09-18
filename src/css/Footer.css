@@ -1,1 +1,77 @@
-/*확인*/
+
+footer{
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+#footer{
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 28px 16px 36px;
+
+  display: grid;
+  row-gap: 18px;
+}
+
+/* 1) 로고 + 메뉴 줄 */
+.footer-logo img{ height: 36px; }
+
+.footer-menu{ margin: 0; padding: 0; }
+.footer-menu li{
+  list-style: none;
+  display: flex; flex-wrap: wrap;
+  gap: 16px 20px;
+  padding: 0;
+}
+.footer-menu a{
+  color: var(--footer-text);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-menu a:hover{ text-decoration: underline; }
+
+/* 2) 회사 정보 */
+.footer-txt p{
+  margin: 0;
+  color: var(--footer-muted);
+}
+
+/* 3) 카피 */
+.footer_txt-copy{
+  margin-top: 4px;
+  color: var(--footer-muted);
+  font-size: 13px;
+}
+
+/* 4) 담당자/기능 리스트 */
+.footer-ft{
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 24px;
+}
+.footer-ft > li{ list-style: none; }
+
+.footer-ft-name{
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.footer-ft-list p{
+  margin: 0 0 6px;
+  color: var(--footer-text);
+  opacity: .9;
+}
+
+/* 반응형 */
+@media (max-width: 1024px){
+  :root{ --container-w: 100%; }
+}
+@media (max-width: 768px){
+  #footer{ row-gap: 16px; }
+  .footer-ft{ grid-template-columns: 1fr; }
+}

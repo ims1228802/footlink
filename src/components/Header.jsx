@@ -4,6 +4,7 @@ import Search from "../assets/layout/Search.svg";
 import Shield from "../assets/layout/Shield.svg";
 import Calendar from "../assets/layout/Calendar.svg";
 import User from "../assets/layout/User.svg";
+import '../css/Header.css';
 
 export default function Header() {
   return (

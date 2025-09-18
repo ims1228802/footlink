@@ -5,7 +5,8 @@ import Handshake from "../assets/layout/Handshake.svg";
 import Commercial from "../assets/layout/Commercial.svg";
 import Help_outline from "../assets/layout/Help_outline.svg";
 import Settings from "../assets/layout/Settings.svg";
-import {user} from "../data/user.js";
+import Output from "../assets/layout/Output.svg";
+import { user } from "../data/user.js";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -54,12 +55,12 @@ export default function Sidebar() {
           <div className="sidebar-title">기타</div>
           <ul>
                 <li>
-                  <Link to="/">설정</Link>
-                  <img src={Commercial} alt="공지사항" />
+                  <Link to="/Settings">설정</Link>
+                  <img src={Settings} alt="설정" />
                 </li>
                 <li>
-                  <Link to="/faq">로그아웃</Link>
-                  <img src={Help_outline} alt="자주 묻는 질문" />
+                  <Link to="/logout">로그아웃</Link>
+                  <img src={Output} alt="로그아웃" />
                 </li>
               </ul>
           </div>
