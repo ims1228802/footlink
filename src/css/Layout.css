@@ -1,0 +1,8 @@
+html, body, #root { height: 100%; }
+body{
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+main{ flex: 1 0 auto; } /* header 위/ footer 아래에 본문 채우기 */
