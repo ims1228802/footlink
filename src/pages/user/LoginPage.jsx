@@ -54,43 +54,46 @@ export default function LoginPage() {
         alert("가입된 회원이 없습니다");
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
       alert("로그인요청실패");
     }
   };
   return (
-    <div>
-      <img src={logoHeader} alt="로고" />
-      <p>로그인하고 팀을 만나세요.</p>
+    <div className="login-container">
+      <img src={logoHeader} className="logo" alt="로고" />
+      <p className="login-text">로그인하고 팀을 만나세요.</p>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
           name="email"
+          className="input-field"
           placeholder="이메일을 입력해주세요"
           value={values.email}
           onChange={handleChange}
           required
         />
-        {errors.email && <div className="errorMessage">{errors.email}</div>}
+        {errors.email && <div className="error-message">{errors.email}</div>}
 
         <input
           type="password"
           name="password"
+          className="input-field"
           placeholder="비밀번호를 입력해주세요"
           value={values.password}
           onChange={handleChange}
           required
         />
         {errors.password && (
-          <div className="errorMessage">{errors.password}</div>
+          <div className="error-message">{errors.password}</div>
         )}
 
-        <div>
-          <label>
+        <div className="checkbox-wrapper">
+          <label className="checkbox-label">
             <input
               type="checkbox"
               name="remember"
+              className="checkbox-input"
               checked={values.remember}
               onChange={handleChange}
             />
@@ -98,19 +101,27 @@ export default function LoginPage() {
           </label>
         </div>
 
-        <button type="submit">로그인</button>
+        <button type="submit" className="login-button">
+          로그인
+        </button>
 
-        <div>
-          <Link to="/signup">회원가입</Link>
-          <Link to="/FindEmail">아이디 찾기</Link>
-          <Link to="/FindPassword">비밀번호 찾기</Link>
+        <div className="link-group">
+          <Link to="/signup" className="link">
+            회원가입
+          </Link>
+          <Link to="/FindEmail" className="link">
+            아이디 찾기
+          </Link>
+          <Link to="/FindPassword" className="link">
+            비밀번호 찾기
+          </Link>
         </div>
       </form>
 
-      <div>
-        <img src={kakao} alt="카카오 로그인" />
-        <img src={google} alt="구글 로그인" />
-        <img src={naver} alt="네이버 로그인" />
+      <div className="social-login">
+        <img src={kakao} className="social-icon" alt="카카오 로그인" />
+        <img src={google} className="social-icon" alt="구글 로그인" />
+        <img src={naver} className="social-icon" alt="네이버 로그인" />
       </div>
     </div>
   );
