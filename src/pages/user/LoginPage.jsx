@@ -67,7 +67,7 @@ export default function LoginPage() {
         <input
           type="email"
           name="email"
-          className="input-field"
+          className="login-input"
           placeholder="이메일을 입력해주세요"
           value={values.email}
           onChange={handleChange}
@@ -78,7 +78,7 @@ export default function LoginPage() {
         <input
           type="password"
           name="password"
-          className="input-field"
+          className="login-input"
           placeholder="비밀번호를 입력해주세요"
           value={values.password}
           onChange={handleChange}
@@ -97,24 +97,33 @@ export default function LoginPage() {
               checked={values.remember}
               onChange={handleChange}
             />
+            <span className="circle"></span>
             아이디 저장
           </label>
         </div>
 
         <button type="submit" className="login-button">
-          로그인
+          로 그 인
         </button>
 
         <div className="link-group">
-          <Link to="/signup" className="link">
-            회원가입
-          </Link>
-          <Link to="/FindEmail" className="link">
-            아이디 찾기
-          </Link>
-          <Link to="/FindPassword" className="link">
-            비밀번호 찾기
-          </Link>
+          <ul className="link-group">
+            <li>
+              <Link to="/signup" className="link">
+                회원가입
+              </Link>
+            </li>
+            <li>
+              <Link to="/FindEmail" className="link">
+                계정 찾기
+              </Link>
+            </li>
+            <li>
+              <Link to="/FindPassword" className="link">
+                비밀번호 찾기
+              </Link>
+            </li>
+          </ul>
         </div>
       </form>
 

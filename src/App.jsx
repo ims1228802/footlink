@@ -12,13 +12,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Navigate to="/login" />} />{" "}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/FindEmail" element={<FindEmail />} />
         <Route path="/FindPassword" element={<FindPassword />} />
-        
+      </Routes>
       {/* <Routes>
         <Route path="/" element={<Navigate to="/main" />} />
         <Route

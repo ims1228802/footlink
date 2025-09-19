@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIos from "../../assets/icon/ArrowBackIos.svg";
+import "../../css/SignUp.css";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -36,182 +37,230 @@ export default function SignUp() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Link to="/login">
-        <img
-          src={ArrowBackIos}
-          alt="로그인으로 돌아가기"
-        />
-      </Link>
-      <h2>회원가입</h2>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <Link to="/login" className="back-link">
+          <img
+            src={ArrowBackIos}
+            alt="로그인으로 돌아가기"
+            className="back-icon"
+          />
+        </Link>
+        <h2 className="form-title">회원가입</h2>
 
-      <h3>기본정보</h3>
-      <input
-        type="email"
-        name="email"
-        placeholder="이메일을 입력해주세요"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <br />
-
-      <input
-        type="password"
-        name="password"
-        placeholder="비밀번호를 입력해주세요"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
-      <br />
-
-      <input
-        type="password"
-        name="confirmPassword"
-        placeholder="비밀번호를 다시 입력해주세요"
-        value={form.confirmPassword}
-        onChange={handleChange}
-        required
-      />
-      <br />
-
-      <input
-        type="text"
-        name="name"
-        placeholder="이름을 입력해주세요"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-      <br />
-
-      <div>
-        <input
-          type="text"
-          name="birthYear"
-          placeholder="YYYY"
-          value={form.birthYear}
-          onChange={handleChange}
-          maxLength={4}
-        />
-        <input
-          type="text"
-          name="birthMonth"
-          placeholder="MM"
-          value={form.birthMonth}
-          onChange={handleChange}
-          maxLength={2}
-        />
-        <input
-          type="text"
-          name="birthDay"
-          placeholder="DD"
-          value={form.birthDay}
-          onChange={handleChange}
-          maxLength={2}
-        />
-      </div>
-
-      <div>
-        <label>
+        <h3 className="section-title">기본정보</h3>
+        <div className="select-group">
+          <label htmlFor="email" className="form-label">
+            이메일
+          </label>
           <input
-            type="radio"
-            name="gender"
-            value="남자"
-            checked={form.gender === "남자"}
+            id="email"
+            type="email"
+            name="email"
+            className="signup-input"
+            placeholder="이메일을 입력해주세요"
+            value={form.email}
             onChange={handleChange}
-          />{" "}
-          남자
-        </label>
-        <label>
+            required
+          />
+          <label htmlFor="password" className="form-label">
+            비밀번호
+          </label>
           <input
-            type="radio"
-            name="gender"
-            value="여자"
-            checked={form.gender === "여자"}
+            id="password"
+            type="password"
+            name="password"
+            className="signup-input"
+            placeholder="비밀번호를 입력해주세요"
+            value={form.password}
             onChange={handleChange}
-          />{" "}
-          여자
-        </label>
-      </div>
+            required
+          />
+          <label htmlFor="confirmPassword" className="form-label">
+            비밀번호 확인
+          </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            className="signup-input"
+            placeholder="비밀번호를 다시 입력해주세요"
+            value={form.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="name" className="form-label">
+            이름
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            className="signup-input"
+            placeholder="이름을 입력해주세요"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+          <div className="birth-group">
+            <label className="form-label">생년월일</label>
+            <div className="birth-inputs">
+              <input
+                type="text"
+                name="birthYear"
+                className="input-birth"
+                placeholder="YYYY"
+                value={form.birthYear}
+                onChange={handleChange}
+                maxLength={4}
+              />
+              <input
+                type="text"
+                name="birthMonth"
+                className="input-birth"
+                placeholder="MM"
+                value={form.birthMonth}
+                onChange={handleChange}
+                maxLength={2}
+              />
+              <input
+                type="text"
+                name="birthDay"
+                className="input-birth"
+                placeholder="DD"
+                value={form.birthDay}
+                onChange={handleChange}
+                maxLength={2}
+              />
+            </div>
+          </div>
 
-      <input
-        type="tel"
-        name="phone"
-        placeholder="휴대폰 번호"
-        value={form.phone}
-        onChange={handleChange}
-      />
-      <button type="button">인증요청</button>
-      <br />
+          <div className="gender-group">
+            <label className="form-label">성별</label>
+            <div className="gender-toggle">
+              <input
+                id="male"
+                type="radio"
+                name="gender"
+                value="남자"
+                checked={form.gender === "남자"}
+                onChange={handleChange}
+              />
+              <label htmlFor="male">남자</label>
+              <input
+                id="female"
+                type="radio"
+                name="gender"
+                value="여자"
+                checked={form.gender === "여자"}
+                onChange={handleChange}
+              />
+              <label htmlFor="female">여자</label>
+            </div>
+          </div>
+          <div className="phone-group">
+            <label className="form-label">휴대폰번호</label>
+            <div className="input-with-button">
+              <input
+                type="tel"
+                name="phone"
+                className="input-phone"
+                placeholder="휴대폰 번호를 입력해주세요 ( - 제외 )"
+                value={form.phone}
+                onChange={handleChange}
+              />
+              <button type="button" className="btn-secondary">인증요청</button>
+            </div>
+          </div>
+          <div className="verify-group">
+            <label className="form-label">인증번호</label>
+            <div className="input-with-button">
+              <input
+                type="text"
+                name="verificationCode"
+                className="input-verify"
+                placeholder="인증번호 입력해주세요"
+                value={form.verificationCode}
+                onChange={handleChange}
+              />
+              <button type="button" className="btn-secondary">인증확인</button>
+            </div>
+          </div>
+        </div>
 
-      <input
-        type="text"
-        name="verificationCode"
-        placeholder="인증번호 입력"
-        value={form.verificationCode}
-        onChange={handleChange}
-      />
-      <button type="button">인증확인</button>
-      <br />
+        <h3 className="section-title">추가정보</h3>
+        <div className="select-group">
+          <p className="form-label"> 주로 활동하는 지역을 선택해주세요. </p>
+          <div className="select-row">
+            <select
+              name="city"
+              className="select-field"
+              value={form.city}
+              onChange={handleChange}
+            >
+              <option value="서울">서울</option>
+              <option value="부산">부산</option>
+              <option value="대구">대구</option>
+            </select>
 
-      <h3>추가정보</h3>
-      <select name="city" value={form.city} onChange={handleChange}>
-        <option value="서울">서울</option>
-        <option value="부산">부산</option>
-        <option value="대구">대구</option>
-      </select>
+            <select
+              name="district"
+              className="select-field"
+              value={form.district}
+              onChange={handleChange}
+            >
+              <option value="종로구">종로구</option>
+              <option value="강남구">강남구</option>
+              <option value="서초구">서초구</option>
+            </select>
+          </div>
+        </div>
 
-      <select name="district" value={form.district} onChange={handleChange}>
-        <option value="종로구">종로구</option>
-        <option value="강남구">강남구</option>
-        <option value="서초구">서초구</option>
-      </select>
+        <h3 className="section-title">이용약관 동의</h3>
+        <div className="select-group">
+          <div className="checkbox-group">
+            <label>
+              <input
+                type="checkbox"
+                name="agreeAll"
+                checked={form.agreeAll}
+                onChange={handleChange}
+              />
+              전체 동의
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="agreeTerms"
+                checked={form.agreeTerms}
+                onChange={handleChange}
+              />
+              [필수] 이용약관 동의
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="agreePrivacy"
+                checked={form.agreePrivacy}
+                onChange={handleChange}
+              />
+              [필수] 개인정보 수집 및 이용 동의
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="agreeMarketing"
+                checked={form.agreeMarketing}
+                onChange={handleChange}
+              />
+              [선택] 이벤트 및 혜택 정보 수신
+            </label>
+          </div>
+        </div>
 
-      <h3>이용약관 동의</h3>
-      <label>
-        <input
-          type="checkbox"
-          name="agreeAll"
-          checked={form.agreeAll}
-          onChange={handleChange}
-        />
-        전체 동의
-      </label>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="agreeTerms"
-          checked={form.agreeTerms}
-          onChange={handleChange}
-        />
-        [필수] 이용약관 동의
-      </label>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="agreePrivacy"
-          checked={form.agreePrivacy}
-          onChange={handleChange}
-        />
-        [필수] 개인정보 수집 및 이용 동의
-      </label>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="agreeMarketing"
-          checked={form.agreeMarketing}
-          onChange={handleChange}
-        />
-        [선택] 이벤트 및 혜택 정보 수신
-      </label>
-      <br />
-
-      <button type="submit">가입하기</button>
-    </form>
+        <button type="submit" className="btn-submit">
+          가입하기
+        </button>
+      </form>
+    </div>
   );
 }
