@@ -1,0 +1,202 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 20px;
+}
+
+.back-icon {
+  position: absolute;
+  font-size: 24px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-form {
+  max-width: 600px; /* 폼 전체 폭 제한 */
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 40px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 450;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 450;
+  margin: 20px 0 20px;
+  color: #333;
+}
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.select-group {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #444;
+}
+
+.form-input,
+.signup-input,
+.input-birth,
+.select-field {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.signup-input:focus,
+.input-birth:focus,
+.select-field:focus {
+  border-color: #00c2a0;
+  box-shadow: 0 0 0 2px rgba(0, 194, 160, 0.2);
+}
+
+.birth-inputs {
+  display: flex;
+  gap: 8px;
+}
+
+.input-birth {
+  flex: 1; /* 3개가 동일한 비율로 */
+  padding: 11px 12px;
+  min-width: 0; /* flex 항목이 너무 넓어지지 않게 */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.gender-toggle input[type="radio"] {
+  display: none;
+}
+
+.gender-toggle {
+  display: flex;
+  gap: 12px;
+}
+
+.gender-toggle label {
+  flex: 1;
+  padding: 9px 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #999;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 15px;
+}
+
+.gender-toggle label:hover {
+  background: #f1f1f1;
+}
+
+.gender-toggle input[type="radio"]:checked + label {
+  border-color: #00c2a0;
+  background: #f9ffff;
+  color: #00c2a0;
+  font-weight: 400;
+}
+
+.input-with-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%; /* 부모가 form 크기 꽉 채움 */
+  margin-bottom: 16px;
+}
+
+/* input 크기 동일 */
+.input-phone,
+.input-verify {
+  flex: 1; /* 남은 공간을 다 차지 */
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.btn-secondary {
+  padding: 12px 16px;
+  white-space: nowrap; /* 글자 줄바꿈 방지 */
+  border-radius: 6px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #009e82;
+}
+
+.phone-group button:hover,
+.verify-group button:hover {
+  background: #009c82;
+}
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #444;
+}
+
+.checkbox-group input {
+  accent-color: #00c2a0;
+}
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  background: #00c2a0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background: #009c82;
+}
+
+.btn-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
