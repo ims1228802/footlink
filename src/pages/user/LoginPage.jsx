@@ -3,45 +3,96 @@ import google from "../../assets/login/google.svg";
 import kakao from "../../assets/login/kakao.svg";
 import naver from "../../assets/login/naver.svg";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "../../css/LoginPage.css";
+import useForm from "../../hooks/useForm";
+import axios from "axios";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("로그인 시도:", { email, password, remember });
+  // 유효성 검사 함수
+  const validate = (values) => {
+    const errors = {};
+    const emailRegex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const passwordRegex = /^.{8,}$/;
+    if (!emailRegex.test(values.email)) {
+      errors.email = "올바른 이메일을 입력 해주세요";
+    }
+    if (!passwordRegex.test(values.password)) {
+      errors.password = "영문, 숫자, 특수문자 포함 8자 이상 입력해주세요";
+    }
+    return errors;
   };
 
+  const { values, errors, handleChange, handleSubmit, setValues } = useForm(
+    { email: "", password: "", remember: false }, // 초기값
+    validate
+  );
+
+  // 아이디 저장 불러오기
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("savedEmail");
+    if (savedEmail) {
+      setValues((prev) => ({
+        ...prev,
+        email: savedEmail,
+        remember: true,
+      }));
+    }
+  }, [setValues]);
+
+  const onSubmit = async (formData) => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (response.data) {
+        alert("로그인 성공");
+      } else {
+        alert("가입된 회원이 없습니다");
+      }
+    } catch (error) {
+      console.error(error)
+      alert("로그인요청실패");
+    }
+  };
   return (
     <div>
       <img src={logoHeader} alt="로고" />
       <p>로그인하고 팀을 만나세요.</p>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="email"
+          name="email"
           placeholder="이메일을 입력해주세요"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={values.email}
+          onChange={handleChange}
           required
         />
+        {errors.email && <div className="errorMessage">{errors.email}</div>}
+
         <input
           type="password"
+          name="password"
           placeholder="비밀번호를 입력해주세요"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={values.password}
+          onChange={handleChange}
           required
         />
+        {errors.password && (
+          <div className="errorMessage">{errors.password}</div>
+        )}
 
         <div>
           <label>
             <input
               type="checkbox"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
+              name="remember"
+              checked={values.remember}
+              onChange={handleChange}
             />
             아이디 저장
           </label>
