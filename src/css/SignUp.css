@@ -43,7 +43,6 @@
 }
 
 .select-group {
-  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
 }
@@ -141,7 +140,7 @@
 .input-phone,
 .input-verify {
   flex: 1; /* 남은 공간을 다 차지 */
-  padding: 12px 14px;
+  padding: 11px 14px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 14px;
@@ -166,18 +165,101 @@
 .verify-group button:hover {
   background: #009c82;
 }
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #444;
+
+.region {
+  position: relative;
+  margin-top: 0px;
 }
 
-.checkbox-group input {
-  accent-color: #00c2a0;
+.select-row {
+  display: flex;
+  gap: 1rem;
 }
+
+.address-group {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.select-field {
+  appearance: none;
+  width: 100%;
+  padding: 11px 32px 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* 기본: 선택된 값은 검정 */
+.select-field {
+  color: #000;
+}
+
+/* 만약 선택된 option이 value=""라면 회색 */
+.select-field:has(option[value=""]:checked) {
+  color: #aaa;
+}
+
+.arrow-icon {
+  position: absolute;
+  right: 10px;
+  top: 37%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.terms-section {
+  margin: 20px 0;
+}
+
+.select-group.terms-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.terms-section__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #333;
+}
+
+.terms-section__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.terms-section__label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #333; /* 체크박스 색상 (크롬/엣지/사파리) */
+}
+
+.terms-section__button {
+  font-size: 13px;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.terms-section__button:hover {
+  text-decoration: underline; /* 보기 버튼 hover 시 효과 */
+}
+
+.terms-divider {
+  border-top: 1px solid #ddd;
+  margin: 8px 0;
+}
+
 .btn-submit {
   width: 100%;
   padding: 14px;
