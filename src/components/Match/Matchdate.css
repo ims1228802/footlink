@@ -1,0 +1,42 @@
+.calendar-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.date-item{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+button{
+    height: 20px;
+    background-color: white;
+    border: none;
+    font-weight: bold;
+}
+.date-item button{
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    height: 58px;
+    width: 34px;
+    justify-content: space-around;
+}
+.date-item button.active{
+    display: flex;
+    flex-direction: column;
+    background-color: #00ADB5;
+    border-radius: 20px;
+    height: 58px;
+    width: 34px;
+    color: white;
+    justify-content: space-around;
+}

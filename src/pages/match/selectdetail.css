@@ -1,0 +1,87 @@
+/* Container for the textarea */
+.textarea-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.match-textarea {
+    width: 100%;
+    height: 300px; /* 충분한 높이 */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none; /* 크기 조절 비활성화 */
+    box-sizing: border-box;
+}
+
+/* Info box */
+.info-box {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.info-title {
+    font-weight: bold;
+    color: #555;
+    margin-top: 0;
+}
+
+.info-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.info-list li {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* button-group은 flex 컨테이너 */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+/* Link 컴포넌트에 직접 버튼 스타일 적용 */
+.back-button, .next-button {
+    flex-grow: 1; /* 남은 공간을 동일하게 나눠 가짐 */
+    flex-basis: 0; /* flex-grow가 제대로 작동하도록 기본 너비를 0으로 설정 */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center; /* 텍스트를 중앙 정렬 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+/* '이전으로' 버튼 스타일 */
+.back-button {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 1px solid #2c3e50;
+}
+
+.back-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* '등록하기' 버튼 스타일 */
+.next-button {
+    background-color: #2e7d32;
+    color: #fff;
+    border: none;
+}
+
+.next-button:hover {
+    background-color: #1b5e20;
+}
