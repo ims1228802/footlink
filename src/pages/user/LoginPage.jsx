@@ -4,7 +4,7 @@ import kakao from "../../assets/login/kakao.svg";
 import naver from "../../assets/login/naver.svg";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import "../../css/LoginPage.css";
+import "../../css/user/LoginPage.css";
 import useForm from "../../hooks/useForm";
 import axios from "axios";
 
