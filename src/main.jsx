@@ -1,13 +1,16 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./App.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client'; // ✅ 이 라인을 추가하세요.
+import App from './App.jsx';
+import './index.css';
+import { Provider } from 'react-redux';
+import { store } from './store/store.js';
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    {/* 3. <App />을 <Provider>로 감싸고, store를 prop으로 전달합니다. */}
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </StrictMode>
+    </Provider>
+  </React.StrictMode>,
 );
