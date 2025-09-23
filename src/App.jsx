@@ -1,27 +1,26 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import "./index.css";
-import HomePage from "./pages/match/match.jsx";
-import ResultPage from './pages/match/result.jsx';
-import EndPage from './pages/match/end.jsx'
-import SelectField from './pages/match/selectfield.jsx';
-import SelectMatch from './pages/match/selectmatch.jsx';
-import SelectDetail from './pages/match/selectdetail.jsx';
+import Layout from "./layout/Layout.jsx";
+import Sidebar from "./components/Sidebar.jsx";
+import React, { useState } from "react";
+import Router from "./routes/Router";
+import "./app.css";
 
-
-
-
-const router = createBrowserRouter([
-  { path : '/', element : <HomePage /> },
-  { path : '/result', element : <ResultPage />},
-  { path : '/end' , element : <EndPage />},
-  { path : '/selectfield', element : <SelectField />},
-  { path : '/selectmatch', element : <SelectMatch />},
-  { path : '/selectdetail', element : <SelectDetail />}
-]);
 
 function App() {
   return (
-    <RouterProvider router= { router }/>
+    <div className="App">
+      <Router />
+      {/* <Routes>
+        <Route path="/" element={<Navigate to="/main" />} />
+        <Route
+          path="/main"
+          element={
+            <Layout>
+              <Main></Main>
+            </Layout>
+          }
+        />
+      </Routes> */}
+    </div>
   );
 }
 export default App;

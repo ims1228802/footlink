@@ -1,0 +1,6 @@
+.team_sub_menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}

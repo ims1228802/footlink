@@ -1,0 +1,175 @@
+main .container{
+    display: flex;
+}
+
+main .side-div{
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    border-right: 1px solid #D4DAE2;
+}
+
+main .side-div .team-info{
+    border-bottom: 1px solid #D4DAE2;
+    padding: 34px 19px 30px 19px;
+}
+
+main .side-div .team-info .team-icon{
+    text-align: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+}
+
+main .side-div .team-info .team-text{
+    margin-top: 30px;
+}
+
+main .side-div .team-info .team-text p{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+}
+
+main .side-div .team-info .team-text .team-area{
+    font-size: 16px;
+    text-align: left;
+    margin-top: 9px;
+}
+
+main .side-div .team-info .team-text .team-area span{
+    margin-right: 9px;
+}
+
+main .side-div .team-info .team-text .team-details{
+    font-size: 16px;
+    text-align: left;
+}
+
+main .side-div .team-info .team-text .team-details span{
+    margin-right: 9px;
+}
+
+main .side-div .side-button{
+    display: flex;
+    flex-direction: column;
+    padding: 35px 17px 43px 17px;
+}
+
+main .side-div .side-button button{
+    margin-bottom: 10px;
+    border: 1px solid #00ADB5;
+    color: #00ADB5;
+}
+
+main .side-div .side-button .team-delete{
+    margin-bottom: 10px;
+    background:#FF4B4B;
+    border: none;
+    color: white;
+}
+
+main .contents-div{
+    padding-left: 33px;
+    padding-top: 30px;
+}
+
+main .contents-div > p{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+    margin-top: 35px;
+    margin-bottom: 25px;
+}
+
+main .contents-div nav ul{
+    display: flex;
+}
+
+main .contents-div nav ul li{
+    width: 65px;
+}
+
+main .contents-div .team-member{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    margin-top: 8px;
+    padding: 29px 25px;
+    width: 33.9vw;
+}
+
+main .contents-div .team-member .profile-user{
+    margin-bottom: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+main .contents-div .team-member .profile-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .contents-div .team-member .profile-title p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+main .contents-div .team-member .profile-title .member-view{
+    font-size: 16px;
+    color: #00ADB5;
+}
+
+main .contents-div .team-member .profile-user .profile-img{
+    border: 1px solid #D4DAE2;
+    border-radius: 30px;
+    width: 46px;
+    height: 46px;
+}
+
+main .contents-div .team-member .profile-user .profile-text{
+    margin-left: 20px;
+}
+
+main .contents-div .content-info{
+    display: flex;
+    flex-wrap: wrap;
+    width: 33.9vw;
+}
+
+main .contents-div .content-info .info-div{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    padding: 15px;
+    width: 321px;
+    margin-right: 8px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+main .contents-div .content-info .info-div:nth-child(2n){
+    margin: 0 0 15px 0;
+}
+
+main .contents-div .content-info .info-div p{
+    margin-bottom: 13px;
+}
+
+main .contents-div .content-info .info-div img{
+    margin-bottom: 13px;
+    margin-right: 15px;
+}
+
+main .contents-div .content-info .info-div .img-icon{
+    display: flex;
+    align-items: center;
+}
+
+main .contents-div .chart-div{
+    height: 254px;
+    margin-top: 20px;
+}

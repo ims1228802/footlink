@@ -1,31 +1,31 @@
 import { user, matchStats } from "../../data/user";
-import Game from "../../assets/icon/Game.svg?react";
-import Starrate from "../../assets/icon/Starrate.svg?react";
-import History from "../../assets/icon/History.svg?react";
-import Share from "../../assets/icon/Share.svg?react";
+import Game from "../../assets/icon/Game.svg";
+import Starrate from "../../assets/icon/Starrate.svg";
+import History from "../../assets/icon/History.svg";
+import Share from "../../assets/icon/Share.svg";
 
 export default function MyPage() {
   return (
     <div>
       <h3>내 정보</h3>
       <button>
-        <Share />
+        <img src={Share} alt="내 정보" />
       </button>
       <div>
         <div>소셜매치</div>
         <ul>
           <li>
-            <Game />
+            <img src={Game} alt="경기" />
             <p>경기</p>
             <p>{matchStats.totalGames}</p>
           </li>
           <li>
-            <Starrate />
+            <img src={Starrate} alt="MVP" />
             <p>MVP</p>
             <p>{matchStats.mvpCount}</p>
           </li>
           <li>
-            <History />
+            <img src={History} alt="최근활동" />
             <p>최근활동</p>
             <p>{matchStats.lastActivity}</p>
           </li>
