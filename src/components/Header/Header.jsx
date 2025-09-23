@@ -1,8 +1,8 @@
-import logo from "C:/develop/React class/study/vite-project/src/assets/FootLink.svg";
-import icon from "C:/develop/React class/study/vite-project/src/assets/Searchicon.svg";
-import user from "C:/develop/React class/study/vite-project/src/assets/User.svg";
-import match from "C:/develop/React class/study/vite-project/src/assets/Calendar.svg";
-import team from "C:/develop/React class/study/vite-project/src/assets/Shield.svg";
+import logo from "../../assets/layout/logo_header.svg";
+import icon from "../../assets/layout/search.svg";
+import user from "../../assets/layout/User.svg";
+import match from "../../assets/layout/Calendar.svg";
+import team from "../../assets/layout/Shield.svg";
 import "./Header.css";
 
 export default function Header () {
