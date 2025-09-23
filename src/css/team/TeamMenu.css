@@ -1,0 +1,62 @@
+.team_menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.team_menu ul{
+    display: flex;
+    list-style: none;
+    margin: 34px 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.team_menu ul li {
+    margin-right: 10px;
+    color: #9A9A9A;
+}
+
+.team_menu ul li:hover {
+    margin-right: 10px;
+    color: black;
+    cursor: pointer;
+}
+
+.team_menu ul li:first-child{
+    width: 79px;
+    margin-right: 10px;
+    border-right: 1px solid;
+}
+
+.team_menu ul .active {
+    color: black;
+}
+
+.team_menu .team_search{
+    display: flex;
+    width: 237px;
+    height: 37px;
+    padding: 0 15px;
+    border: 1px solid #D4DAE2;
+    border-radius: 20px;
+    align-items: center;
+    margin-top: 27px;
+}
+
+.team_menu .team_search img{
+    width: 24px;
+    height: 24px;
+}
+
+.team_menu .team_search input{
+    border: none;
+    font-size: 13px;
+}
+
+.team_menu .team_search input:focus{
+    outline: none;
+    font-size: 13px;
+}

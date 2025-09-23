@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIos from "../../assets/icon/ArrowBackIos.svg";
 import KeyboardArrowDown from "../../assets/icon/KeyboardArrowDown.svg";
-import "../../css/SignUp.css";
+import "../../css/user/SignUp.css";
 import districts from "../../data/districts";
 import usePhoneVerification from "../../hooks/usePhoneVerification";
 
