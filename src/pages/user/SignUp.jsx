@@ -141,7 +141,7 @@ export default function SignUp() {
                   placeholder="YYYY"
                   value={form.birthYear}
                   onChange={handleChange}
-                  maxLength={3}
+                  maxLength={4}
                   inputMode="numeric"
                   pattern="\d*"
                 />
@@ -152,7 +152,7 @@ export default function SignUp() {
                   placeholder="MM"
                   value={form.birthMonth}
                   onChange={handleChange}
-                  maxLength={1}
+                  maxLength={2}
                   inputMode="numeric"
                   pattern="\d*"
                 />
@@ -163,7 +163,7 @@ export default function SignUp() {
                   placeholder="DD"
                   value={form.birthDay}
                   onChange={handleChange}
-                  maxLength={1}
+                  maxLength={2}
                   inputMode="numeric"
                   pattern="\d*"
                 />
