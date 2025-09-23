@@ -36,7 +36,7 @@ function HomePage() {
             <Headers />
             <section id = "content">
                 <div className="top-content">
-                    <Link to="/">
+                    <Link to="/match">
                         <h2>일정</h2>
                     </Link>
                     <hr/>

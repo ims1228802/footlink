@@ -9,17 +9,6 @@ function App() {
   return (
     <div className="App">
       <Router />
-      {/* <Routes>
-        <Route path="/" element={<Navigate to="/main" />} />
-        <Route
-          path="/main"
-          element={
-            <Layout>
-              <Main></Main>
-            </Layout>
-          }
-        />
-      </Routes> */}
     </div>
   );
 }

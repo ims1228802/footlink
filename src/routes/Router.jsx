@@ -9,6 +9,14 @@ import FindEmail from "../pages/user/FindEmail.jsx";
 import FindPassword from "../pages/user/FindPassword.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
 import LoginPage from "../pages/user/LoginPage.jsx";
+import "../index.css";
+import HomePage from "../pages/match/match.jsx";
+import ResultPage from '../pages/match/result.jsx';
+import EndPage from '../pages/match/end.jsx';
+import SelectField from '../pages/match/selectfield.jsx';
+import SelectMatch from '../pages/match/selectmatch.jsx';
+import SelectDetail from '../pages/match/selectdetail.jsx';
+
 
 const router = createBrowserRouter([
   {path: "/", element: <Navigate to="/login"/>},
@@ -20,6 +28,12 @@ const router = createBrowserRouter([
   {path: '/teamDetail', element: <TeamDetail />},
   {path: '/newTeam', element: <NewTeam />},
   {path: '/newTeamNext', element: <NewTeamNext />},
+  { path : '/match', element : <HomePage /> },
+  { path : '/result', element : <ResultPage />},
+  { path : '/end' , element : <EndPage />},
+  { path : '/selectfield', element : <SelectField />},
+  { path : '/selectmatch', element : <SelectMatch />},
+  { path : '/selectdetail', element : <SelectDetail />}
 ])
 
 export default function Router(){
