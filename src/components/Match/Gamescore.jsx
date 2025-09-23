@@ -1,4 +1,4 @@
-import teamimg from "C:/develop/React class/study/vite-project/src/assets/Teamicon.svg"
+import teamimg from "../../../public/Teamicon.svg"
 
 export default function Gamescore(name, score) {
     return(

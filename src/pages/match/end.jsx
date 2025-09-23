@@ -1,9 +1,8 @@
-import DateNavigator from "../components/Match/Matchdate";
-import Header from "../components/Header/Header";
+import DateNavigator from "../../components/Match/Matchdate";
+import Headers from '../../components/Header/Header';
 import { Link } from "react-router-dom"
 import "./end.css"
-import EndList from "../components/Match/endlist.jsx";
-import { END_LIST } from "../enddata.js";
+import EndList from "../../components/Match/endlist.jsx";
 
 function EndPage() {
 
@@ -14,7 +13,7 @@ function EndPage() {
     })
     return(
         <>
-            <Header />
+            <Headers />
             <section id="content">
                 <div class="top-content">
                     <Link to="/">
@@ -29,7 +28,7 @@ function EndPage() {
                     <p>레벨</p>
                     <p>성별</p>
                 </div>
-                {endList}
+
             </section>
         </>
     )

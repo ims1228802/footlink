@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './selectfield.css';
-import Headers from '../components/Header/Header';
+import Headers from '../../components/Header/Header';
 import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux'; 
-import { selectSlot, clearSelection } from '../store/matchSlice'; 
+import { selectSlot, clearSelection } from '../../store/matchSlice'; 
 
 const selectField = () => {
     // ... (기존 상태 변수들은 동일)

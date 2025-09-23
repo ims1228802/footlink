@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './selectdetail.css';
-import Headers from '../components/Header/Header';
+import Headers from '../../components/Header/Header';
 import { Link , useNavigate } from 'react-router-dom'; 
 
 const selectDetail = () => {

@@ -1,8 +1,8 @@
-import Header from "../components/Header/Header";
+import Headers from '../../components/Header/Header';
 import './match.css';
-import DateNavigator from "../components/Match/Matchdate";
-import MatchGrid from "../components/Match/Matchgrid";
-import { MATCH_LIST } from"../data";
+import DateNavigator from "../../components/Match/Matchdate";
+import MatchGrid from "../../components/Match/Matchgrid";
+// import { MATCH_LIST } from"../data/matchlist";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -26,14 +26,14 @@ function HomePage() {
     }, []);
     
 
-    const matchList = MATCH_LIST.map(matchInfo => {
-        return (
-          <MatchGrid key={matchInfo.id} {...matchInfo}/> 
-        )
-      })
+    // const matchList = MATCH_LIST.map(matchInfo => {
+    //     return (
+    //       <MatchGrid key={matchInfo.id} {...matchInfo}/> 
+    //     )
+    //   })
     return(
         <>
-            <Header />
+            <Headers />
             <section id = "content">
                 <div className="top-content">
                     <Link to="/">
@@ -57,7 +57,7 @@ function HomePage() {
                     </div>
                 </div>
                 <div className= "match-content">
-                    {matchList}
+                    {/* {matchList} */}
                 </div>
             </section>
         </>

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Header from '../components/Header/Header.jsx';
-import teamimg from "../assets/Teamicon.svg";
-import { MATCH_SCORE } from "../matchscore.js";
-import MatchScore from "../components/Match/Matchscore.jsx";
-import { teamData } from "../userresult.js";
-import ResultTable from "../components/Match/Resulttable.jsx"
+import Headers from '../../components/Header/Header';
+import teamimg from "../../../public/Teamicon.svg";
+// import { MATCH_SCORE } from "../matchscore.js";
+import MatchScore from "../../components/Match/Matchscore.jsx";
+// import { teamData } from "../../data/match/";
+import ResultTable from "../../components/Match/Resulttable.jsx"
 
 function ResultPage() {
     const [activeContentIndex, setActiveContentIndex] = useState(0);
@@ -23,7 +23,7 @@ function ResultPage() {
   });
     return(
         <>
-      <Header />
+      <Headers />
       <div class="match-result-arr">
         <div class="match-result-box">
             <h1 style={{ margin: '5px' }}>매치결과</h1>
