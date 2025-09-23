@@ -10,11 +10,11 @@ export default function usePhoneVerification() {
     setError(null);
 
     try {
-      const res = await fetch(`/api/check-phone?phone=${phone}`);
+      const res = await fetch(`http://localhost/api/check-phone?phone=${phone}`);
+      const data = await res.json();
       if (!res.ok) {
         throw new Error("서버 응답 실패");
       }
-      const data = await res.json();
 
       if (data.exists) {
         alert("이미 등록된 휴대폰 번호입니다.");
