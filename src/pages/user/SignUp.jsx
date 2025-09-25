@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ArrowBackIos from "../../assets/icon/ArrowBackIos.svg";
 import KeyboardArrowDown from "../../assets/icon/KeyboardArrowDown.svg";
 import "../../css/user/SignUp.css";
 import districts from "../../data/districts";
 import usePhoneVerification from "../../hooks/usePhoneVerification";
+import useVerifyCode from "../../hooks/useVerifyCode";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -26,10 +27,7 @@ export default function SignUp() {
     agreeMarketing: false,
   });
 
-  const { requestVerification, loading } = usePhoneVerification();
-
   const handleChange = (e) => {
-    console.log(e.target);
     const { name, value, type, checked } = e.target;
 
     if (name === "agreeAll") {
@@ -58,17 +56,104 @@ export default function SignUp() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("제출된 정보:", form);
+
+    // birthYear, birthMonth, birthDay → birth(YYYY-MM-DD)로 합치기
+    const birth = `${form.birthYear}-${form.birthMonth.padStart(
+      2,
+      "0"
+    )}-${form.birthDay.padStart(2, "0")}`;
+
+    if (form.password !== form.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    const payload = {
+      email: form.email,
+      password: form.password,
+      confirmPassword: form.confirmPassword,
+      name: form.name,
+      phone: form.phone,
+      birth, // ✅ 하나로 합쳐진 값
+      gender: form.gender,
+      city: form.city,
+      district: form.district,
+    };
+
+    try {
+      const res = await fetch(`http://localhost/api/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        alert("회원가입 성공!");
+      } else {
+        const errMsg = await res.text();
+        alert("회원가입 실패: " + errMsg);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("서버 연결 실패");
+    }
   };
 
-  const handleRequestVerification = () => {
+  // hooks
+  const { requestVerification, loading } = usePhoneVerification();
+  const { verifyCode } = useVerifyCode();
+
+  // timer
+  const [timeLeft, setTimeLeft] = useState(0); // 남은 시간(초)
+  const timerRef = useRef(null);
+
+  // 타이머 시작 함수
+  const startTimer = () => {
+    clearInterval(timerRef.current);
+    setTimeLeft(180); // 3분
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  // 언마운트 시 타이머 정리
+  useEffect(() => {
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  // 인증번호 요청
+  const handleRequestVerification = async () => {
     if (!form.phone) {
       alert("휴대폰 번호를 입력해주세요.");
       return;
     }
-    requestVerification(form.phone);
+    const result = await requestVerification(form.phone);
+    if (!result?.exists) {
+      startTimer(); // ✅ 타이머 시작
+    }
+  };
+
+  // 인증번호 확인
+  const handleVerifyCode = async () => {
+    const success = await verifyCode(form.phone, form.verificationCode);
+    if (success) {
+      clearInterval(timerRef.current);
+      setTimeLeft(0);
+    }
+  };
+
+  // 시간 포맷 (MM:SS)
+  const formatTime = (seconds) => {
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
+    return `${m}:${s}`;
   };
 
   return (
@@ -200,6 +285,8 @@ export default function SignUp() {
               <label htmlFor="female">여자</label>
             </div>
           </div>
+
+          {/* 휴대폰번호 */}
           <div className="phone-group">
             <label className="form-label">휴대폰번호</label>
             <div className="input-with-button">
@@ -208,11 +295,14 @@ export default function SignUp() {
                 name="phone"
                 className="input-phone"
                 placeholder="휴대폰 번호를 입력해주세요 ( - 제외 )"
-                maxLength={11}
-                inputMode="numeric"
-                pattern="\d*"
                 value={form.phone}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    phone: e.target.value.replace(/[^0-9]/g, "").slice(0, 11),
+                  })
+                }
+                maxLength={11}
               />
               <button
                 type="button"
@@ -220,26 +310,46 @@ export default function SignUp() {
                 onClick={handleRequestVerification}
                 disabled={loading || form.phone.length !== 11}
               >
-                {loading ? "인증요청" : "인증요청"}
+                {timeLeft > 0 ? "재전송" : "인증요청"}
               </button>
             </div>
           </div>
+
+          {/* 인증번호 */}
           <div className="verify-group">
             <label className="form-label">인증번호</label>
             <div className="input-with-button">
-              <input
-                type="text"
-                name="verificationCode"
-                className="input-verify"
-                placeholder="인증번호 입력해주세요"
-                maxLength={6}
-                value={form.verificationCode}
-                onChange={handleChange}
-              />
+              <div className="input-verify-wrapper">
+                <input
+                  type="text"
+                  name="verificationCode"
+                  className="input-verify"
+                  placeholder="인증번호 입력해주세요"
+                  value={form.verificationCode}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      verificationCode: e.target.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 6),
+                    })
+                  }
+                  maxLength={6}
+                />
+                {/* 남은 시간 표시 */}
+                {timeLeft > 0 && (
+                  <span className="verify-timer">{formatTime(timeLeft)}</span>
+                )}
+              </div>
               <button
                 type="button"
                 className="btn-secondary"
-                disabled={loading || form.verificationCode.length !== 6}
+                onClick={handleVerifyCode}
+                disabled={
+                  loading ||
+                  form.verificationCode.length !== 6 ||
+                  timeLeft === 0
+                }
               >
                 인증확인
               </button>
@@ -247,11 +357,11 @@ export default function SignUp() {
           </div>
         </div>
 
+        {/* 추가정보 */}
         <div className="select-group">
           <h3 className="section-title">추가정보</h3>
           <p className="form-label region">
-            {" "}
-            주로 활동하는 지역을 선택해주세요.{" "}
+            주로 활동하는 지역을 선택해주세요.
           </p>
           <div className="select-row">
             <div className="address-group">
@@ -289,6 +399,7 @@ export default function SignUp() {
           </div>
         </div>
 
+        {/* 이용약관 동의 */}
         <div className="terms-section">
           <h3 className="section-title">이용약관 동의</h3>
           <div className="select-group terms-group">
