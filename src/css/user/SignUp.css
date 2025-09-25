@@ -153,17 +153,19 @@
   border-radius: 6px;
   font-size: 14px;
   border: 1px solid #ddd;
-  color: #fff;
+  color: #FFF;
+  background: #00ADB5;
   cursor: pointer;
+  font-weight: 400;
 }
 
-.btn-secondary:hover {
-  background: #009e82;
-}
-
-.phone-group button:hover,
-.verify-group button:hover {
-  background: #009c82;
+.btn-secondary:disabled 
+{
+  font-weight: 400;
+  background: #f9ffff;
+  color: #00ADB5; /* 글씨 색 */
+  cursor: not-allowed; /* 마우스 커서 */
+   opacity: 0.6;     /* 버튼 투명도 */
 }
 
 .region {
