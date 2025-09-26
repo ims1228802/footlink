@@ -4,7 +4,7 @@ import TeamDetail from '../pages/team/TeamDetail';
 import NewTeam from '../pages/team/NewTeam';
 import NewTeamNext from '../pages/team/NewTeamNext';
 import MyInfo from "../pages/user/MyInfo.jsx";
-import Main from "../pages/user/Main.jsx";
+import Main from "../pages/Main.jsx";
 import FindEmail from "../pages/user/FindEmail.jsx";
 import FindPassword from "../pages/user/FindPassword.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
@@ -16,12 +16,14 @@ import EndPage from '../pages/match/end.jsx';
 import SelectField from '../pages/match/selectfield.jsx';
 import SelectMatch from '../pages/match/selectmatch.jsx';
 import SelectDetail from '../pages/match/selectdetail.jsx';
-
+import Welcome from '../pages/user/Welcome.jsx';
 
 const router = createBrowserRouter([
-  {path: "/", element: <Navigate to="/login"/>},
+  {path: "/", element: <Navigate to="/main"/>},
+  {path: '/main', element: <Main />},  
   {path: '/login', element: <LoginPage />},
   {path: '/signup', element: <SignUp />},
+  {path: '/Welcome', element: <Welcome />},
   {path: '/FindEmail', element: <FindEmail />},
   {path: '/FindPassword', element: <FindPassword />},
   {path: '/teamList', element: <Team />},
