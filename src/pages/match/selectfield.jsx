@@ -2,25 +2,36 @@ import React, { useState, useEffect } from 'react';
 import './selectfield.css';
 import Headers from '../../components/Header/Header';
 import axios from 'axios';
-import { Link , useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux'; 
-import { selectSlot, clearSelection } from '../../store/matchSlice'; 
+import { addTimeSelection, removeTimeSelection } from '../../store/matchSlice';
+
 
 const selectField = () => {
-    // ... (기존 상태 변수들은 동일)
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { selections } = useSelector(state => state.matchCreation.step1_selection);
+
     const [province, setProvince] = useState([]);
     const [fieldData, setFieldData] = useState([]);
     const [selectedField, setSelectedField] = useState(null);
     const [stadiumFields, setStadiumFields] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD')); // 초기 날짜를 오늘로 설정
+    const [selectedDate, setSelectedDate] = useState(() => {
+        // selections 배열에 항목이 있으면, 그 첫 번째 항목의 날짜를 사용합니다.
+        if (selections && selections.length > 0) {
+            return selections[0].date;
+        }
+        // 없다면 오늘 날짜를 기본값으로 사용합니다.
+        return moment().format('YYYY-MM-DD');
+    });
     const [bookedTimeSlots, setBookedTimeSlots] = useState({}); // 예약 정보를 구장 ID별로 저장하는 객체
     const [selectProvince, setSelectProvince] = useState('');
     const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
-    const dispatch = useDispatch(); 
-    const { selectedFieldId, selectedTime } = useSelector(state => state.matchSelection); // Store에서 현재 상태 가져오기
     
+    console.log("Current selections from Redux:", selections);
 
     // 컴포넌트 초기 렌더링 시 지역 데이터 및 초기 풋살장 데이터 가져오기
     useEffect(() => {
@@ -38,23 +49,20 @@ const selectField = () => {
 
     // 선택된 구장, 날짜가 변경될 때마다 예약된 시간 슬롯을 가져오는 훅
     useEffect(() => {
-        if (selectedField && selectedDate) {
+        if (stadiumFields.length > 0 && selectedDate) {
             const fetchBookedTimes = async () => {
                 try {
-
-                    const fieldIds = stadiumFields.map(field => field.fieldNo);
-
-                    // 각 필드별로 예약 시간을 조회
-                    const bookedData = {};
-                    for (const fieldId of fieldIds) {
+                        const bookedData = {};
+                    // Promise.all을 사용하여 여러 필드의 예약 정보를 병렬로 가져와 성능을 개선합니다.
+                    await Promise.all(stadiumFields.map(async (field) => {
                         const response = await axios.get(`http://localhost:8080/api/Match/booked-slots`, {
                             params: {
-                                fieldNo: fieldId,
+                                fieldNo: field.fieldNo,
                                 date: selectedDate
                             }
                         });
-                        bookedData[fieldId] = response.data;
-                    }
+                        bookedData[field.fieldNo] = response.data;
+                    }));
                     setBookedTimeSlots(bookedData);
                 } catch (error) {
                     console.error("예약 시간 슬롯 호출 중 오류 발생:", error);
@@ -62,8 +70,10 @@ const selectField = () => {
                 }
             };
             fetchBookedTimes();
+        } else {
+            setBookedTimeSlots({}); // stadiumFields가 없으면 예약 정보도 초기화합니다.
         }
-    }, [selectedField, selectedDate, stadiumFields]); 
+    }, [stadiumFields, selectedDate]); 
 
     // 구장 운영 시간을 기반으로 시간 슬롯을 생성하는 함수
     const generateTimeSlots = (start, end) => {
@@ -139,13 +149,23 @@ const selectField = () => {
             return; // 예약된 슬롯은 선택 불가
         }
 
-        if (selectedFieldId === fieldId && selectedTime === slotTime) {
-            dispatch(clearSelection());
-        } else {
-            dispatch(selectSlot({ 
-                fieldId: fieldId, 
+       const isSelected = selections.some(
+            sel => sel.fieldId === fieldId && sel.time === slotTime && sel.date === selectedDate
+        );
+
+        if (isSelected) {
+            // 4. 이미 선택된 상태이면 배열에서 제거하는 removeSelection 액션을 사용합니다.
+            dispatch(removeTimeSelection({
+                fieldId: fieldId,
                 time: slotTime,
-                date: selectedDate 
+                date: selectedDate
+            }));
+        } else {
+            // 5. 선택되지 않은 상태이면 배열에 추가하는 addSelection 액션을 사용합니다.
+            dispatch(addTimeSelection({
+                fieldId: fieldId,
+                time: slotTime,
+                date: selectedDate
             }));
         }
     };
@@ -162,7 +182,7 @@ const selectField = () => {
 
     const handleNextClick = () => {
         // 유효성 검사: 필드 ID와 시간이 모두 선택되었는지 확인
-        if (selectedFieldId && selectedTime) {
+        if (selections.length > 0) {
             navigate('/selectmatch'); 
         } else {
             alert('구장과 시간을 모두 선택해주세요.');
@@ -233,19 +253,36 @@ const selectField = () => {
                     <div className="field-list">
                         {stadiumFields.length > 0 ? (
                             stadiumFields.map((field) => (
-                                <div key={field.id} className="field-item">
+                                <div key={field.fieldNo} className="field-item">
                                     <div className="field-info">
                                         <div className="field-text">
                                             <div className="field-name">{field.fieldName}</div>
                                             <div className="field-details">{field.sft}m</div>
                                         </div>
                                         <div className="time-slots">
-                                            {generateTimeSlots(field.ost, field.oet).map((slot, index) => {
-                                                const isSelected = selectedFieldId === field.fieldNo && selectedTime === slot;
-                                                
+                                            {generateTimeSlots(field.ost, field.oet).map((slot) => {
+                                                const isSelected = selections.some(sel => {
+                                                    // 각 조건을 개별 변수에 담아 결과를 명확히 확인합니다.
+                                                    const idMatch = sel.fieldId == field.fieldNo;
+                                                    const timeMatch = sel.time === slot;
+                                                    const dateMatch = sel.date === selectedDate;
+
+                                                    // --- 🧐 최종 디버깅 로그 ---
+                                                    // 콘솔이 너무 복잡해지지 않도록, 현재 렌더링하는 슬롯이 Redux에 저장된 시간과 일치할 때만 로그를 출력합니다.
+                                                    if (sel.time === slot) {
+                                                        console.group(`--- [${slot}] 비교 결과 ---`);
+                                                        console.log(`ID 일치?: ${idMatch}  (Redux값: '${sel.fieldId}', 컴포넌트값: '${field.fieldNo}')`);
+                                                        console.log(`시간 일치?: ${timeMatch} (Redux값: '${sel.time}', 컴포넌트값: '${slot}')`);
+                                                        console.log(`날짜 일치?: ${dateMatch} (Redux값: '${sel.date}', 컴포넌트값: '${selectedDate}')`);
+                                                        console.groupEnd();
+                                                    }
+                                                    
+                                                    return idMatch && timeMatch && dateMatch;
+                                                });
+
                                                 return (
                                                     <span
-                                                        key={index}
+                                                        key={`${field.fieldNo}-${slot}`}
                                                         className={`time-slot ${isSlotBooked(field.fieldNo, slot) ? 'booked' : ''} ${isSelected ? 'selected' : ''}`}
                                                         onClick={() => handleTimeSlotClick(field.fieldNo, slot)}
                                                     >
