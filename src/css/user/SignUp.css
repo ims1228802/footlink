@@ -147,23 +147,60 @@
   box-sizing: border-box;
 }
 
+.input-verify-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-verify {
+  width: 100%;
+  padding-right: 60px; /* 오른쪽에 타이머 공간 확보 */
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #333;
+}
+
+.input-verify:focus {
+  outline: none;
+  border-color: #3b82f6; /* 포커스 시 파란색 테두리 */
+  background-color: #fff;
+}
+
+.verify-timer {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff4d4f; /* 빨간색 */
+  pointer-events: none; /* 클릭 막기 */
+}
+
+
 .btn-secondary {
   padding: 12px 16px;
   white-space: nowrap; /* 글자 줄바꿈 방지 */
   border-radius: 6px;
   font-size: 14px;
   border: 1px solid #ddd;
-  color: #fff;
+  color: #FFF;
+  background: #00ADB5;
   cursor: pointer;
+  font-weight: 400;
 }
 
-.btn-secondary:hover {
-  background: #009e82;
-}
-
-.phone-group button:hover,
-.verify-group button:hover {
-  background: #009c82;
+.btn-secondary:disabled 
+{
+  font-weight: 400;
+  background: #f9ffff;
+  color: #00ADB5; /* 글씨 색 */
+  cursor: not-allowed; /* 마우스 커서 */
+   opacity: 0.6;     /* 버튼 투명도 */
 }
 
 .region {
