@@ -32,7 +32,6 @@
   gap: 20px;
 }
 
-
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -62,10 +61,13 @@
   display: flex;
   align-items: center;
   border: 1px solid #ddd;
-  background-color : #EBE6E6;
+  background-color: #ebe6e6;
   border-radius: 999px;
   padding: 5px 12px;
   width: 260px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 32px;
 }
 
 .header-search-bar {

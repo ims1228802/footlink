@@ -1,8 +1,5 @@
-{
-  /*더미데이터*/
-}
 
-export const LikeMatchs = [
+const LikeMatches = [
   {
     matchNum: "051",
     date: "2025-07-30",
@@ -48,3 +45,4 @@ export const LikeMatchs = [
     recruitCount: "10/12",
   },
 ];
+export default LikeMatches

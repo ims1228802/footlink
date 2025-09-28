@@ -17,9 +17,11 @@ export default function Footer() {
                 <Link to="#" className="footer-link">
                   이용약관
                 </Link>
+                |
                 <Link to="#" className="footer-link">
                   개인정보 처리방침
                 </Link>
+                |
                 <Link to="#" className="footer-link">
                   고객센터
                 </Link>
@@ -29,9 +31,7 @@ export default function Footer() {
 
           {/* 회사 정보 */}
           <div className="footer-info">
-            <p>
               풋링크 | 전북특별자치도 전주시 완산구 유연로 220 | 063-123-4567
-            </p>
           </div>
 
           {/* 저작권 */}

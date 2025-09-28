@@ -4,8 +4,8 @@
   flex-shrink: 0;
   background-color: #1f252e;
   color: #fff;
-  padding: 0 0 30px;
   font-size: 14px;
+  flex-shrink: 0;
 }
 
 .footer-container {
@@ -18,6 +18,12 @@
   align-items: flex-start;
   justify-content: space-between;
   color: #fff;
+}
+
+.footer-m1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .footer-top {
@@ -69,7 +75,8 @@
 
 .footer-team {
   display: flex;
-  font-weight: bold;
+  font-weight: lighter;
   color: #fff;
   gap: 50px;
 }
+
