@@ -1,0 +1,243 @@
+main h2{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 34px;
+}
+
+.flex-div{
+    display: flex;
+    margin-top: 34px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid #D4DAE2;
+}
+
+.flex-div div p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.emblem-div{
+    width: 505px;
+    height: 312px;
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    margin-right: 14px;
+    padding: 30px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emblem-div .icon-div{
+    height: 128px;
+    width: 128px;
+}
+
+.emblem-div .icon-div img{
+    width: 128px;
+    height: 128px;
+}
+
+.button-div{
+    margin-top: 32px;
+}
+
+.input-div input{
+    margin-bottom: 20px;
+    outline: none;
+    border: 1px solid #D4DAE2;
+    width: 505px;
+    padding: 10px 13px;
+    background: #F8FAFB;
+    border-radius: 10px;
+}
+
+.date-div{
+    margin-bottom: 34px;
+    border-bottom: 1px solid #D4DAE2;;
+}
+
+.week-div{
+    text-align: left;
+}
+
+.week-div h2{
+    font-size: 20px;
+}
+
+.section-week > p{
+    text-align: left;
+    margin-top: 14px;
+    margin-bottom: 10px;
+}
+
+.checkbox-section{
+    display: flex;
+    margin-bottom: 34px;
+}
+
+.checkbox-section input[type="checkbox"]{
+    appearance: none;
+}
+
+.checkbox-section input[type="checkbox"]:checked + .checkbox-layout{
+    background: #46A663;
+}
+
+.checkbox-section input[type="checkbox"]:checked + .checkbox-layout p{
+    color: white;
+}
+
+.checkbox-layout{
+    padding: 11px 50px;
+    border: 1px solid #46A663;
+    border-radius: 30px;
+    margin-right: 26.68px;
+}
+
+.checkbox-layout p{
+    color: #46A663;
+}
+
+.time-div{
+    margin-top: 34px;
+}
+
+.time-div p{
+    text-align: left;
+    margin-top: 14px;
+    margin-bottom: 10px;
+}
+
+.checkbox-layout-l{
+    width: 226px;
+    border: 1px solid #46A663;
+    border-radius: 30px;
+    margin-right: 35px;
+}
+
+.checkbox-layout-l p{
+    color: #46A663;
+}
+
+.checkbox-section input[type="checkbox"]:checked + .checkbox-layout-l{
+    background: #46A663;
+}
+
+.checkbox-section input[type="checkbox"]:checked + .checkbox-layout-l p{
+    color: white;
+}
+
+.area-div{
+    margin-bottom: 34px;
+    border-bottom: 1px solid #F8FAFB;
+}
+
+.area-text{
+    text-align: left;
+}
+
+.area-text h2{
+    font-size: 20px;
+}
+
+.input-box{
+    width: 1022px;
+    height: 45px;
+    border: 1px solid #D4DAE2;
+    margin-top: 10px;
+    border-radius: 10px;
+    margin-bottom: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.input-box input[type="text"]{
+    outline: none;
+    width: 100%;
+}
+
+.city{
+    margin-right: 5px;
+}
+
+.city input[type="text"]{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    width: 509px;
+    padding: 11px 13px;
+    outline: none;
+}
+
+.area input[type="text"]{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    width: 509px;
+    padding: 11px 13px;
+    outline: none;
+}
+
+.peoples-div h2{
+    font-size: 20px;
+    margin-bottom: 34px;
+}
+
+.age-div{
+    text-align: left;
+}
+
+.age-div > p{
+    margin-bottom: 10px;
+}
+
+.gender-div{
+    text-align: left;
+}
+
+.gender-div > p{
+    margin-bottom: 10px;
+}
+
+.checkbox-layout-gender{
+    border-radius: 30px;
+    border: 1px solid #46A663;
+    width: 316px;
+    height: 49px;
+    margin-right: 36px;
+    text-align: center;
+    padding: 13px 0;
+}
+
+.checkbox-layout-gender p{
+    color: #46A663;
+}
+
+.checkbox-section input[type="radio"]{
+    appearance: none;
+}
+
+.checkbox-section input[type="radio"]:checked + .checkbox-layout-gender{
+    background: #46A663;
+}
+
+.checkbox-section input[type="radio"]:checked + .checkbox-layout-gender p{
+    color: white;
+}
+
+.checkbox-section input[type="radio"]:checked + .checkbox-layout{
+    background: #46A663;
+}
+
+.checkbox-section input[type="radio"]:checked + .checkbox-layout p{
+    color: white;
+}
+
+.button-div{
+    margin-bottom: 34px;
+}

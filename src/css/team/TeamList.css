@@ -4,6 +4,10 @@ main {
     margin: 0 auto;
 }
 
+main .none{
+    display: none;
+}
+
 main .team_div{
     padding: 30px 26px;
     border: 1px solid #D4DAE2;
@@ -64,11 +68,12 @@ main .team_div .team_info .team_name .user_count span{
 main .team_div .team_view_favorite{
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 main .team_div .team_view_favorite img{
     width: 20px;
+    text-align: left;
 }
 
 main .team_div .team_view_favorite .team_view{
@@ -82,6 +87,13 @@ main .team_div .team_view_favorite .team_favorite{
     align-items: center;
 }
 
+main .team_div .team_view_favorite .team_application{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
 main .team_div .team_view_favorite span{
     margin-left: 9px;
+    text-align: left;
 }
