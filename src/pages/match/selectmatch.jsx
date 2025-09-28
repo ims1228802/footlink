@@ -11,7 +11,7 @@ const AddMatchLevel = () => {
 
     const savedStep2Data = useSelector(state => state.matchCreation.step2_details);
 
-    const [matchFormat, setMatchFormat] = useState(savedStep2Data.matchFormat);
+    const [matchType, setMatchFormat] = useState(savedStep2Data.matchType);
     const [gender, setGender] = useState(savedStep2Data.gender);
     const [minLevel, setMinLevel] = useState(savedStep2Data.minLevel);
     const [maxLevel, setMaxLevel] = useState(savedStep2Data.maxLevel);
@@ -107,7 +107,7 @@ const AddMatchLevel = () => {
     const handleNextClick = () => {
         if (minLevel !== null && maxLevel !== null) {
             const step2Data = {
-                matchFormat,
+                matchType,
                 gender,
                 minLevel,
                 maxLevel,
@@ -160,7 +160,7 @@ const AddMatchLevel = () => {
                             <label htmlFor="match-format">매치 방식</label>
                             <select
                                 id="match-format"
-                                value={matchFormat}
+                                value={matchType}
                                 onChange={(e) => setMatchFormat(e.target.value)}
                             >
                                 <option value="6vs6">6vs6</option>

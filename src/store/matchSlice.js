@@ -6,17 +6,13 @@ export const createMatchPost = createAsyncThunk(
     'matchCreation/createPost',
     async (_, { getState, rejectWithValue }) => {
         try {
-            // Redux 스토어에서 현재 matchCreation 상태 전체를 가져옵니다.
             const state = getState().matchCreation;
 
-            // ✅ 수정된 부분: 각 단계의 데이터를 하나로 조합합니다.
             const finalData = {
-                ...state.step1_selection, // { selections: [...] }
+                ...state.step1_matchInfo, // { selections: [...] }
                 ...state.step2_details,   // { matchFormat, gender, minLevel, maxLevel }
                 ...state.step3_post,      // { title, content }
             };
-
-            // console.log를 통해 서버로 보내기 직전의 최종 데이터 구조를 확인합니다.
             console.log('API 요청 시작. 보낼 데이터:', finalData);
 
             const response = await axios.post('http://localhost:8080/api/addMatch', finalData);
@@ -36,13 +32,19 @@ export const createMatchPost = createAsyncThunk(
 const initialState = {
     // 1페이지: 날짜, 구장, 시간
     step1_selection: {
-        selections: [], 
+        selections: [], // UI에서 선택/해제를 위해 임시로 사용하는 배열
+    },
+    step1_matchInfo: { // 최종적으로 계산된 매치 정보를 저장할 곳
+        fieldNo: null,
+        matchDate: null,
+        matchTime: null,
+        matchEndTime: null,
     },
     // 2페이지: 레벨, 매치 방식, 성별
     step2_details: {
         minLevel: null,
         maxLevel: null,
-        matchFormat: '6vs6',
+        matchType: '6vs6',
         gender: '혼성',
     },
     // 3페이지: 게시글 내용
@@ -51,7 +53,7 @@ const initialState = {
         content: '',
     },
     // API 제출 상태
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+    status: 'idle',
     error: null,
 };
 
@@ -62,7 +64,7 @@ const matchCreationSlice = createSlice({
         // 각 단계의 데이터를 저장하는 액션
         addTimeSelection: (state, action) => {
             const existingIndex = state.step1_selection.selections.findIndex(
-                sel => sel.fieldId === action.payload.fieldId &&
+                sel => sel.fieldNo === action.payload.fieldNo &&
                        sel.time === action.payload.time &&
                        sel.date === action.payload.date
             );
@@ -71,10 +73,13 @@ const matchCreationSlice = createSlice({
             }
         },
         removeTimeSelection: (state, action) => {
-            const { fieldId, time, date } = action.payload;
+            const { fieldNo, time, date } = action.payload;
             state.step1_selection.selections = state.step1_selection.selections.filter(
-                sel => !(sel.fieldId === fieldId && sel.time === time && sel.date === date)
+                sel => !(sel.fieldNo === fieldNo && sel.time === time && sel.date === date)
             );
+        },
+        saveStep1: (state, action) => {
+            state.step1_matchInfo = action.payload;
         },
         saveStep2: (state, action) => {
             state.step2_details = action.payload;
@@ -102,5 +107,5 @@ const matchCreationSlice = createSlice({
 },
 });
 
-export const { addTimeSelection, removeTimeSelection, saveStep2, saveStep3, clearForm } = matchCreationSlice.actions;
+export const { addTimeSelection, removeTimeSelection, saveStep1 ,saveStep2, saveStep3, clearForm } = matchCreationSlice.actions;
 export default matchCreationSlice.reducer;
