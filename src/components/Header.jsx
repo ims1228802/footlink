@@ -3,47 +3,70 @@ import Menu_Header from "../assets/layout/Menu_Header.svg";
 import Search from "../assets/layout/Search.svg";
 import Shield from "../assets/layout/Shield.svg";
 import Calendar from "../assets/layout/Calendar.svg";
+import { useNavigate } from "react-router-dom";
 import User from "../assets/layout/User.svg";
-import '../css/Header.css';
+import "../css/Header.css";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
-    <header>
-      <div id="header">
-          <div className="header-menu">
-            <button className="header-nav-btn" type="button">
-              <img src={Menu_Header} alt="MenuIcon" />
+    <header className="header">
+      <div className="header-container">
+        <div className="header-mx1">
+          {/* 메뉴 버튼 */}
+          <div className="header-section header-left">
+            <button className="header-btn header-btn-menu" type="button">
+              <img src={Menu_Header} alt="Menu Icon" />
             </button>
           </div>
-          <div className="header-logo">
-            <button className="header-logo-btn">
-              <img src={LogoHeader} alt="HeaderLogo" />
+
+          {/* 로고 */}
+          <div className="header-section header-logo">
+            <button className="header-btn header-btn-logo" onClick={() => navigate("/main")}>
+              <img src={LogoHeader} alt="Header Logo" />
             </button>
           </div>
-          <div className="header-search">
+        </div>
+        {/* 검색창 */}
+        <div className="header-mx2">
+          <div className="header-section header-search">
             <div className="header-search-bar">
-              <img src={Search} alt="SearchIcon" />
+              <img
+                src={Search}
+                alt="Search Icon"
+                className="header-search-icon"
+              />
               <input
                 type="search"
-                placeholder="지역,구장,팀이름으로 찾기"
+                className="header-search-input"
+                placeholder="지역, 구장, 팀이름으로 찾기"
               />
             </div>
           </div>
-          <div className="header-team-icon">
-            <button className="header-team">
-              <img src={Shield} alt="ShieldIcon" />
+
+          {/* 아이콘 영역 */}
+          <div className="header-section header-icons">
+            <button
+              className="header-btn header-btn-team"
+              onClick={() => navigate("/teamList")}
+            >
+              <img src={Shield} alt="Shield Icon" />
+            </button>
+            <button
+              className="header-btn header-btn-match"
+              onClick={() => navigate("/match")}
+            >
+              <img src={Calendar} alt="Match Icon" />
+            </button>
+            <button
+              className="header-btn header-btn-user"
+              onClick={() => navigate("/login")}
+            >
+              <img src={User} alt="User Icon" />
             </button>
           </div>
-          <div className="header-match-icon">
-            <button className="header-match">
-              <img src={Calendar} alt="MatchIcon" />
-            </button>
-          </div>
-          <div className="header-mypage-icon">
-            <button className="header-mypage">
-              <img src={User} alt="UserIcon" />
-            </button>
-          </div>
+        </div>
       </div>
     </header>
   );

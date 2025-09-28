@@ -1,6 +1,6 @@
 import React from "react";
 
-export default AppliedMatchs = ({ matches }) => {
+export default function AppliedMatches(matches) {
   return (
     <div>
       <h1>Applied Matches</h1>

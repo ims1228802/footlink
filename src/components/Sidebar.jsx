@@ -8,6 +8,7 @@ import Settings from "../assets/layout/Settings.svg";
 import Output from "../assets/layout/Output.svg";
 import { user } from "../data/user.js";
 import { Link } from "react-router-dom";
+import "../css/sidebar.css";  
 
 export default function Sidebar() {
   return (
@@ -24,15 +25,15 @@ export default function Sidebar() {
               <div className="sidebar-title"> MY 정보관리</div>
               <ul>
                 <li>
-                  <Link to="/myinfo">내 정보</Link>
+                  <Link to="/user/my-info">내 정보</Link>
                   <img src={Vector} alt="내 정보" />
                 </li>
                 <li>
-                  <Link to="/myteams">소속한팀</Link>
+                  <Link to="/user/my-teams">소속한팀</Link>
                   <img src={KnightShield} alt="소속한팀" />
                 </li>
                 <li>
-                  <Link to="/mymatch">매치정보</Link>
+                  <Link to="/user/my-info">매치정보</Link>
                   <img src={Handshake} alt="매치정보" />
                 </li>
               </ul>
