@@ -16,12 +16,12 @@
     margin-left: 35px;
     margin-right: 35px;
 }
-button{
+/* button{
     height: 20px;
     background-color: white;
     border: none;
     font-weight: bold;
-}
+} */
 .date-item button{
     display: flex;
     flex-direction: column;
