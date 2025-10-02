@@ -1,118 +1,50 @@
-.level-text{
+.recruit-text{
     text-align: left;
 }
 
-.level-text h2{
+.recruit-text h2{
+    font-size: 24px;
+}
+
+.recruit-text p{
     font-size: 20px;
-}
-
-.level-div{
-    margin-top: 70px;
-    padding-bottom: 37px;
-    border-bottom: 1px solid #EAEAEA;
-}
-
-.level-select-text h2{
-    text-align: center;
-    font-size: 20px;
-}
-
-.level-select{
-    margin-top: 43px;
-    display: flex;
-    gap: 11px;
-    justify-content: center;
-}
-
-.select-area{
-    background-color: #EAEAEA;
-    width: 75px;
-    height: 47px;
-    border-bottom: 1px solid #D4DAE2;
-    border-radius: 10px;
-}
-
-.level-line{
-    margin-top: 10px;
-    display: flex;
-    gap: 10.5px;
-}
-
-.level-beginner{
-    background-color: #00E58A;
-    width: 248px;
-    height: 9px;
-    border-radius: 10px 0 0 10px;
-}
-
-.level-amateur{
-    background-color: #1570FF;
-    width: 420px;
-    height: 9px;
-}
-
-.level-semi-pro{
-    background-color: #FF4029;
-    width: 248px;
-    height: 9px;
-}
-
-.level-pro{
-    background-color: #212121;
-    width: 75px;
-    height: 9px;
-    border-radius: 0 10px 10px 0;
-}
-
-.team-stats{
-    margin-top: 32px;
-}
-
-.team-stats h2{
-    font-size: 20px;
-}
-
-.chart-div{
-    width: 100%;
-    height: 440px;
+    font-weight: bold;
+    margin: 0;
     margin-top: 34px;
+}
+
+.recruit-div{
+    margin-top: 34px;
+    padding-bottom: 37px;
+}
+
+.recruit-select-button{
+    text-align: right;
+    font-size: 20px;
+}
+
+.recruit-content{
+    width: 100%;
+    height: 550px;
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+}
+
+.recruit-info{
     background-color: #F8FAFB;
+    padding: 15px 25px;
+    margin-top: 30px;
     border-radius: 10px;
     border-bottom: 1px solid #D4DAE2;
 }
 
-.stats-div{
-    margin-top: 45px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
+.recruit-info h2{
+    font-size: 20px;
+    margin: 0;
 }
 
-.slider-container{
-    text-align: left;
-    width: 26.3vw;
-}
-
-.slider-container input[type="range"]{
-    width: 100%;
-    appearance: none;
+.recruit-info ul{
     margin-top: 15px;
-}
-
-.slider-container input[type="range"]::-webkit-slider-runnable-track{
-    background-color: #EAEAEA;
-    height: 12px;
-    border-radius: 20px;
-}
-
-.slider-container input[type="range"]::-webkit-slider-thumb{
-    appearance: none;
-    background-color: #FFFFFF;
-    width: 34px;
-    height: 34px;
-    border-radius: 30px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
-    margin-top: calc(-0.5px - 12px);
 }
 
 .button-div{
