@@ -1,8 +1,21 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import "../../css/team/NewTeamNext.css";
+import { useNavigate } from "react-router-dom";
 
 export default function NewTeamNext() {
+    const navigate = useNavigate();
+
+    const navigateHandler = (route) => {
+        console.log(route);
+
+        if (route == 'pre'){
+            navigate('/newTeam');
+        }else{
+            navigate('/teamList');
+        }
+    }
+
     return(
         <>
             <Header />
@@ -78,8 +91,8 @@ export default function NewTeamNext() {
                     </div>
                 </div>
                 <div className="button-div">
-                    <button>이전으로</button>
-                    <button>다음으로</button>
+                    <button type="button" onClick={() => navigateHandler('pre')}>이전으로</button>
+                    <button type="button" onClick={() => navigateHandler('next')}>다음으로</button>
                 </div>
             </main>
             <Footer />

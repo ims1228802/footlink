@@ -1,78 +1,52 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import teamIcon from "../../assets/team/team_icon_128.png";
 import search from "../../assets/team/search.png";
 import "../../css/team/NewTeam.css";
+import Layout from "../../layout/Layout";
+import { useNavigate } from "react-router-dom";
 
 export default function NewTeamRecruit(){
+
+    const navigate = useNavigate();
+
+    const navigateHandler = (route) => {
+        if(route = 'pre'){
+            navigate('/teamList');
+        }else{
+            navigate('/newTeamRecruitNext');
+        }
+    }
+
     return(
-        <>
-            <Header />
+            <Layout>
                 <main>
                     <h2>팀원 모집하기</h2>
                     <div className="date-div">
                         <div className="week-div">
-                            <h2>언제 운동하시나요?</h2>
-                            <p>정확하지 않아도 괜찮아요</p>
+                            <h2>팀 특징이 무엇인가요?</h2>
                         </div>
                         <div className="section-week">
-                            <p>활동 요일</p>
                             <section className="checkbox-section">
-                                <input id="monday" name="monday" type="checkbox" />
-                                <label for="monday" className="checkbox-layout">
-                                    <p>월</p>
+                                <input id="self-war" name="self-war" type="checkbox" />
+                                <label for="self-war" className="checkbox-layout">
+                                    <p>자체전 위주로 해요</p>
                                 </label>
-                                <input id="tuesday" name="tuesday" type="checkbox" />
-                                <label for="tuesday" className="checkbox-layout">
-                                    <p>화</p>
+                                <input id="tournament" name="tournament" type="checkbox" />
+                                <label for="tournament" className="checkbox-layout">
+                                    <p>대회를 준비해요</p>
                                 </label>
-                                <input id="wednesday" name="wednesday" type="checkbox" />
-                                <label for="wednesday" className="checkbox-layout">
-                                    <p>수</p>
+                                <input id="team-match" name="team-match" type="checkbox" />
+                                <label for="team-match" className="checkbox-layout">
+                                    <p>팀 매칭 위주로 해요</p>
                                 </label>
-                                <input id="thursday" name="thursday" type="checkbox" />
-                                <label for="thursday" className="checkbox-layout">
-                                    <p>목</p>
+                                <input id="together" name="together" type="checkbox" />
+                                <label for="together" className="checkbox-layout">
+                                    <p>함께 실력을 키워요</p>
                                 </label>
-                                <input id="friday" name="friday" type="checkbox" />
-                                <label for="friday" className="checkbox-layout">
-                                    <p>금</p>
-                                </label>
-                                <input id="saturday" name="saturday" type="checkbox" />
-                                <label for="saturday" className="checkbox-layout"> 
-                                    <p>토</p>
-                                </label>
-                                <input id="sunday" name="sunday" type="checkbox" />
-                                <label for="sunday" className="checkbox-layout">
-                                    <p>일</p>
+                                <input id="coach" name="coach" type="checkbox" />
+                                <label for="coach" className="checkbox-layout">
+                                    <p>전문 코치님이 있어요</p>
                                 </label>
                             </section>
                         </div>
-                        <div className="time-div">
-                            <p>활동 시간</p>
-                        </div>
-                        <section className="checkbox-section">
-                            <input id="morning" name="morning" type="checkbox" />
-                            <label for="morning" className="checkbox-layout-l">
-                                <p>아침</p>
-                                <p>06시 ~ 12시</p>
-                            </label>
-                            <input id="lunch" name="lunch" type="checkbox" />
-                            <label for="lunch" className="checkbox-layout-l">
-                                <p>점심</p>
-                                <p>12시 ~ 18시</p>
-                            </label>
-                            <input id="dinner" name="dinner" type="checkbox" />
-                            <label for="dinner" className="checkbox-layout-l">
-                                <p>저녁</p>
-                                <p>18시 ~ 24시</p>
-                            </label>
-                            <input id="late-night" name="late-night" type="checkbox" />
-                            <label for="late-night" className="checkbox-layout-l">
-                                <p>심야</p>
-                                <p>24시 ~ 06시</p>
-                            </label>
-                        </section>
                     </div>
                     <div className="area-div">
                         <div className="area-text">
@@ -95,7 +69,7 @@ export default function NewTeamRecruit(){
                         </div>
                     </div>
                     <div className="peoples-div">
-                        <h2>어떤 사람들이 모여있나요?</h2>
+                        <h2>어떤 사람들을 모집하실건가요?</h2>
                         <div className="age-div">
                             <p>주요 나이대</p>
                             <section className="checkbox-section">
@@ -142,14 +116,37 @@ export default function NewTeamRecruit(){
                                 </label>
                             </section>
                         </div>
+                        <div className="level-div">
+                            <p>레벨</p>
+                            <section className="checkbox-section">
+                                <input id="self-war" name="self-war" type="checkbox" />
+                                <label for="self-war" className="checkbox-layout">
+                                    <p>실력무관</p>
+                                </label>
+                                <input id="tournament" name="tournament" type="checkbox" />
+                                <label for="tournament" className="checkbox-layout">
+                                    <p>비기너</p>
+                                </label>
+                                <input id="team-match" name="team-match" type="checkbox" />
+                                <label for="team-match" className="checkbox-layout">
+                                    <p>아마추어</p>
+                                </label>
+                                <input id="together" name="together" type="checkbox" />
+                                <label for="together" className="checkbox-layout">
+                                    <p>세미프로</p>
+                                </label>
+                                <input id="coach" name="coach" type="checkbox" />
+                                <label for="coach" className="checkbox-layout">
+                                    <p>프로</p>
+                                </label>
+                            </section>
+                        </div>
                         <div className="button-div">
-                            <button>이전으로</button>
-                            <button>다음으로</button>
+                            <button type="button" onClick={() => navigateHandler('pre')}>이전으로</button>
+                            <button type="button" onClick={() => navigateHandler('next')}>다음으로</button>
                         </div>
                     </div>
-                    
                 </main>
-            <Footer />
-        </>
+            </Layout>
     );
 }

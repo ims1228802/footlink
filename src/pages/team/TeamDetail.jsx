@@ -1,5 +1,4 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import axios from "axios";
 import "../../css/team/TeamDetail.css"
 import logo from "../../assets/team/team_logo.png"
 import location from "../../assets/team/location_on.png"
@@ -9,11 +8,22 @@ import avgTime from "../../assets/team/avg_time.png";
 import user from "../../assets/team/User.png";
 import looksOne from "../../assets/team/looks_one.png";
 import userProfile from "../../assets/team/user_profile.png";
+import Layout from "../../layout/Layout";
+import { useState } from "react";
 
 export default function TeamDetail() {
+        const [ data, setData ] = useState([]);
+
+        axios.get('http://localhost/api/teamDetail')
+        .then(response => {
+            setData(response.data);
+        })
+        .catch(error => {
+            console.log(`Error feching data: ${error}`);
+        });
+        
     return(
-        <>
-            <Header />
+         <Layout>
             <main>
                 <div className="container">
                     <div className="side-div">
@@ -135,7 +145,6 @@ export default function TeamDetail() {
                     </div>
                 </div>
             </main>
-            <Footer />
-        </>
+        </Layout>
     );
 }
