@@ -4,7 +4,7 @@ import Starrate from "../../assets/icon/Starrate.svg";
 import History from "../../assets/icon/History.svg";
 import Share from "../../assets/icon/Share.svg";
 
-export default function MyPage() {
+export default function MyInfo() {
   return (
     <div>
       <h3>내 정보</h3>
