@@ -33,6 +33,8 @@ import MyTeams from "../pages/user/MyTeams.jsx";
 import LikeMatches from "../pages/user/LikeMatches.jsx";
 import CompletedMatches from "../pages/user/CompletedMatches.jsx";
 import AppliedMatches from "../pages/user/AppliedMatches.jsx";
+import NewTeamRecruit from "../pages/team/NewTeamRecruit.jsx";
+import NewTeamRecruitNext from "../pages/team/NewTeamRecruitNext.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/main" /> },
@@ -45,7 +47,9 @@ const router = createBrowserRouter([
   { path: "/teamList", element: <Team /> },
   { path: "/teamDetail", element: <TeamDetail /> },
   { path: "/newTeam", element: <NewTeam /> },
+  { path: "/newTeamRecruit", element: <NewTeamRecruit /> },
   { path: "/newTeamNext", element: <NewTeamNext /> },
+  { path: "/newTeamRecruitNext", element: <NewTeamRecruitNext /> },
   { path: "/match", element: <HomePage /> },
   { path: "/result", element: <ResultPage /> },
   { path: "/end", element: <EndPage /> },

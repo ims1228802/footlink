@@ -7,8 +7,15 @@ import React, { useEffect, useState } from "react";
 import "../../css/user/LoginPage.css";
 import useForm from "../../hooks/useForm";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../hooks/axiosInstance";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userSlice";
 
 export default function LoginPage() {
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate();
+  
   // 유효성 검사 함수
   const validate = (values) => {
     const errors = {};
@@ -41,26 +48,42 @@ export default function LoginPage() {
     }
   }, [setValues]);
 
+  // 로그인 요청
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/login", {
+      const response = await axiosInstance.post("/login", {
         email: formData.email,
         password: formData.password,
       });
 
-      if (response.data) {
-        alert("로그인 성공");
+      if (response.data.message === "로그인 성공") {
+        const token = response.data.token;
+
+        localStorage.setItem("accessToken", token);
+
+        // 로그인 성공 후 유저 정보 Redux에 저장
+        dispatch(setUser({
+          name: response.data.name,  // 서버에서 내려주는 값
+          email: formData.email,     // 서버 응답에 email이 있다면 그 값 사용
+          img: response.data.img || "/default-profile.png"
+        }));
+        alert("로그인 성공!");
+
+        // 로그인 후 메인 페이지로 이동
+        navigate("/main");
       } else {
-        alert("가입된 회원이 없습니다");
+        alert("가입된 회원이 없습니다.");
       }
     } catch (error) {
-      console.error(error);
-      alert("로그인요청실패");
+      console.error("❌ 로그인 요청 실패:", error);
+      alert("로그인 요청 실패");
     }
   };
+
+
   return (
     <div className="login-container">
-      <img src={logoHeader} className="logo" alt="로고" />
+      <img src={logoHeader} className="logo" alt="로고" onClick={() => navigate("/main")}/>
       <p className="login-text">로그인하고 팀을 만나세요.</p>
 
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>

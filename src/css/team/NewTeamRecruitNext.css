@@ -1,0 +1,53 @@
+.recruit-text{
+    text-align: left;
+}
+
+.recruit-text h2{
+    font-size: 24px;
+}
+
+.recruit-text p{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 34px;
+}
+
+.recruit-div{
+    margin-top: 34px;
+    padding-bottom: 37px;
+}
+
+.recruit-select-button{
+    text-align: right;
+    font-size: 20px;
+}
+
+.recruit-content{
+    width: 100%;
+    height: 550px;
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+}
+
+.recruit-info{
+    background-color: #F8FAFB;
+    padding: 15px 25px;
+    margin-top: 30px;
+    border-radius: 10px;
+    border-bottom: 1px solid #D4DAE2;
+}
+
+.recruit-info h2{
+    font-size: 20px;
+    margin: 0;
+}
+
+.recruit-info ul{
+    margin-top: 15px;
+}
+
+.button-div{
+    margin-top: 50px;
+}
+

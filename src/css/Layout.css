@@ -4,6 +4,7 @@
   flex-direction: column;
   min-height: 100vh; /* 화면 전체 높이 */
   background-color: #fff;
+  overflow-y: scroll;
 }
 
 .layout-content {
@@ -11,3 +12,4 @@
   overflow-y: auto;
 }
 
+  

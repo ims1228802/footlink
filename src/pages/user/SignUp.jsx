@@ -6,8 +6,11 @@ import "../../css/user/SignUp.css";
 import districts from "../../data/districts";
 import usePhoneVerification from "../../hooks/usePhoneVerification";
 import useVerifyCode from "../../hooks/useVerifyCode";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -102,7 +105,7 @@ export default function SignUp() {
       });
 
       if (res.ok) {
-        alert("회원가입 성공!");
+        navigate("/welcome");
       } else {
         const errMsg = await res.text();
         alert("회원가입 실패: " + errMsg);
