@@ -80,3 +80,44 @@
   gap: 50px;
 }
 
+/* ✅ 반응형 추가 */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding: 24px 16px;
+  }
+
+  .footer-m1 {
+    align-items: center;
+  }
+
+  .footer-top {
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-info {
+    font-size: 12px;
+  }
+
+  .footer-team {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-member {
+    text-align: center;
+  }
+
+  .footer-member-list p {
+    font-size: 12px;
+  }
+}
