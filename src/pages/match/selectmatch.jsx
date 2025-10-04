@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './selectmatch.css';
-import Headers from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveStep2 } from '../../store/matchSlice';
+import Layout from '../../Layout/Layout';
 
 const AddMatchLevel = () => {
     const navigate = useNavigate();
@@ -121,7 +121,7 @@ const AddMatchLevel = () => {
 
     return (
         <>
-            <Headers />
+            <Layout>
             <main className="container">
                 <div className="register-container">
  
@@ -187,6 +187,7 @@ const AddMatchLevel = () => {
                     </button>
                 </div>
             </main>
+            </Layout>
         </>
     );
 };

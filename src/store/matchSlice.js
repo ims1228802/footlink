@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// 최종 제출을 위한 Async Thunk
+
 export const createMatchPost = createAsyncThunk(
     'matchCreation/createPost',
     async (_, { getState, rejectWithValue }) => {
@@ -61,7 +61,6 @@ const matchCreationSlice = createSlice({
     name: 'matchCreation',
     initialState,
     reducers: {
-        // 각 단계의 데이터를 저장하는 액션
         addTimeSelection: (state, action) => {
             const existingIndex = state.step1_selection.selections.findIndex(
                 sel => sel.fieldNo === action.payload.fieldNo &&
@@ -87,7 +86,6 @@ const matchCreationSlice = createSlice({
         saveStep3: (state, action) => {
             state.step3_post = action.payload;
         },
-        // 전체 폼을 초기화하는 액션
         clearForm: (state) => {
             Object.assign(state, initialState);
         }
