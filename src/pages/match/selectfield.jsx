@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './selectfield.css';
-import Headers from '../../components/Header/Header';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-// useSelector, addTimeSelection, removeTimeSelection은 더 이상 사용하지 않습니다.
 import { saveStep1 } from '../../store/matchSlice';
+import Layout from '../../layout/Layout';
 
 
 const SelectField = () => {
@@ -14,10 +13,8 @@ const SelectField = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // --- 로직 수정 1: State 관리 방식 변경 ---
-    // Redux의 selections 배열 대신, 시작 시간과 이용 시간을 컴포넌트 내부에서 관리합니다.
-    const [startTime, setStartTime] = useState(null); // 사용자가 선택한 시작 시간 { fieldId, time }
-    const [duration, setDuration] = useState(2);      // 사용자가 선택한 이용 시간 (기본 2시간)
+    const [startTime, setStartTime] = useState(null);
+    const [duration, setDuration] = useState(2);     
 
     // 기존 State들은 그대로 유지합니다.
     const [province, setProvince] = useState([]);
@@ -69,7 +66,6 @@ const SelectField = () => {
         }
     }, [stadiumFields, selectedDate]);
 
-    // 기존 Helper 함수들은 그대로 유지합니다.
     const generateTimeSlots = (start, end) => {
         const slots = [];
         const startTime = moment(start, 'HH:mm');
@@ -94,14 +90,14 @@ const SelectField = () => {
         });
     };
 
-    // --- 로직 수정 2: 시간 선택 핸들러 변경 ---
+
     const handleTimeSlotClick = (fieldNo, slotTime) => {
         if (isSlotBooked(fieldNo, slotTime)) {
             alert('이미 예약된 시간입니다.');
             return;
         }
 
-        // 선택한 시간부터 '이용 시간'만큼 예약이 가능한지 확인합니다.
+
         let isBlockAvailable = true;
         for (let i = 0; i < duration; i++) {
             const timeToCheck = moment(slotTime, 'HH:mm').add(i, 'hours').format('HH:mm');
@@ -122,7 +118,7 @@ const SelectField = () => {
             return;
         }
 
-        // 가능하면 시작 시간으로 설정하고, 이미 선택된 경우 해제합니다.
+
         if (startTime && startTime.fieldNo === fieldNo && startTime.time === slotTime) {
             setStartTime(null);
         } else {
@@ -130,7 +126,7 @@ const SelectField = () => {
         }
     };
 
-    // --- 로직 수정 3: '다음으로' 버튼 핸들러 변경 ---
+
     const handleNextClick = () => {
         if (!startTime) {
             alert('시작 시간을 선택해주세요.');
@@ -150,10 +146,9 @@ const SelectField = () => {
         dispatch(saveStep1(matchDataToSend));
         navigate('/selectmatch');
     };
-
-    // --- 로직 수정 4: 구장 변경 시 선택 초기화 ---
+ 
     const handleLocationClick = async (stadium) => {
-        setStartTime(null); // 구장이 바뀌면 시작 시간을 초기화합니다.
+        setStartTime(null); 
         setSelectedField(stadium);
         try {
             const response = await axios.get(`http://localhost:8080/api/${stadium.staNo}/fields`);
@@ -164,7 +159,6 @@ const SelectField = () => {
         }
     };
 
-    // 기존 핸들러 함수들은 그대로 유지합니다.
     const handleProvinceChange = async (e) => {
         const selectedKeyword = e.target.value;
         setSelectProvince(selectedKeyword);
@@ -185,10 +179,10 @@ const SelectField = () => {
 
     return (
         <>
-            <Headers />
+            <Layout>
             <main className="container">
                 <div className="register-container">
-                    {/* 상단 UI (지역, 날짜, 검색)는 기존과 동일합니다. */}
+
                     <div className="step-indicators">
                         <div className="step-item active"><span>1. 구장 및 시간</span></div>
                         <div className="step-item"><span>2. 인원 및 레벨</span></div>
@@ -200,7 +194,12 @@ const SelectField = () => {
                         <div className="selection-box search-input-box"><input type="text" placeholder="검색할 구장명 입력" value={searchTerm} onChange={handleSearchChange}/></div>
                     </div>
                     <div className="location-list-container">
-                        {filteredFieldData.length > 0 ? (<div className="location-list">{filteredFieldData.map((loc) => (<div key={loc.staNo} className={`location-item ${selectedField && selectedField.staNo === loc.staNo ? 'selected' : ''}`} onClick={() => handleLocationClick(loc)}><div className="location-name">{loc.staName}</div><div className="location-address">{loc.staAddr}</div></div>))}</div>) : (<div className="no-data-message"><span>풋살장이 존재하지 않습니다.</span></div>)}
+                        {filteredFieldData.length > 0 ? (<div className="location-list">{filteredFieldData.map((loc) => (<div key={loc.staNo} 
+                        className={`location-item ${selectedField && selectedField.staNo === loc.staNo ? 'selected' : ''}`} 
+                        onClick={() => handleLocationClick(loc)}><div className="location-name">{loc.staName}
+                    </div>
+                    <div className="location-address">{loc.staAddr}</div></div>))}</div>) : (<div className="no-data-message">
+                        <span>풋살장이 존재하지 않습니다.</span></div>)}
                     </div>
                     <hr />
                     <div className="field-list">
@@ -212,7 +211,6 @@ const SelectField = () => {
                                         <div className="field-details">{field.sft}m</div>
                                     </div>
 
-                                    {/* --- UI 변경 1: 이용 시간 선택 UI 추가 --- */}
                                     <div className="duration-selector">
                                         <strong>이용 시간: </strong>
                                         {[1, 2, 3].map(hour => (
@@ -220,7 +218,7 @@ const SelectField = () => {
                                                 key={hour}
                                                 onClick={() => {
                                                     setDuration(hour);
-                                                    setStartTime(null); // 이용 시간 변경 시 시작 시간 초기화
+                                                    setStartTime(null); 
                                                 }}
                                                 className={duration === hour ? 'active' : ''}
                                             >
@@ -231,13 +229,11 @@ const SelectField = () => {
 
                                     <div className="time-slots">
                                         {generateTimeSlots(field.ost, field.oet).map((slot) => {
-                                            // --- UI 변경 2: '선택됨' 상태 판단 로직 수정 ---
                                             let isSelected = false;
                                             if (startTime && startTime.fieldNo === field.fieldNo) {
                                                 const startMoment = moment(startTime.time, 'HH:mm');
                                                 const endMoment = moment(startTime.time, 'HH:mm').add(duration, 'hours');
                                                 const currentMoment = moment(slot, 'HH:mm');
-                                                // 현재 슬롯이 [시작시간, 종료시간) 범위에 있는지 확인
                                                 if (currentMoment.isBetween(startMoment, endMoment, null, '[)')) {
                                                     isSelected = true;
                                                 }
@@ -266,6 +262,7 @@ const SelectField = () => {
                     <button className="next-button" onClick={handleNextClick}>다음으로</button>
                 </div>
             </main>
+            </Layout>
         </>
     );
 };

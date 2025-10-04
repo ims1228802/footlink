@@ -1,0 +1,185 @@
+.page-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #333;
+}
+
+/* 상단 이미지 배너 */
+.image-banner {
+    position: relative;
+    width: 100%;
+    padding-top: 50%; /* 이미지 비율에 맞게 조정 */
+    background-size: cover;
+    background-position: center;
+    background-color: #eee; /* 이미지 로딩 전 배경색 */
+}
+
+.sports-logo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: auto;
+}
+
+/* 매치 정보 섹션 */
+.match-info-container {
+    padding: 24px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.title-row h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.location {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.share-button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+}
+
+.date-time {
+    font-size: 16px;
+    color: #555;
+    margin: 4px 0 0;
+}
+
+.apply-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #00c7b1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.apply-button:hover {
+    background-color: #00a593;
+}
+
+/* 공통 섹션 스타일 */
+.section {
+    padding: 30px 20px;
+    border-bottom: 8px solid #f5f5f5;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+}
+
+/* 매치 방식 섹션 */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #00c7b1;
+}
+
+.icon-label {
+    font-weight: 500;
+}
+
+.icon-description {
+    font-size: 12px;
+    color: #888;
+}
+
+/* 시설 정보 섹션 */
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.facility-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #888;
+    font-size: 14px;
+}
+
+.facility-item svg {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.facility-item.disabled {
+    opacity: 0.5;
+    color: #aeaeae; 
+}
+
+.facility-label {
+    font-size: 14px;
+}
+
+.facility-description {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* 로딩 및 에러 메시지 */
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 18px;
+    color: #555;
+}

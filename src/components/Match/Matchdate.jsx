@@ -1,10 +1,9 @@
-import  { useState } from 'react';
-import './Matchdate.css'
+import { useState } from 'react';
+import './Matchdate.css';
 
-function DateNavigator() {
+// 부모 컴포넌트로부터 selectedDate와 onDateChange 함수를 props로 받습니다.
+function DateNavigator({ selectedDate, onDateChange }) {
   const [currentDate, setCurrentDate] = useState(new Date());
-
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const NextMonth = () => {
     setCurrentDate(prevDate => {
@@ -21,12 +20,6 @@ function DateNavigator() {
       return newDate;
     });
   };
-
-  const twoDaysBefore = new Date(currentDate);
-  twoDaysBefore.setDate(currentDate.getDate() - 2);
-
-  const twoDaysAfter = new Date(currentDate);
-  twoDaysAfter.setDate(currentDate.getDate() + 2);
 
   // 요일을 한글로 변환
   const getDayName = (date) => {
@@ -51,19 +44,19 @@ function DateNavigator() {
   };
 
   const getFiveDays = (date) => {
-  const daysArray = [];
-  const startDate = new Date(date);
-  startDate.setDate(date.getDate() - 2);
+    const daysArray = [];
+    const startDate = new Date(date);
+    startDate.setDate(date.getDate() - 2);
 
-  for (let i = 0; i < 5; i++) {
-    const day = new Date(startDate);
-    day.setDate(startDate.getDate() + i);
-    daysArray.push(day);
-  }
-  return daysArray;
-};
+    for (let i = 0; i < 5; i++) {
+      const day = new Date(startDate);
+      day.setDate(startDate.getDate() + i);
+      daysArray.push(day);
+    }
+    return daysArray;
+  };
 
-const filteredDays = getFiveDays(currentDate);
+  const filteredDays = getFiveDays(currentDate);
 
   return (
     <div className="calendar-section">
@@ -76,21 +69,21 @@ const filteredDays = getFiveDays(currentDate);
         <button className='arrow-left' onClick={PreviousDate}>〈</button>
         {filteredDays.map((day, index) => (
           <div key={index} className="date-item">
-              <button
-                  // day와 selectedDate의 연, 월, 일이 모두 같은지 비교
-                className={
-                      day.getFullYear() === selectedDate.getFullYear() &&
-                      day.getMonth() === selectedDate.getMonth() &&
-                      day.getDate() === selectedDate.getDate()
-                        ? "active"
-                        : ""
-                  }
-                  // 클릭된 날짜 객체를 selectedDate 상태에 저장
-                onClick={() => setSelectedDate(day)}
-              >
-                <span className="day">{getDayName(day)}</span>
-                <span className="date">{day.getDate()}</span>
-              </button>
+            <button
+              // className 비교 시, props로 받은 selectedDate를 사용합니다.
+              className={
+                day.getFullYear() === selectedDate.getFullYear() &&
+                day.getMonth() === selectedDate.getMonth() &&
+                day.getDate() === selectedDate.getDate()
+                  ? "active"
+                  : ""
+              }
+              // 클릭 시, props로 받은 onDateChange 함수를 호출하여 부모의 상태를 변경합니다.
+              onClick={() => onDateChange(day)}
+            >
+              <span className="day">{getDayName(day)}</span>
+              <span className="date">{day.getDate()}</span>
+            </button>
           </div>
         ))}
         <button className="arrow-right" onClick={NextDate}>〉</button>

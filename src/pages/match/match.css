@@ -1,18 +1,39 @@
 .top-content{
     display: flex;
 }
+
 .top-content hr{
     margin :20px;
 }
-.match-content{
-    display: flex;
+
+
+.match-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
+
+
+@media (min-width: 768px) {
+  .match-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .match-content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
 .main-top{
     display: flex;
     justify-content: space-between;
     margin-bottom: 72px;
     align-items: center;
 }
+
 .main-top p{
     background-color: #00ADB5;
     width: 82px;
@@ -22,9 +43,16 @@
     height: 33px;
     align-content: center;
 }
+.match-card-link {
+    text-decoration: none; 
+    color: inherit;       
+    display: block;    
+}
+
 .match-filter{
     display: flex;
 }
+
 .match-add{
     background-color: #00ADB5;
     width: 85px;
@@ -34,4 +62,22 @@
     height: 33px;
     align-content: center;
     font-size: 16px;
+}
+
+.match-filter select, .match-filter .filter-checkbox {
+    margin-right: 10px; /* 필터 간 간격 */
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-checkbox input[type="checkbox"] {
+    margin-right: 5px;
 }
