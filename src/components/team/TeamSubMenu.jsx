@@ -1,6 +1,18 @@
 import '../../css/team/TeamSubMenu.css'
+import { useNavigate } from 'react-router-dom';
 
-export default function TeamSubMenu() {
+export default function TeamSubMenu(menu) {
+    const navigate = useNavigate();
+
+    const navigateHandler = () => {
+        if(menu.selectMenu == 'teamList'){
+            navigate('/newTeam');
+        } else {
+            navigate('/newTeamRecruit');
+        }
+    }
+
+    //console.log(menu.selectMenu);
     return(
         <div className='team_sub_menu'>
             <div className='team_filter'>
@@ -29,7 +41,7 @@ export default function TeamSubMenu() {
                     <input type='checkbox' id='time' name='time' className='appearance-none'/>
                 </label>
             </div>
-            <button className='outline-1 outline-cyan-500 text-cyan-500'>팀 생성하기</button>
+            <button className='outline-1 outline-cyan-500 text-cyan-500' onClick={navigateHandler}>{menu.selectMenu == 'teamList' ? '팀 생성하기' : '팀원 모집하기'}</button>
         </div>
     );
 }
