@@ -1,9 +1,177 @@
-#sidebar {
-  width: 220px;
-  background-color: #1f252e;
-  color: #fff;
-  padding: 20px;
+/* 전체 사이드바 */
+.sidebar {
+  width: 320px;
+  height: 700px;
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  color: #111;
+}
+
+/* 네비게이션 컨테이너 */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ─────────────── 상단 프로필 ─────────────── */
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.sidebar-profile-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.sidebar-profile-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+}
+
+.sidebar-profile-email {
+  font-size: 13px;
+  color: #666;
+}
+
+/* 구분선 */
+.sidebar-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+/* ─────────────── 섹션 공통 ─────────────── */
+.sidebar-block {
+  margin-bottom: 28px;
+}
+
+.sidebar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+/* 리스트 공통 */
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  margin-bottom: 4px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+}
+
+/* 링크 공통 */
+.sidebar-link {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: 10px 12px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 8px;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* 아이콘 */
+.sidebar-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+/* hover 효과 */
+.sidebar-item:hover .sidebar-link {
+  background-color: #eef3f8;
+}
+
+/* 활성화(active) 상태 */
+.sidebar-item.active .sidebar-link {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+/* 로그아웃 버튼 전용 */
+.sidebar-logout {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sidebar-logout:hover {
+  background-color: #eef3f8;
+}
+
+/* ─────────────── 반응형 ─────────────── */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .sidebar-top {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .sidebar-profile-img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0;
+  }
+
+  .sidebar-title {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-link {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .sidebar-icon {
+    width: 16px;
+    height: 16px;
+  }
 }
