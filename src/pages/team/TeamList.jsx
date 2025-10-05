@@ -16,7 +16,7 @@ import Layout from '../../layout/Layout';
 
 export default function TeamList() {
     const [selectButton, setSelectButton] = useState();
-    const [data, setData] = useState([]);
+    const [ data, setData ] = useState([]);
     const [ menu, setMenu ] = useState('teamList');
     const [ searchText, setSearchText ] = useState('');
 
@@ -53,7 +53,7 @@ export default function TeamList() {
                     <TeamSubMenu selectMenu={menu}/>
                     {filterList.length > 0 ? 
                         filterList.map((list) => list.isTemp == "정석" ? (
-                        <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamName=${list.teamName}`}>
+                        <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
                                 <img src={teamImg} />
                             </div>
