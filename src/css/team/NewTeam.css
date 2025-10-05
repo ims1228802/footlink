@@ -93,10 +93,10 @@ main h2{
 }
 
 .checkbox-layout{
-    padding: 11px 50px;
+    padding: 11px 49px;
     border: 1px solid #46A663;
     border-radius: 30px;
-    margin-right: 26.68px;
+    margin-right: 20px;
 }
 
 .checkbox-layout p{
@@ -118,17 +118,19 @@ main h2{
     border: 1px solid #46A663;
     border-radius: 30px;
     margin-right: 35px;
+    padding: 5px 59px;
+    text-align: center;
 }
 
 .checkbox-layout-l p{
     color: #46A663;
 }
 
-.checkbox-section input[type="checkbox"]:checked + .checkbox-layout-l{
+.checkbox-section input[type="radio"]:checked + .checkbox-layout-l{
     background: #46A663;
 }
 
-.checkbox-section input[type="checkbox"]:checked + .checkbox-layout-l p{
+.checkbox-section input[type="radio"]:checked + .checkbox-layout-l p{
     color: white;
 }
 
@@ -208,7 +210,6 @@ main h2{
     border-radius: 30px;
     border: 1px solid #46A663;
     width: 316px;
-    height: 49px;
     margin-right: 36px;
     text-align: center;
     padding: 13px 0;
@@ -240,6 +241,8 @@ main h2{
 
 .button-div{
     margin-bottom: 34px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .emblem-img-div{
@@ -257,4 +260,80 @@ main h2{
     margin-top: 20px;
     padding-bottom: 24px;
     border-bottom: 1px solid #D4DAE2;
+}
+
+.area-select{
+    margin: 15px 0;
+}
+
+.area-select select{
+    margin-right: 15px;
+    border: 1px solid #46A663;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.area-select input[type="text"]{
+    width: 83%;
+    border: 1px solid #46A663;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.stadium-div{
+    background-color: #F8FAFB;
+    border-radius: 10px;
+    border-bottom: 1px solid #D4DAE2;
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.stadium-item{
+    border-bottom: 1px solid #D4DAE2;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.stadium-item p{
+    margin: 0;
+}
+
+.search-active{
+    background-color: #46A663;
+    color: white;
+}
+
+.submit-btn{
+    border-radius: 10px;
+    background-color: #46A663;
+    color: white;
+    width: 49%;
+    padding: 12px;
+}
+
+.close-btn{
+    border-radius: 10px;
+    border: 1px solid #46A663;
+    color: #46A663;
+    width: 49%;
+    padding: 12px;
+}
+
+.outline-btn{
+    border-radius: 10px;
+    border: 1px solid #46A663;
+    color: #46A663;
+    width: 49%;
+    padding: 6px;
+}
+
+.fill-btn{
+    border-radius: 10px;
+    background-color: #46A663;
+    color: white;
+    width: 49%;
+    padding: 6px;
 }

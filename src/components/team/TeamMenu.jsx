@@ -3,7 +3,7 @@ import search from '../../assets/team/search.png'
 import { useState } from 'react'
 import axios from 'axios';
 
-export default function TeamMenu(list) {
+export default function TeamMenu({list}) {
     const [ menu, setMenu ] = useState('teamList');
     const [ searchText, setSearchText ] = useState('');
 
