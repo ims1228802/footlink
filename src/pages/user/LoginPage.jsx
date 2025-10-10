@@ -9,13 +9,12 @@ import useForm from "../../hooks/useForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../hooks/axiosInstance";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/userSlice";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginPage() {
-  const dispatch = useDispatch(); 
   const navigate = useNavigate();
-  
+  const queryClient = useQueryClient();
+
   // 유효성 검사 함수
   const validate = (values) => {
     const errors = {};
@@ -61,15 +60,9 @@ export default function LoginPage() {
 
         localStorage.setItem("accessToken", token);
 
-        // 로그인 성공 후 유저 정보 Redux에 저장
-        dispatch(setUser({
-          name: response.data.name,  // 서버에서 내려주는 값
-          email: formData.email,     // 서버 응답에 email이 있다면 그 값 사용
-          img: response.data.img || "/default-profile.png"
-        }));
-        alert("로그인 성공!");
+        // ✅ React Query 캐시 초기화 (로그인 상태 반영)
+        queryClient.invalidateQueries(["user"]);
 
-        // 로그인 후 메인 페이지로 이동
         navigate("/main");
       } else {
         alert("가입된 회원이 없습니다.");
@@ -80,10 +73,14 @@ export default function LoginPage() {
     }
   };
 
-
   return (
     <div className="login-container">
-      <img src={logoHeader} className="logo" alt="로고" onClick={() => navigate("/main")}/>
+      <img
+        src={logoHeader}
+        className="logo"
+        alt="로고"
+        onClick={() => navigate("/main")}
+      />
       <p className="login-text">로그인하고 팀을 만나세요.</p>
 
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>

@@ -1,7 +1,6 @@
 /* 전체 사이드바 */
 .sidebar {
   width: 320px;
-  height: 700px;
   background-color: #f9fafb;
   border-right: 1px solid #e5e7eb;
   padding: 24px 20px;
@@ -9,6 +8,10 @@
   flex-direction: column;
   justify-content: flex-start;
   color: #111;
+}
+
+.sidebar p {
+  margin: 0; /* 전역 margin 제거 */
 }
 
 /* 네비게이션 컨테이너 */
@@ -21,10 +24,11 @@
 /* ─────────────── 상단 프로필 ─────────────── */
 .sidebar-top {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 28px;
   text-align: center;
+  gap: 30px;
+  margin: 6px 0px 30px;
 }
 
 .sidebar-profile-img {
@@ -33,6 +37,13 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 12px;
+}
+
+.sidebar-profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .sidebar-profile-name {
@@ -50,8 +61,6 @@
 .sidebar-divider {
   width: 100%;
   height: 1px;
-  background-color: #e5e7eb;
-  margin-bottom: 20px;
 }
 
 /* ─────────────── 섹션 공통 ─────────────── */
@@ -60,10 +69,10 @@
 }
 
 .sidebar-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #9ca3af;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 /* 리스트 공통 */
@@ -83,7 +92,7 @@
 .sidebar-link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 10px 12px;
   color: #111;
   font-size: 14px;
@@ -94,12 +103,13 @@
   background-color: transparent;
   transition: background-color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
   cursor: pointer;
+  gap: 30px;
 }
 
 /* 아이콘 */
 .sidebar-icon {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   opacity: 0.8;
 }
 
@@ -124,7 +134,7 @@
   color: #111;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding: 10px 12px;
   border-radius: 8px;
@@ -143,6 +153,7 @@
     border-bottom: 1px solid #e5e7eb;
     min-height: auto;
     padding: 16px;
+    display: none;
   }
 
   .sidebar-top {
@@ -162,7 +173,7 @@
 
   .sidebar-title {
     font-size: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 15px;
   }
 
   .sidebar-link {
@@ -171,7 +182,7 @@
   }
 
   .sidebar-icon {
-    width: 16px;
-    height: 16px;
+    width: 21px;
+    height: 21px;
   }
 }

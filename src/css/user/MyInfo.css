@@ -1,0 +1,332 @@
+/* ===============================
+   전체 컨테이너
+   =============================== */
+.myinfo-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: #111;
+}
+
+.myinfo-container p {
+  margin: 0; /* 전역 margin 제거 */
+}
+
+/* ===============================
+   상단 헤더 (내 정보 + 공유 버튼)
+   =============================== */
+.myinfo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.myinfo-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.myinfo-header-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.myinfo-share-btn,
+.myinfo-modify-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.myinfo-share-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===============================
+   섹션 공통
+   =============================== */
+.myinfo-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  color: #111;
+  padding-bottom: 20px;
+}
+
+.myinfo-stats-section {
+  margin-left: 20px;
+}
+
+.myinfo-basic-section {
+  margin-left: 20px;
+}
+
+/* ===============================
+   📊 통계 카드 영역
+   =============================== */
+
+.myinfo-stats-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.myinfo-stats-item {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: transform 0.1s ease-in-out;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.myinfo-stats-item:hover {
+  transform: translateY(-2px);
+}
+
+.myinfo-stats-icon-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.myinfo-stats-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.myinfo-stats-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+}
+
+.myinfo-stats-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* ===============================
+   🧾 기본정보 + 승률 그래프 (2열)
+   =============================== */
+
+.myinfo-separator {
+  height: 245px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* 왼쪽 기본정보 */
+.myinfo-graph-left {
+  flex: 1;
+  width: 300px;
+}
+
+.myinfo-basic-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 10px;
+}
+
+.myinfo-basic-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.myinfo-basic-row:last-child {
+  border-bottom: none;
+}
+
+.myinfo-basic-label {
+  font-size: 14px;
+  width: 95px;
+}
+
+.myinfo-team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* 아래로 쌓이게 */
+  gap: 4px; /* 팀 이름 간 간격 */
+}
+
+.myinfo-team-list li {
+  max-width: 215px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.myinfo-no-team {
+  color: #757b8a !important;
+}
+
+.myinfo-basic-value {
+  font-size: 14px;
+  color: #111;
+}
+
+.myinfo-empty-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #757b8a;
+  font-size: 13px;
+}
+
+.myinfo-register-btn {
+  background-color: #60ba9e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.myinfo-register-btn:hover {
+  background-color: #4ea289;
+}
+
+/* 오른쪽 승률 그래프 */
+.myinfo-graph-right {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myinfo-chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+}
+
+.myinfo-chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.myinfo-chart-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.myinfo-chart-label {
+  font-size: 13px;
+  color: #777;
+}
+
+.myinfo-chart-empty {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  color: #777;
+  font-size: 14px;
+}
+
+.myinfo-chart-empty-sub {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+/* ===============================
+   ✏️ 자기소개
+   =============================== */
+.myinfo-intro-section {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px); /* 좌우 마진만큼 빼기 */
+  max-width: 800px; /* 최대 너비 제한 */
+  min-height: 120px; /* 최소 높이 */
+  box-sizing: border-box; /* 패딩과 보더를 포함한 크기 계산 */
+
+}
+
+.myinfo-intro-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  max-height: 200px; /* 최대 높이 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+  padding-right: 10px; /* 스크롤바와의 간격 */
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #fafafa;
+  padding: 12px 16px;
+  transition: background-color 0.2s ease-in-out;
+  height: 90px;
+}
+
+/* ===============================
+   📡 상태 표시
+   =============================== */
+.myinfo-loading,
+.myinfo-require-login {
+  font-size: 15px;
+  color: #555;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* ===============================
+   🔹 반응형
+   =============================== */
+@media (max-width: 900px) {
+  .myinfo-separator {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .myinfo-graph-right {
+    width: 100%;
+  }
+
+  .myinfo-stats-list {
+    flex-direction: column;
+  }
+
+  .myinfo-basic-label {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+}
