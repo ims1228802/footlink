@@ -1,0 +1,172 @@
+.myteam-container {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: #111;
+}
+
+.myteam-container p {
+  margin: 0; /* 전역 margin 제거 */
+}
+
+.myteam-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.myteam-separator {
+  margin-left: 20px;
+}
+
+.myteam-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  color: #111;
+  padding-bottom: 20px;
+}
+
+.myteam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myteam-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 40px;
+  border-radius: 12px;
+  border: 0.5px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  gap: 30px;
+}
+
+.myteam-item:hover {
+  background: #fafafa;
+}
+
+.myteam-img-wrap {
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.myteam-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.myteam-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.myteam-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.myteam-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.myteam-count-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 0.5px solid #eee;
+  background-color: #8c8c8c;
+  border-radius: 10px;
+  width: 50px;
+  padding: 1px 8px;
+  justify-content: center;
+}
+
+.myteam-count {
+  font-size: 13px;
+  color: #fff;
+}
+
+.myteam-count-icon {
+  width: 14px;
+  height: 14px;
+  color: #fff;
+}
+
+.myteam-location-group {
+    display: flex;
+    align-items: center;
+    width: auto;
+    padding: 1px 8px;
+    justify-content: flex-start;
+    }
+
+.myteam-location {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #000000;
+  margin-left: 10px;
+}
+
+.myteam-location-icon {
+  width: 14px;
+  height: 14px;
+  color: #fff;
+}
+
+.myteam-tags {
+  font-size: 13px;
+  color: #000000;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.myteam-floating-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 50px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+.myteam-floating-btn .plus {
+  font-size: 18px;
+}
+
+.myteam-empty {
+  text-align: center;
+  margin-top: 100px;
+  color: #666;
+}
+.myteam-create-btn {
+  margin-top: 20px;
+  padding: 8px 14px;
+  border: none;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}

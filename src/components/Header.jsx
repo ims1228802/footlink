@@ -6,31 +6,30 @@ import Calendar from "../assets/layout/Calendar.svg";
 import ArrowBackIos from "../assets/icon/ArrowBackIos.svg";
 import User from "../assets/layout/User.svg";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { useSelector } from "react-redux"; // 🔹 Redux 연결
 import "../css/Header.css";
+import React, { useState } from "react";
+import { useUser } from "../hooks/useUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Header() {
+
+
+  const { data: user } = useUser();     // 로그인된 유저정보
+  const queryClient = useQueryClient(); // 캐시 접근
   const navigate = useNavigate();
+
+
   const [isMobileSearch, setIsMobileSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
-
-
-   // 임시로 전체 state를 한번 찍어보면 바로 원인 파악됩니다
-  // const whole = useSelector((s) => s);
-  // console.log("Redux whole state in Header:", whole);
-
-  // Redux에서 유저 상태 가져오기
-  const user = useSelector((state) => state.user.user);
 
   const handleClear = () => setSearchText("");
 
   const handleUserClick = () => {
     if (user) {
-      // ✅ 로그인되어 있음 → 마이페이지로 이동
+      // 로그인되어 있음 → 마이페이지로 이동
       navigate("/user/my-info");
     } else {
-      // ❌ 로그인 안되어 있음 → 로그인 페이지로 이동
+      // 로그인 안되어 있음 → 로그인 페이지로 이동
       navigate("/login");
     }
   };

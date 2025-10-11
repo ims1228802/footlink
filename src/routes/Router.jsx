@@ -3,6 +3,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 //main
 import Main from "../pages/Main.jsx";
@@ -29,7 +30,8 @@ import Welcome from "../pages/user/Welcome.jsx";
 import FindEmail from "../pages/user/FindEmail.jsx";
 import FindPassword from "../pages/user/FindPassword.jsx";
 import MyInfo from "../pages/user/MyInfo.jsx";
-import MyTeams from "../pages/user/MyTeams.jsx";
+import Modify from "../pages/user/Modify.jsx";
+import MyTeam from "../pages/user/MyTeam.jsx";
 import LikeMatches from "../pages/user/LikeMatches.jsx";
 import CompletedMatches from "../pages/user/CompletedMatches.jsx";
 import AppliedMatches from "../pages/user/AppliedMatches.jsx";
@@ -44,6 +46,7 @@ const router = createBrowserRouter([
   { path: "/welcome", element: <Welcome /> },
   { path: "/find-Email", element: <FindEmail /> },
   { path: "/find-Password", element: <FindPassword /> },
+  { path: "modify", element: <Modify /> },
   { path: "/teamList", element: <Team /> },
   { path: "/teamDetail", element: <TeamDetail /> },
   { path: "/newTeam", element: <NewTeam /> },
@@ -56,13 +59,18 @@ const router = createBrowserRouter([
   { path: "/selectfield", element: <SelectField /> },
   { path: "/selectmatch", element: <SelectMatch /> },
   { path: "/selectdetail", element: <SelectDetail /> },
-  { path: "/match/:matchNo", element :<MatchDetailPage /> },
+  { path: "/match/:matchNo", element: <MatchDetailPage /> },
   {
     path: "/user",
-    element: <MypageLayout />,
+    element: (
+      <ProtectedRoute>
+        <MypageLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { path: "my-info", element: <MyInfo /> },
-      { path: "my-teams", element: <MyTeams /> },
+      { path: "modify", element: <Modify /> },
+      { path: "my-team", element: <MyTeam /> },
       { path: "like-matches", element: <LikeMatches /> },
       { path: "applied-matches", element: <AppliedMatches /> },
       { path: "completed-match", element: <CompletedMatches /> },
