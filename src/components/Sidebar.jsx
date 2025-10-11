@@ -10,6 +10,7 @@ import "../css/Sidebar.css";
 import { useUser } from "../hooks/useUser";
 import { useQueryClient } from "@tanstack/react-query";
 import profile from "../assets/user/profile.svg";
+import React, { useState, useEffect } from "react";
 
 export default function Sidebar() {
   const { data: user } = useUser();
@@ -21,6 +22,10 @@ export default function Sidebar() {
     localStorage.removeItem("accessToken"); // 토큰 제거
     queryClient.invalidateQueries(["user"]); // 유저 캐시 무효화
     navigate("/login");
+  };
+
+  const toggleMenu = (menu) => {
+    setOpenMenu(openMenu === menu ? null : menu);
   };
 
   // 현재 경로와 비교해 active 메뉴 판단
