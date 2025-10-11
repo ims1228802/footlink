@@ -31,7 +31,7 @@ import FindEmail from "../pages/user/FindEmail.jsx";
 import FindPassword from "../pages/user/FindPassword.jsx";
 import MyInfo from "../pages/user/MyInfo.jsx";
 import Modify from "../pages/user/Modify.jsx";
-import MyTeams from "../pages/user/MyTeams.jsx";
+import MyTeam from "../pages/user/MyTeam.jsx";
 import LikeMatches from "../pages/user/LikeMatches.jsx";
 import CompletedMatches from "../pages/user/CompletedMatches.jsx";
 import AppliedMatches from "../pages/user/AppliedMatches.jsx";
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
     children: [
       { path: "my-info", element: <MyInfo /> },
       { path: "modify", element: <Modify /> },
-      { path: "my-teams", element: <MyTeams /> },
+      { path: "my-team", element: <MyTeam /> },
       { path: "like-matches", element: <LikeMatches /> },
       { path: "applied-matches", element: <AppliedMatches /> },
       { path: "completed-match", element: <CompletedMatches /> },

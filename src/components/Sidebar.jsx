@@ -61,10 +61,10 @@ export default function Sidebar() {
             </li>
             <li
               className={`sidebar-item ${
-                isActive("/user/my-teams") ? "active" : ""
+                isActive("/user/my-team") ? "active" : ""
               }`}
             >
-              <Link to="/user/my-teams" className="sidebar-link">
+              <Link to="/user/my-team" className="sidebar-link">
                 <img
                   src={KnightShield}
                   alt="소속한팀"

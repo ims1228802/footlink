@@ -3,7 +3,6 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #fff;
-  overflow-y: scroll;
 }
 
 /* 사이드바 + 메인 콘텐츠 영역 */
