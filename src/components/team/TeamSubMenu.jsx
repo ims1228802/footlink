@@ -1,15 +1,26 @@
+import { useSelector } from 'react-redux';
 import '../../css/team/TeamSubMenu.css'
 import { useNavigate } from 'react-router-dom';
 
 export default function TeamSubMenu({selectMenu}) {
     const navigate = useNavigate();
+    const user = useSelector(state => state.user.user);
 
     const navigateHandler = () => {
-        if(selectMenu == 'teamList'){
-            navigate('/newTeam');
-        } else {
-            navigate('/newTeamRecruit');
+        
+        console.log(user);
+
+        if(user){
+            if(selectMenu == 'teamList'){
+                navigate('/newTeam');
+            } else {
+                navigate('/newTeamRecruit');
+            }
+        }else{
+            alert('로그인 후 이용가능합니다');
+            navigate('/login');
         }
+
     }
 
     //console.log(menu.selectMenu);
