@@ -30,7 +30,7 @@ const SelectField = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/Match');
+                const response = await axios.get('http://localhost/api/Match');
                 setProvince(response.data.pro);
                 setFieldData(response.data.Sta);
             } catch (error) {
@@ -46,7 +46,7 @@ const SelectField = () => {
                 try {
                         const bookedData = {};
                     await Promise.all(stadiumFields.map(async (field) => {
-                        const response = await axios.get(`http://localhost:8080/api/Match/booked-slots`, {
+                        const response = await axios.get(`http://localhost/api/Match/booked-slots`, {
                             params: {
                                 fieldNo: field.fieldNo,
                                 date: selectedDate
@@ -151,7 +151,7 @@ const SelectField = () => {
         setStartTime(null); 
         setSelectedField(stadium);
         try {
-            const response = await axios.get(`http://localhost:8080/api/${stadium.staNo}/fields`);
+            const response = await axios.get(`http://localhost/api/Match/${stadium.staNo}/fields`);
             setStadiumFields(response.data);
         } catch (error) {
             console.error("구장 정보 API 호출 중 오류 발생:", error);
@@ -163,7 +163,7 @@ const SelectField = () => {
         const selectedKeyword = e.target.value;
         setSelectProvince(selectedKeyword);
         try {
-            const response = await axios.post('http://localhost:8080/api/select', { keyword: selectedKeyword });
+            const response = await axios.post('http://localhost/api/Match/select', { keyword: selectedKeyword });
             setFieldData(response.data);
             setSelectedField(null);
             setStadiumFields([]);

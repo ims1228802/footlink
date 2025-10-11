@@ -31,7 +31,7 @@ function HomePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/Match');
+                const response = await axios.get('http://localhost/api/Match/matchList');
                 setOriginalMatchList(response.data.matchList);
                 console.log(response.data.matchList);
                 setProvince(response.data.pro);

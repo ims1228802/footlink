@@ -7,14 +7,16 @@ import React, { useEffect, useState } from "react";
 import "../../css/user/LoginPage.css";
 import useForm from "../../hooks/useForm";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation  } from "react-router-dom";
 import axiosInstance from "../../hooks/axiosInstance";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
+  const location = useLocation();
+  
+  const from = location.state?.from || '/';
   // 유효성 검사 함수
   const validate = (values) => {
     const errors = {};
@@ -63,7 +65,7 @@ export default function LoginPage() {
         // ✅ React Query 캐시 초기화 (로그인 상태 반영)
         queryClient.invalidateQueries(["user"]);
 
-        navigate("/main");
+        navigate(from, { replace: true });
       } else {
         alert("가입된 회원이 없습니다.");
       }
