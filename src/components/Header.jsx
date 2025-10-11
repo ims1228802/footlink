@@ -17,8 +17,8 @@ export default function Header() {
 
 
    // 임시로 전체 state를 한번 찍어보면 바로 원인 파악됩니다
-  const whole = useSelector((s) => s);
-  console.log("Redux whole state in Header:", whole);
+  // const whole = useSelector((s) => s);
+  // console.log("Redux whole state in Header:", whole);
 
   // Redux에서 유저 상태 가져오기
   const user = useSelector((state) => state.user.user);

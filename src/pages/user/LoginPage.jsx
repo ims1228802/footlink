@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import "../../css/user/LoginPage.css";
 import useForm from "../../hooks/useForm";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation  } from "react-router-dom";
 import axiosInstance from "../../hooks/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
@@ -15,7 +15,9 @@ import { setUser } from "../../store/userSlice";
 export default function LoginPage() {
   const dispatch = useDispatch(); 
   const navigate = useNavigate();
+  const location = useLocation();
   
+  const from = location.state?.from || '/';
   // 유효성 검사 함수
   const validate = (values) => {
     const errors = {};
@@ -69,8 +71,7 @@ export default function LoginPage() {
         }));
         alert("로그인 성공!");
 
-        // 로그인 후 메인 페이지로 이동
-        navigate("/main");
+        navigate(from, { replace: true });
       } else {
         alert("가입된 회원이 없습니다.");
       }
