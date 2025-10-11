@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import "../../css/team/TeamList.css";
 import '../../css/team/TeamMenu.css'
@@ -10,8 +11,6 @@ import viewIcon from '../../assets/team/view.png';
 import favoriteIcon from '../../assets/team/favorite.png';
 import applicationIcon from '../../assets/team/group_add.png';
 import search from '../../assets/team/search.png'
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import Layout from '../../layout/Layout';
 
 export default function TeamList() {
@@ -25,7 +24,7 @@ export default function TeamList() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/api/team')
+        axios.get('http://localhost/api/team/teamList')
         .then(response => {
             setData(response.data);
         })
@@ -70,9 +69,9 @@ export default function TeamList() {
                                     <span>{list.stadium}</span>
                                 </div>
                                 <div className='team_details'>
-                                    <span>남녀모두</span>
+                                    <span>{list.gender}</span>
                                     <span>{list.teamAge}</span>
-                                    <span>{'매일'} {list.meetingTime}</span>
+                                    <span>{list.activeDoWeek} {list.meetingTime}</span>
                                     <span>{list.level}</span>
                                 </div>
                             </div>
@@ -115,9 +114,9 @@ export default function TeamList() {
                                     <span>{list.stadium}</span>
                                 </div>
                                 <div className='team_details'>
-                                    <span>남녀모두</span>
+                                    <span>{list.gender}</span>
                                     <span>{list.teamAge}</span>
-                                    <span>{'매일'} {list.meetingTime}</span>
+                                    <span>{list.activeDoWeek} {list.meetingTime}</span>
                                     <span>{list.level}</span>
                                 </div>
                             </div>
