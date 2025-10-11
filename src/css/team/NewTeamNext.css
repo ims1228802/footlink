@@ -17,6 +17,10 @@
     font-size: 20px;
 }
 
+.level-select-text p{
+    text-align: center;
+}
+
 .level-select{
     margin-top: 43px;
     display: flex;
@@ -119,3 +123,6 @@
     margin-top: 50px;
 }
 
+.fill{
+    background-color: #00E58A;
+}
