@@ -29,7 +29,9 @@ const initialState = {
     },
     // api 상태
     state: '',
-    error: ''
+    error: '',
+    // button 상태
+    buttonState: 'teamList'
 }
 
 //createAsyncThunk 정의

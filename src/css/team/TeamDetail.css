@@ -60,6 +60,8 @@ main .side-div .side-button button{
     margin-bottom: 10px;
     border: 1px solid #00ADB5;
     color: #00ADB5;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 main .side-div .side-button .team-delete{
@@ -88,6 +90,7 @@ main .contents-div nav ul{
 
 main .contents-div nav ul li{
     width: 65px;
+    text-align: center;
 }
 
 main .contents-div .team-member{
@@ -121,6 +124,7 @@ main .contents-div .team-member .profile-title p{
 main .contents-div .team-member .profile-title .member-view{
     font-size: 16px;
     color: #00ADB5;
+    cursor: pointer;
 }
 
 main .contents-div .team-member .profile-user .profile-img{
@@ -172,4 +176,14 @@ main .contents-div .content-info .info-div .img-icon{
 main .contents-div .chart-div{
     height: 254px;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.active-btn{
+    border-bottom: 3px solid #00ADB5;
+}
+
+.underline-btn{
+    width: 100%;
 }
