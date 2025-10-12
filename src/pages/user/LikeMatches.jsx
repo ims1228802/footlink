@@ -1,53 +1,52 @@
-import likeMatches from "../../data/likeMatches"; 
-import love from "../../assets/icon/love.svg";  
+import likeMatches from "../../data/likeMatches";
+import love from "../../assets/icon/love.svg";
+import "../../css/user/LikeMatches.css";
 
-{
-  /*
-  ** reduce((누적값, 현재값) => { return 새로운누적값*},초기값)
- 참고사이트 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
- const key = "hello"
- obj[key] = "world"
- -> {hello : "world"}
- */
-}
-
-{
-  /*찜한매치 날자별로 그룹화 함수*/
-}
 function groupBy(matches) {
   return matches.reduce((acc, match) => {
     const date = match.date;
-    if (!acc[date]) {
-      acc[date] = [];
-    }
+    if (!acc[date]) acc[date] = [];
     acc[date].push(match);
     return acc;
   }, {});
 }
 
-{
-  /*찜한매치 그룹화*/
-}
 const grouped = groupBy(likeMatches);
 
-export default function LikeMachs() {
+export default function LikeMatches() {
   return (
-    <div>
-      <h3>찜한 매치</h3>
-
+    <div className="like-container">
+      <h3 className="like-title">찜한매치</h3>
+      <div className="like-subtitle">찜한 매치들을 확인해보세요!</div>
+      <div className="like-separator">
       {Object.entries(grouped).map(([date, matches]) => (
-        <div key={date}>
-          <div>{date}</div>
+        <div key={date} className="like-date-group">
+          <div className="like-date">{date}</div>
 
-          <ul>
-            {matches.map((match, idx) => (
-              <li key={idx}>
-                <div>경기장: {match.Stadium}</div>
-                <div>시간: {match.start}</div>
-                <div>인원: {match.recruitCount}</div>
-                <div>레벨: {match.level}</div>
+          <ul className="like-list">
+            {matches.map((match) => (
+              <li key={match.id} className="like-card">
+                <div className="like-time-wrap">
+                  <div className={`like-status ${match.status}`}>
+                    {match.status}
+                  </div>
+                  <div className="like-time">{match.start}</div>
+                </div>
 
-                <button>
+                <div className="like-info">
+                  <div className="like-stadium">{match.stadium}</div>
+                  <div className="like-tags">
+                    <span>{match.gender}</span> | <span>{match.matchType}</span>
+                  </div>
+                  <div className="like-meta">
+                    모집현황 : {match.recruitCount}
+                  </div>
+                  <div className="like-organizer">
+                    {match.organizer} • {match.level}
+                  </div>
+                </div>
+
+                <button className="like-btn">
                   <img src={love} alt="찜" />
                 </button>
               </li>
@@ -55,6 +54,7 @@ export default function LikeMachs() {
           </ul>
         </div>
       ))}
+      </div>
     </div>
   );
 }
