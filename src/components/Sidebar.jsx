@@ -17,6 +17,7 @@ export default function Sidebar() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const location = useLocation();
+  const [openMenu, setOpenMenu] = useState(null);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken"); // 토큰 제거
@@ -27,6 +28,12 @@ export default function Sidebar() {
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
+  useEffect(() => {
+    if (location.pathname.includes("match")) setOpenMenu("match");
+    else if (location.pathname.includes("team")) setOpenMenu("team");
+    else setOpenMenu(null);
+  }, [location.pathname]);
 
   // 현재 경로와 비교해 active 메뉴 판단
   const isActive = (path) => location.pathname === path;
@@ -79,14 +86,62 @@ export default function Sidebar() {
               </Link>
             </li>
             <li
-              className={`sidebar-item ${
-                isActive("/user/match-info") ? "active" : ""
-              }`}
+              className={`sidebar-item ${openMenu === "match" ? "open" : ""}`}
             >
-              <Link to="/user/match-info" className="sidebar-link">
+              <button
+                type="button"
+                onClick={() => toggleMenu("match")}
+                className="sidebar-link sidebar-toggle"
+              >
                 <img src={Handshake} alt="매치정보" className="sidebar-icon" />
                 <span>매치정보</span>
-              </Link>
+                <span className="sidebar-arrow">
+                  {openMenu === "match" ? "▾" : "▸"}
+                </span>
+              </button>
+
+              {openMenu === "match" && (
+                <ul className="sidebar-sublist">
+                  <li
+                    className={`sidebar-item ${
+                      isActive("/user/like-matches") ? "active" : ""
+                    }`}
+                  >
+                    <Link
+                      to="/user/like-matches"
+                      className="sidebar-link sidebar-sublink"
+                    >
+                      <span>- 찜한 매치</span>
+                    </Link>
+                  </li>
+
+                  <li
+                    className={`sidebar-item ${
+                      isActive("/user/applied-matches") ? "active" : ""
+                    }`}
+                  >
+                    <Link
+                      to="/user/applied-matches"
+                      className="sidebar-link sidebar-sublink"
+                    >
+                      <span>- 신청한 매치</span>
+                    </Link>
+                  </li>
+
+                  <li
+                    className={`sidebar-item ${
+                      isActive("/user/completed-matches") ? "active" : ""
+                    }`}
+                  >
+                    <Link
+                      to="/user/completed-matches"
+                      className="sidebar-link sidebar-sublink"
+                    >
+                      <span>- 완료된 매치</span>
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </div>
