@@ -43,7 +43,6 @@ export default function MyInfo() {
     totalGames: 0,
     mvpCount: 0,
     lastActivity: 0,
-    team: ["건강하세요풋살", "미라클모닝풋살", "썸머풋살"],
   };
 
   const matchStats = userData?.matchStats || {
@@ -160,11 +159,11 @@ export default function MyInfo() {
               <div className="myinfo-basic-row">
                 <p className="myinfo-basic-label">소속팀</p>
 
-                {userData.team && userData.team.length > 0 ? (
+                {user.teams && user.teams.length > 0 ? (
                   <ul className="myinfo-team-list">
-                    {userData.team.map((team, index) => (
+                    {user.teams.map((teams, index) => (
                       <li key={index} className="myinfo-basic-value">
-                        {team}
+                        {teams.teamNm}
                       </li>
                     ))}
                   </ul>

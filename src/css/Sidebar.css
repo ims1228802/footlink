@@ -1,6 +1,6 @@
 /* 전체 사이드바 */
 .sidebar {
-  width: 320px;
+  width: 300px;
   background-color: #f9fafb;
   border-right: 1px solid #e5e7eb;
   padding: 24px 20px;
@@ -125,6 +125,51 @@
   font-weight: 600;
 }
 
+/* 매치정보 토글 메뉴 */
+.sidebar-toggle {
+  width: 100%;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.sidebar-arrow {
+  font-size: 13px;
+  margin-left: auto;
+  color: #999;
+}
+
+/* 하위 메뉴 (토글 시 보이기) */
+.sidebar-sublist {
+  margin-top: 6px;
+  padding-left: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: fadeIn 0.25s ease;
+}
+
+.sidebar-sublink {
+  font-size: 13.5px;
+  color: #555;
+  text-decoration: none;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-sublink:hover {
+  background-color: #f4f6fb;
+}
+
+.sidebar-item.active .sidebar-sublink {
+  background-color: #edf2ff;
+  font-weight: 600;
+}
+
 /* 로그아웃 버튼 전용 */
 .sidebar-logout {
   background: none;
@@ -185,4 +230,18 @@
     width: 21px;
     height: 21px;
   }
+
+
+   /* 애니메이션 */
+  @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 }

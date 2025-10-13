@@ -1,8 +1,4 @@
-{
-  /*더미데이터*/
-}
-
-export const completeMatches = [
+const completeMatches = [
   {
     matchNum: "008",
     date: "2025-04-30",
@@ -45,4 +41,41 @@ export const completeMatches = [
     stadium: "전주 다 풋살장 B구장",
     team: "미라클모닝풋살 vs 러너풋살",
   },
+    {
+    matchNum: "022",
+    date: "2025-06-16",
+    start: "06:00",
+    stadium: "전주 다 풋살장 B구장",
+    team: "미라클모닝풋살 vs 러너풋살",
+  },
+    {
+    matchNum: "022",
+    date: "2025-06-16",
+    start: "06:00",
+    stadium: "전주 다 풋살장 B구장",
+    team: "미라클모닝풋살 vs 러너풋살",
+  },
+    {
+    matchNum: "022",
+    date: "2025-06-16",
+    start: "06:00",
+    stadium: "전주 다 풋살장 B구장",
+    team: "미라클모닝풋살 vs 러너풋살",
+  },
+    {
+    matchNum: "022",
+    date: "2025-06-16",
+    start: "06:00",
+    stadium: "전주 다 풋살장 B구장",
+    team: "미라클모닝풋살 vs 러너풋살",
+  },
+    {
+    matchNum: "022",
+    date: "2025-06-16",
+    start: "06:00",
+    stadium: "전주 다 풋살장 B구장",
+    team: "미라클모닝풋살 vs 러너풋살",
+  },
+  
 ];
+export default completeMatches;
