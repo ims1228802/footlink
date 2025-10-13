@@ -37,6 +37,13 @@ import CompletedMatches from "../pages/user/CompletedMatches.jsx";
 import AppliedMatches from "../pages/user/AppliedMatches.jsx";
 import NewTeamRecruit from "../pages/team/NewTeamRecruit.jsx";
 import NewTeamRecruitNext from "../pages/team/NewTeamRecruitNext.jsx";
+import Notice from "../pages/user/Notice.jsx";
+import NoticeDetail from "../pages/user/NoticeDetail.jsx";
+import Faq from "../pages/user/Faq.jsx";
+import FaqDetail from "../pages/user/FaqDetail.jsx";
+import Settings from "../pages/user/Settings.jsx";
+
+
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/main" /> },
@@ -73,7 +80,12 @@ const router = createBrowserRouter([
       { path: "my-team", element: <MyTeam /> },
       { path: "like-matches", element: <LikeMatches /> },
       { path: "applied-matches", element: <AppliedMatches /> },
-      { path: "completed-match", element: <CompletedMatches /> },
+      { path: "completed-matches", element: <CompletedMatches /> },
+      { path: "notice", element: <Notice /> },
+      { path: "notice/:id", element: <NoticeDetail /> },
+      { path: "faq", element: <Faq /> },
+      { path: "faq/:id", element: <FaqDetail /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
 ]);

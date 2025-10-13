@@ -1,0 +1,97 @@
+.container {
+  background: #fff;
+  min-height: 100%;
+  font-family: "Pretendard", sans-serif;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 25px;
+}
+
+/* 🔹 탭 영역 */
+.tabContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.tabBtn {
+  padding: 8px 18px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  background-color: #f1f5f4;
+}
+
+.active {
+  background-color: #00a884;
+  color: #fff;
+  border-color: #00a884;
+}
+
+/* 🔹 공지 리스트 */
+.noticeList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.noticeCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.noticeCard:hover {
+  background-color: #f8fafb;
+}
+
+.noticeLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.noticeTitle {
+  font-size: 15px;
+  color: #222;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.noticeType {
+  color: #00a884;
+  font-weight: 600;
+}
+
+.noticeDate {
+  color: #666;
+  font-size: 14px;
+}
+
+.noticeRight {
+  color: #bbb;
+  font-size: 16px;
+}
+
+.noData {
+  text-align: center;
+  color: #999;
+  margin-top: 30px;
+  font-size: 14px;
+}
