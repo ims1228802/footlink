@@ -18,10 +18,15 @@
     background-color: white;
     border-radius: 10px;
     padding: 34px 30px;
+    overflow-y: auto;
 }
 
 .modal-content h2{
     font-size: 20px;
+    margin: 0;
+}
+
+.modal-content p{
     margin: 0;
 }
 

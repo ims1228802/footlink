@@ -22,6 +22,8 @@ import {
     Tooltip,
     Legend
     } from "chart.js";
+import Modal from "../../components/Modal.jsx";
+import Calendar from "../../components/team/Calendar.jsx";
 
 export default function TeamDetail() {
         const urlLocation = useLocation();
@@ -30,11 +32,13 @@ export default function TeamDetail() {
         const [ userData, setUserData ] = useState([]);
         const [ chartsData, setChartsDate ] = useState([]);
         const [ button, setButton ] = useState('overview');
+        const [ isModalOpen, setModalOpen ] = useState(false);
+        const [ teamCode, setTeamCode ] = useState('');
 
         useEffect(() => {
             setSearchParams(urlLocation.search);
             const teamCode = searchParams.get('teamCode');
-            console.log(teamCode);
+            setTeamCode(teamCode);
 
             axios.get(`http://localhost/api/team/teamDetail?teamCode=${teamCode}`)
                 .then(response => {
@@ -97,7 +101,21 @@ export default function TeamDetail() {
             ],
         }
 
-        console.log(chartData);
+        const openModel = () => {
+            document.body.style.cssText = `
+            position: fixed;
+            top: -${window.scrollY}px;
+            overflow-y: scroll;
+            width: 100%;`;
+            setModalOpen(true);
+        }
+
+        const closeModel = () => {
+            setModalOpen(false);
+            const scrollY = document.body.style.top;
+            document.body.style.cssText = '';
+            window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        }
         
         const Content = () => {
             switch(button){
@@ -110,7 +128,7 @@ export default function TeamDetail() {
                                     <p className="member-view" onClick={() => setButton('member')}>전체보기</p>
                                 </div>
                                 {userData.map((item, idx) => idx < 3 ? (
-                                    <div className="profile-user">
+                                    <div className="profile-user" key={item.name}>
                                         <div className="profile-img">
                                             <img src={userProfile}/>
                                         </div>
@@ -173,35 +191,56 @@ export default function TeamDetail() {
                     )
                 case 'calendar':
                     return(
-                        <>
-                            <div className="team-member">
-                                <div className="profile-title">
-                                    <p>일정</p>
-                                    <button className="member-view" onClick={() => setButton('member')}>일정추가</button>
+                        <div className="team-member">
+                            <div className="profile-title">
+                                <p>일정</p>
+                                <button className="calendar-btn" onClick={() => openModel()}>일정추가</button>
+                            </div>
+                            <div className="calendar-box">
+                                <p>8월 3일</p>
+                                <div className="calendar-div">
+                                    <div className="time-state">
+                                        <p>21:00</p>
+                                        <div className="complete">
+                                            <span>완료</span>
+                                        </div>
+                                    </div>
+                                    <div className="calendar-info">
+                                        <div className="calendar-title">
+                                            <span>전주 삼잇풋살장 A구장</span>
+                                            <div className="stadium-info">
+                                                <span>남</span>
+                                            </div>
+                                            <div className="stadium-info">
+                                                <span>6 vs 6</span>
+                                            </div>
+                                        </div>
+                                        <div className="calendar-level">
+                                            <span>모집레벨: 아마추어5 - 세미프로2</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </>
+                        </div>
                     )
                 case 'member':
                     return(
-                        <>
-                            <div className="team-member">
-                                <div className="profile-title">
-                                    <p>멤버</p>
-                                </div>
-                                {userData.map((item) => (
-                                    <div className="profile-user">
-                                        <div className="profile-img">
-                                            <img src={userProfile}/>
-                                        </div>
-                                        <div className="profile-text">
-                                            <p>{item.name}</p>
-                                            <p>{item.level}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                        <div className="team-member">
+                            <div className="profile-title">
+                                <p>멤버</p>
                             </div>
-                        </>
+                            {userData.map((item) => (
+                                <div className="profile-user">
+                                    <div className="profile-img">
+                                        <img src={userProfile}/>
+                                    </div>
+                                    <div className="profile-text">
+                                        <p>{item.name}</p>
+                                        <p>{item.level}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     )
             }
         }
@@ -256,6 +295,9 @@ export default function TeamDetail() {
                     </div>
                 </div>
             </main>
+            <Modal isOpen={isModalOpen} onClose={closeModel}>
+                <Calendar onClose={closeModel} teamCode={teamCode} />
+            </Modal>
         </Layout>
     );
 }

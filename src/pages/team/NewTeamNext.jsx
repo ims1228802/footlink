@@ -13,6 +13,17 @@ export default function NewTeamNext() {
     const teamStateSelector = useSelector(state => state.teamCreate.step2_team_state);
     const [ teamState, setTeamState ] = useState(teamStateSelector);
 
+    useEffect(() => {
+        if(state == 'succeeded'){
+            dispatch(cleanForm());
+            navigateHandler('next');
+        }else if(state == "failed"){
+            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+        }else{
+            console.log('로딩중...');
+        }
+    },[dispatch, state]);
+
     const navigateHandler = (route) => {
         console.log(route);
 
@@ -39,17 +50,6 @@ export default function NewTeamNext() {
         console.log(teamState);
         dispatch(step2_team_state(teamState));
         dispatch(teamCreatePost());
-
-        console.log(state);
-
-        if(state == 'succeeded'){
-            dispatch(cleanForm());
-            navigateHandler('next');
-        }else if(state == "failed"){
-            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
-        }else{
-            console.log('로딩중...');
-        }
     }
 
     return(
