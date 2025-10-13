@@ -1,0 +1,128 @@
+.container {
+  background: #fff;
+  font-family: "Pretendard", sans-serif;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.searchBox {
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* 🔹 카테고리 탭 */
+.categoryTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tabBtn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  background-color: #f1f5f4;
+}
+
+.active {
+  background-color: #00a884;
+  color: #fff;
+  border-color: #00a884;
+}
+
+/* 🔹 리스트 */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  border: 1px solid #e5e8eb;
+  border-radius: 10px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.questionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+
+.questionRow:hover {
+  background: #f8fafb;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category {
+  font-size: 13px;
+  color: #00a884;
+  font-weight: 600;
+}
+
+.question {
+  font-size: 15px;
+  color: #333;
+}
+
+.right {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.answerBox {
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.noResult {
+  text-align: center;
+  color: #999;
+  margin-top: 30px;
+  font-size: 14px;
+}
