@@ -3,7 +3,7 @@ import axios from "axios";
 
 // initialState 정의
 const initialState = {
-    // 팀코드, 이름, 요일, 시간, 구장, 지역, 도시, 나이, 성별
+    // 팀코드, 이름, 요일, 시간, 구장, 지역, 도시, 나이, 성별, 만든 사용자 아이디
     step1_team_info: {
         teamCode: '',
         teamName: '',
@@ -14,6 +14,7 @@ const initialState = {
         week: [],
         activeTime: '',
         age: '',
+        userId: ''
     },
     // 팀 레벨, 데이터
     step2_team_state: {
@@ -46,13 +47,19 @@ export const teamCreatePost = createAsyncThunk(
 
         console.log('api 요청 시작');
 
-        await axios.post('http://localhost/api/addTeam', field)
+        await axios.post('http://localhost/api/team/addTeam', field)
         .then(response=> {
             console.log(response.data);
+            return response.data;
         })
         .catch(error => {
             console.error(`api 요청중 에러 발생: ${error}`);
             alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+
+            if (error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
         });
     });
 
@@ -70,6 +77,8 @@ const teamSlice = createSlice({
         cleanForm: (state) => {
             state.step1_team_info = initialState.step1_team_info;
             state.step2_team_state = initialState.step2_team_state;
+            state.state = initialState.state;
+            state.error = initialState.error;
         }
     },
     extraReducers: (builder) => {
@@ -77,7 +86,7 @@ const teamSlice = createSlice({
             .addCase(teamCreatePost.pending, (state) => {
                 state.state = 'loading';
             })
-            .addCase(teamCreatePost.fulfilled, (state) => {
+            .addCase(teamCreatePost.fulfilled, (state, action) => {
                 state.state = 'succeeded';
             })
             .addCase(teamCreatePost.rejected, (state, action) => {
