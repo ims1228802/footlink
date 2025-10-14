@@ -30,7 +30,8 @@ export default function TeamDetail() {
         const [searchParams, setSearchParams] = useSearchParams();
         const [ data, setData ] = useState([]);
         const [ userData, setUserData ] = useState([]);
-        const [ chartsData, setChartsDate ] = useState([]);
+        const [ chartsData, setChartsData ] = useState([]);
+        const [ calendarData, setCalendarData ] = useState([]);
         const [ button, setButton ] = useState('overview');
         const [ isModalOpen, setModalOpen ] = useState(false);
         const [ teamCode, setTeamCode ] = useState('');
@@ -42,7 +43,6 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/teamDetail?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
                     setData(response.data);
                 })
                 .catch(error => {
@@ -51,7 +51,6 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/userInfo?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
                     setUserData(response.data);
                 })
                 .catch(error => {
@@ -60,13 +59,45 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/states?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
-                    setChartsDate(response.data);
+                    setChartsData(response.data);
+                })
+                .catch(error => {
+                    console.log(`Error feching data: ${error}`);
+            });
+
+            axios.get(`http://localhost/api/team/calendar?teamCode=${teamCode}`)
+                .then(response => {
+                    //console.log(response.data);
+                    setCalendarData(response.data);
                 })
                 .catch(error => {
                     console.log(`Error feching data: ${error}`);
             });
         },[]);
+
+        // 날짜, 시간 포맷 설정
+        const reduceDate = calendarData.reduce((acc, item) => {
+            const calendarDate = new Date(item.date);
+            const month = calendarDate.getMonth() + 1;
+            const day = calendarDate.getDate();
+
+            const dateText = `${month}월 ${day}일`;
+
+            const regex = /^(\d{2}:\d{2}):\d{2}$/;
+            const startTime = item.startTime.replace(regex, '$1');
+            const endTime = item.endTime.replace(regex, '$1');
+
+            item.startTime = startTime;
+            item.endTime = endTime;
+
+            if(!acc[dateText]){
+                acc[dateText] = [];
+            }
+            
+            acc[dateText].push(item);
+
+            return acc;
+        },{});
 
         ChartJS.register(
             RadialLinearScale,
@@ -84,13 +115,13 @@ export default function TeamDetail() {
                     label: '',
                     data: [
                             chartsData.attack,
-                            chartsData.defense, 
-                            chartsData.dribble, 
-                            chartsData.pass, 
-                            chartsData.physical, 
-                            chartsData.shot, 
                             chartsData.speed, 
-                            chartsData.stamina
+                            chartsData.dribble, 
+                            chartsData.stamina,
+                            chartsData.defense, 
+                            chartsData.physical, 
+                            chartsData.pass, 
+                            chartsData.shot, 
                         ],
                     fill: true,     //선 안쪽 색상 채워짐
                     backgroundColor: 'rgba(0,173,181,0.6)',   // 선 안쪽 색상
@@ -221,6 +252,29 @@ export default function TeamDetail() {
                                     </div>
                                 </div>
                             </div>
+                            {Object.keys(reduceDate).map((date) => Object.keys(reduceDate).length > 0 ? (
+                                <div className="calendar-box">
+                                    <p>{date}</p>
+                                    {reduceDate[date].map(item => (
+                                        <div className="calendar-div" key={item.teamDateCode}>
+                                            <div className="time-state">
+                                                <p>{item.startTime}</p>
+                                                <div className="complete">
+                                                    <span>완료</span>
+                                                </div>
+                                            </div>
+                                            <div className="calendar-info">
+                                                <div className="calendar-title">
+                                                    <span>{item.placeName}</span>
+                                                </div>
+                                                <div className="calendar-level">
+                                                    <span>진행시간: {item.startTime} - {item.endTime}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : '일정 목록이 존재하지 않습니다.')}
                         </div>
                     )
                 case 'member':

@@ -193,6 +193,7 @@ main .contents-div .chart-div{
 
 .calendar-box > p{
     font-size: 16px;
+    font-weight: bold;
 }
 
 .calendar-div{
@@ -201,6 +202,7 @@ main .contents-div .chart-div{
     display: flex;
     align-items: center;
     padding: 15px 20px;
+    margin-top: 15px;
 }
 
 .time-state{

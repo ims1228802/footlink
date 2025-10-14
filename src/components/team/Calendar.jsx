@@ -24,7 +24,7 @@ export default function Calendar({ onClose, teamCode }) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost/api/team/calendar', {
+        axios.post('http://localhost/api/team/postCalendar', {
             params: {
                 title: title,
                 location: location,
