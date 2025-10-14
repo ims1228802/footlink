@@ -5,6 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { step2_team_state, cleanForm, teamCreatePost } from "../../store/teamSlice";
+import { option } from "../../data/team/chart.js";
+import { Radar } from "react-chartjs-2";
+import { 
+    Chart as ChartJS,
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend
+    } from "chart.js";
 
 export default function NewTeamNext() {
     const navigate = useNavigate();
@@ -23,6 +34,39 @@ export default function NewTeamNext() {
             console.log('로딩중...');
         }
     },[dispatch, state]);
+
+    ChartJS.register(
+            RadialLinearScale,
+            PointElement,
+            LineElement,
+            Filler,
+            Tooltip,
+            Legend
+        );
+
+    const chartData = {
+            labels: ['공격','스피드','드리블','체력','방어','피지컬','패스','슛'],
+            datasets: [
+                {
+                    label: '',
+                    data: [
+                            teamState.attack,
+                            teamState.speed, 
+                            teamState.dribble, 
+                            teamState.stamina,
+                            teamState.defense, 
+                            teamState.physical, 
+                            teamState.pass, 
+                            teamState.shot, 
+                        ],
+                    fill: true,     //선 안쪽 색상 채워짐
+                    backgroundColor: 'rgba(0,173,181,0.6)',   // 선 안쪽 색상
+                    pointRadius: 0,
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#545455'
+                }
+            ],
+        }
 
     const navigateHandler = (route) => {
         console.log(route);
@@ -66,7 +110,7 @@ export default function NewTeamNext() {
                 <div className="team-stats">
                     <h2>팀 능력치를 설정해주세요</h2>
                     <div className="chart-div">
-                        chart-view
+                        <Radar data={chartData} options={option}/>
                     </div>
                     <div className="stats-div">
                         <div className="slider-container">
