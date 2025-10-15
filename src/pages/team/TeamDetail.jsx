@@ -259,9 +259,6 @@ export default function TeamDetail() {
                                         <div className="calendar-div" key={item.teamDateCode}>
                                             <div className="time-state">
                                                 <p>{item.startTime}</p>
-                                                <div className="complete">
-                                                    <span>완료</span>
-                                                </div>
                                             </div>
                                             <div className="calendar-info">
                                                 <div className="calendar-title">

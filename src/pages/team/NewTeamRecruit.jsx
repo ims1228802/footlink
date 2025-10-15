@@ -1,5 +1,5 @@
 import search from "../../assets/team/search.png";
-import "../../css/team/NewTeam.css";
+import "../../css/team/NewTeamRecruit.css";
 import Layout from "../../layout/Layout";
 import { useNavigate } from "react-router-dom";
 
