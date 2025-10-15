@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation  } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux'; //     
+import { useDispatch } from 'react-redux'; //     
 import axios from 'axios';
 import Layout from '../../layout/Layout';
 import './MatchDetail.css';
-import { setUser } from "../../store/userSlice";
 
 // 아이콘 import 
 import { FaHeart, FaShareSquare, FaUsers, FaTshirt, FaParking, FaRestroom, FaShower, FaStore, FaVectorSquare, FaShoePrints } from 'react-icons/fa';
@@ -12,7 +11,6 @@ import { IoMdFootball } from "react-icons/io";
 import { GiWhistle } from "react-icons/gi";
 
 function MatchDetailPage() {    
-    const { user } = useSelector(state => state.user);
     const { matchNo } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
