@@ -57,6 +57,7 @@ const router = createBrowserRouter([
   { path: "/selectmatch", element: <SelectMatch /> },
   { path: "/selectdetail", element: <SelectDetail /> },
   { path: "/match/:matchNo", element :<MatchDetailPage /> },
+  { path: "/end/:matchNo", element :<ResultPage /> },
   {
     path: "/user",
     element: <MypageLayout />,
