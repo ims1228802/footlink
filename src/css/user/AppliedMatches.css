@@ -1,0 +1,97 @@
+.applied-container {
+  background: #fff;
+  min-height: 100%;
+}
+
+.applied-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.applied-date-group {
+  margin-bottom: 24px;
+}
+
+.applied-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.applied-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.applied-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px 16px;
+
+}
+
+.applied-time {
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+  flex: 0 0 70px;
+}
+
+.applied-info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.applied-stadium {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.applied-meta {
+  font-size: 14px;
+  color: #666;
+}
+
+.applied-meta .divider {
+  margin: 0 6px;
+  color: #ccc;
+}
+
+.applied-status {
+  min-width: 80px;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.applied-status.승인완료 {
+  background-color: #f6ffed;
+  color: #389e0d;
+}
+
+.applied-status.대기중 {
+  background-color: #e6f7ff;
+  color: #096dd9;
+}
+
+.applied-status.거절 {
+  background-color: #fff1f0;
+  color: #cf1322;
+}
+
+.applied-cancel {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}

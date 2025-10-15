@@ -5,6 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { step2_team_state, cleanForm, teamCreatePost } from "../../store/teamSlice";
+import { option } from "../../data/team/chart.js";
+import { Radar } from "react-chartjs-2";
+import { 
+    Chart as ChartJS,
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend
+    } from "chart.js";
 
 export default function NewTeamNext() {
     const navigate = useNavigate();
@@ -12,6 +23,50 @@ export default function NewTeamNext() {
     const state = useSelector(state => state.teamCreate.state);
     const teamStateSelector = useSelector(state => state.teamCreate.step2_team_state);
     const [ teamState, setTeamState ] = useState(teamStateSelector);
+
+    useEffect(() => {
+        if(state == 'succeeded'){
+            dispatch(cleanForm());
+            navigateHandler('next');
+        }else if(state == "failed"){
+            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+        }else{
+            console.log('로딩중...');
+        }
+    },[dispatch, state]);
+
+    ChartJS.register(
+            RadialLinearScale,
+            PointElement,
+            LineElement,
+            Filler,
+            Tooltip,
+            Legend
+        );
+
+    const chartData = {
+            labels: ['공격','스피드','드리블','체력','방어','피지컬','패스','슛'],
+            datasets: [
+                {
+                    label: '',
+                    data: [
+                            teamState.attack,
+                            teamState.speed, 
+                            teamState.dribble, 
+                            teamState.stamina,
+                            teamState.defense, 
+                            teamState.physical, 
+                            teamState.pass, 
+                            teamState.shot, 
+                        ],
+                    fill: true,     //선 안쪽 색상 채워짐
+                    backgroundColor: 'rgba(0,173,181,0.6)',   // 선 안쪽 색상
+                    pointRadius: 0,
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#545455'
+                }
+            ],
+        }
 
     const navigateHandler = (route) => {
         console.log(route);
@@ -39,17 +94,6 @@ export default function NewTeamNext() {
         console.log(teamState);
         dispatch(step2_team_state(teamState));
         dispatch(teamCreatePost());
-
-        console.log(state);
-
-        if(state == 'succeeded'){
-            dispatch(cleanForm());
-            navigateHandler('next');
-        }else if(state == "failed"){
-            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
-        }else{
-            console.log('로딩중...');
-        }
     }
 
     return(
@@ -66,7 +110,7 @@ export default function NewTeamNext() {
                 <div className="team-stats">
                     <h2>팀 능력치를 설정해주세요</h2>
                     <div className="chart-div">
-                        chart-view
+                        <Radar data={chartData} options={option}/>
                     </div>
                     <div className="stats-div">
                         <div className="slider-container">

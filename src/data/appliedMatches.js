@@ -1,39 +1,34 @@
-{
-  /*더미데이터*/
-}
-
-export const appliedMatches = [
+const appliedMatches = [
   {
-    matchNum: "048",
+    id: 1,
     date: "2025-08-01",
-    start: "18:00",
-    state: "모집임박",
-    Stadium: "전주 가 풋살장 A구장",
+    time: "18:00",
+    stadium: "전주 상인풋살장 A구장",
     gender: "남자",
-    setting: "8 vs 8",
-    level: "아마추어5 - 세미프로",
-    recruitCount: "15/16",
+    type: "6 vs 6",
+    recruitStatus: "6 / 18",
+    status: "승인완료",
   },
   {
-    matchNum: "049",
+    id: 2,
     date: "2025-08-06",
-    start: "19:00",
-    state: "마감",
-    stadium: "전주 다 풋살장 C구장",
+    time: "18:00",
+    stadium: "전주 상인풋살장 A구장",
     gender: "남자",
-    setting: "7 vs 7",
-    level: "아마추어5 - 세미프로",
-    recruitCount: "14/14",
+    type: "6 vs 6",
+    recruitStatus: "6 / 18",
+    status: "대기중",
   },
   {
-    matchNum: "050",
+    id: 3,
     date: "2025-08-06",
-    start: "17:00",
-    state: "모집중",
-    stadium: "전주 다 풋살장 C구장",
+    time: "18:00",
+    stadium: "전주 상인풋살장 A구장",
     gender: "남자",
-    setting: "6 vs 6",
-    level: "아마추어5 - 세미프로",
-    recruitCount: "6/12",
+    type: "6 vs 6",
+    recruitStatus: "6 / 18",
+    status: "거절",
   },
 ];
+
+export default appliedMatches;

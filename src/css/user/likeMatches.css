@@ -1,0 +1,113 @@
+.like-container {
+  flex: 1;
+}
+
+.like-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.like-date-group {
+  margin-bottom: 30px;
+}
+
+.like-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.like-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.like-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.like-time-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+}
+
+.like-time {
+  font-weight: 600;
+  color: #222;
+  font-size: 15px;
+}
+
+.like-status {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.like-status.모집중 {
+  background-color: #e8f7ee;
+  color: #2b9d54;
+}
+
+.like-status.진행중 {
+  background-color: #e6efff;
+  color: #376fff;
+}
+
+.like-status.마감 {
+  background-color: #fceaea;
+  color: #d62c2c;
+}
+
+.like-info {
+  flex: 1;
+  margin-left: 12px;
+}
+.like-state-group {
+  display: flex;
+}
+
+.like-stadium {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.like-tags {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.like-meta,
+.like-organizer {
+  font-size: 13px;
+  color: #888;
+}
+
+.like-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.like-btn img {
+  width: 20px;
+  height: 20px;
+}

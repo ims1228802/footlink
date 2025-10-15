@@ -60,6 +60,8 @@ main .side-div .side-button button{
     margin-bottom: 10px;
     border: 1px solid #00ADB5;
     color: #00ADB5;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 main .side-div .side-button .team-delete{
@@ -88,6 +90,7 @@ main .contents-div nav ul{
 
 main .contents-div nav ul li{
     width: 65px;
+    text-align: center;
 }
 
 main .contents-div .team-member{
@@ -115,12 +118,12 @@ main .contents-div .team-member .profile-title p{
     font-size: 20px;
     font-weight: bold;
     text-align: left;
-    margin-bottom: 25px;
 }
 
 main .contents-div .team-member .profile-title .member-view{
     font-size: 16px;
     color: #00ADB5;
+    cursor: pointer;
 }
 
 main .contents-div .team-member .profile-user .profile-img{
@@ -172,4 +175,136 @@ main .contents-div .content-info .info-div .img-icon{
 main .contents-div .chart-div{
     height: 254px;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.active-btn{
+    border-bottom: 3px solid #00ADB5;
+}
+
+.underline-btn{
+    width: 100%;
+}
+
+.calendar-box{
+    margin-top: 35px;
+}
+
+.calendar-box > p{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.calendar-div{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    margin-top: 15px;
+}
+
+.time-state{
+    margin-right: 45px;
+    text-align: center;
+}
+
+.time-state p{
+    margin: 0;
+}
+
+.calendar-title{
+    display: flex;
+    align-items: center;
+}
+
+.calendar-level{
+    font-size: 12px;
+}
+
+.stadium-info{
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 10px;
+    width: 37px;
+    margin-left: 7px;
+    text-align: center;
+}
+
+.pre{
+    width: 46px;
+    background: #9A9A9A;
+    border-radius: 10px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+}
+
+.complete{
+    width: 46px;
+    background: #46A663;
+    border-radius: 10px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+}
+
+.calendar-btn{
+    border: 1px solid #00ADB5;
+    border-radius: 10px;
+    padding: 5px 18px;
+    color: #00ADB5;
+}
+
+.new-calendar{
+    margin-top: 34px;
+}
+
+.new-calendar > input[type="text"] {
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    width: 100%;
+    padding: 11px 13px;
+    outline: none;
+    margin-top: 15px;
+}
+
+.new-calendar textarea{
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    margin-top: 15px;
+    height: 253px;
+    padding: 10px;
+    resize: none;
+}
+
+.new-calendar > input[type="date"] {
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    width: 100%;
+    padding: 11px 13px;
+    outline: none;
+    margin-top: 15px;
+}
+
+.new-calendar > input[type="time"] {
+    border: 1px solid #D4DAE2;
+    border-radius: 10px;
+    width: 49.4%;
+    padding: 11px 13px;
+    outline: none;
+    margin-top: 15px;
+}
+
+.new-calendar > input[type="time"]::before {
+    content: attr(data-placeholder);
+    font-size: 14px;
+    color: #9A9A9A;
+}
+
+#endTime{
+    margin-left: 10px;
 }

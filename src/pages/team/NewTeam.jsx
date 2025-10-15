@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../../components/Modal";
 import axios from "axios";
-import { GiConsoleController } from "react-icons/gi";
+import { useUser } from "../../hooks/useUser";
 import StadiumSearch from "../../components/team/StadiumSearch";
 import { step1_team_info } from "../../store/teamSlice";
 
@@ -18,6 +18,16 @@ export default function NewTeam(){
     const [ isModalOpen, setModalOpen ] = useState(false);
     const [ selectModal, setSelectModel ] = useState('');
     const [ team, setTeam ] = useState(teamSelector);
+    const { data: user, isLoading } = useUser();
+
+    useEffect(() => {
+        const update = {
+            ...team,
+            userId: user.id
+        }
+    
+        setTeam(update);
+    },[]);
 
     console.log(teamSelector);
 
@@ -109,7 +119,6 @@ export default function NewTeam(){
             };
         }
         //console.log(team);
-        
         
         setTeam(update);
     }
