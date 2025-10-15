@@ -5,6 +5,7 @@ import MatchGrid from "../../components/Match/Matchgrid";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const levelData = [
     { name: '비기너', min: 1, max: 3 },
@@ -17,6 +18,7 @@ function HomePage() {
     const [originalMatchList, setOriginalMatchList] = useState([]);
     const [filteredMatchList, setFilteredMatchList] = useState([]);
     const [province, setProvince] = useState([]);
+    const navigate = useNavigate();
 
     // 1. 날짜 상태를 HomePage에서 관리
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -108,9 +110,9 @@ function HomePage() {
             <Layout>
                 <section id="content">
                     <div className="top-content">
-                        <Link to="/match"><h2>일정</h2></Link>
+                        <h2 onClick={() => navigate("/match")}>일정</h2>
                         <hr />
-                        <Link to="/end"><h2>결과</h2></Link>
+                        <h2 onClick={() => navigate("/end")}>결과</h2>
                     </div>
                     {/* 3. DateNavigator에 상태와 함수를 props로 전달 */}
                     <DateNavigator
