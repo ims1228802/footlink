@@ -15,7 +15,7 @@ export const createMatchPost = createAsyncThunk(
             };
             console.log('API 요청 시작. 보낼 데이터:', finalData);
 
-            const response = await axios.post('http://localhost:8080/api/addMatch', finalData);
+            const response = await axios.post('http://localhost/api/Match/addMatch', finalData);
             return response.data;
 
         } catch (error) {

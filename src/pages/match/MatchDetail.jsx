@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation  } from 'react-router-dom';
-import { useSelector } from 'react-redux'; //     
+import { useDispatch } from 'react-redux'; //     
 import axios from 'axios';
 import Layout from '../../layout/Layout';
 import './MatchDetail.css';
@@ -10,10 +10,10 @@ import { FaHeart, FaShareSquare, FaUsers, FaTshirt, FaParking, FaRestroom, FaSho
 import { IoMdFootball } from "react-icons/io";
 import { GiWhistle } from "react-icons/gi";
 
-function MatchDetailPage() {
-    const { user: userInfo } = useSelector(state => state.user);
+function MatchDetailPage() {    
     const { matchNo } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [matchDetails, setMatchDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,11 +21,6 @@ function MatchDetailPage() {
     const [applyError, setApplyError] = useState(null);
     const location = useLocation();
 
-    useEffect(() => {
-        if (userInfo) {
-            console.log("🕵️‍♂️ Redux에서 가져온 현재 사용자 정보:", userInfo);
-        }
-    }, [userInfo]);
     
     useEffect(() => {
         const fetchMatchDetails = async () => {
@@ -41,7 +36,26 @@ function MatchDetailPage() {
         };
         fetchMatchDetails();
     }, [matchNo]);
-
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+          const token = localStorage.getItem("accessToken");
+          if (!token) return;
+    
+          dispatch(setLoading(true));
+          try {
+            const res = await axiosInstance.get("/user/my-info", {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            dispatch(setUser(res.data));
+          } catch (err) {
+            console.error("내 정보 불러오기 실패:", err);
+          } finally {
+            dispatch(setLoading(false));
+          }
+        };
+    
+        fetchUserInfo();
+      }, [dispatch]);
 
     const formatTime = (timeStr) => {
         if (!timeStr) return "";
@@ -57,7 +71,7 @@ function MatchDetailPage() {
     };
 
      const applyMatch = async () => {
-        if (userInfo) {
+        if (user) {
             if (window.confirm('매치를 신청하시겠습니까?')) {
                 setIsApplying(true); // 로딩 시작
                 setApplyError(null); // 이전 에러 초기화
@@ -65,9 +79,9 @@ function MatchDetailPage() {
                 try {
                     const applicationData = {
                         matchNo: matchNo,
-                        userId: userInfo.userId
+                        userId: user.userId
                     };
-                    
+                    console.log('매치 신청 데이터:', applicationData);
                     // 컴포넌트에서 직접 API 호출
                     const response = await axios.post('http://localhost/api/Match/apply', applicationData);
                     
@@ -86,6 +100,7 @@ function MatchDetailPage() {
         } else {
             if (window.confirm('로그인이 필요한 기능입니다. 로그인 페이지로 이동하시겠습니까?')) {
                 navigate('/login', { state: { from: location.pathname } });
+
             }
         }
     };
