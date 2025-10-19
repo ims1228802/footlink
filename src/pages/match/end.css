@@ -18,6 +18,7 @@
 }
 .end-detail{
     display: flex;
+    align-items: center;
 }
 .end-item h2{
     margin:0px
@@ -26,9 +27,20 @@
     display: flex;
     align-items: center;
     margin: 5px;
+    justify-content: space-between;
+}
+.winner-team-arr, .loser-team-arr{
+    display: flex;
+    align-items: center;
 }
 
 .end-team-arr img{
     width: 45px;
     height: 45px;
+}
+@media (min-width: 1024px) {
+  .end-content {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
 }

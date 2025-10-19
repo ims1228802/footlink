@@ -23,6 +23,7 @@ import SelectField from "../pages/match/SelectField.jsx";
 import SelectMatch from "../pages/match/SelectMatch.jsx";
 import SelectDetail from "../pages/match/SelectDetail.jsx";
 import MatchDetailPage from "../pages/match/MatchDetail.jsx";
+import AdminMatch from "../pages/match/adminMatch.jsx";
 //user
 import LoginPage from "../pages/user/LoginPage.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
@@ -42,6 +43,7 @@ import NoticeDetail from "../pages/user/NoticeDetail.jsx";
 import Faq from "../pages/user/Faq.jsx";
 import FaqDetail from "../pages/user/FaqDetail.jsx";
 import Settings from "../pages/user/Settings.jsx";
+
 
 
 
@@ -68,7 +70,7 @@ const router = createBrowserRouter([
   { path: "/selectdetail", element: <SelectDetail /> },
   { path: "/match/:matchNo", element :<MatchDetailPage /> },
   { path: "/end/:matchNo", element :<ResultPage /> },
-
+  { path: "/adminMatch", element :<AdminMatch /> },
   {
     path: "/user",
     element: (
