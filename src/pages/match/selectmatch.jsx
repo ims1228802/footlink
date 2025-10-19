@@ -3,7 +3,7 @@ import './selectmatch.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveStep2 } from '../../store/matchSlice';
-import Layout from '../../Layout/Layout';
+import Layout from '../../layout/Layout';
 
 const AddMatchLevel = () => {
     const navigate = useNavigate();
