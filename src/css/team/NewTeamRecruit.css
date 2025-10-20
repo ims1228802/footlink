@@ -63,6 +63,7 @@ main h2{
 
 .week-div{
     text-align: left;
+    margin-bottom: 10px
 }
 
 .week-div h2{
@@ -93,7 +94,7 @@ main h2{
 }
 
 .checkbox-layout{
-    padding: 11px 50px;
+    padding: 11px 45px;
     border: 1px solid #46A663;
     border-radius: 30px;
     margin-right: 26.68px;
@@ -208,7 +209,6 @@ main h2{
     border-radius: 30px;
     border: 1px solid #46A663;
     width: 316px;
-    height: 49px;
     margin-right: 36px;
     text-align: center;
     padding: 13px 0;
@@ -240,4 +240,28 @@ main h2{
 
 .button-div{
     margin-bottom: 34px;
+}
+
+.close-btn{
+    border-radius: 10px;
+    border: 1px solid #46A663;
+    color: #46A663;
+    width: 49%;
+    padding: 12px;
+}
+
+.outline-btn{
+    border-radius: 10px;
+    border: 1px solid #46A663;
+    color: #46A663;
+    width: 49%;
+    padding: 6px;
+}
+
+.fill-btn{
+    border-radius: 10px;
+    background-color: #46A663;
+    color: white;
+    width: 49%;
+    padding: 6px;
 }
