@@ -1,13 +1,32 @@
 import { useState } from "react";
 import Layout from '../../layout/Layout';
 import teamimg from "../../../public/Teamicon.svg";
-// import { MATCH_SCORE } from "../matchscore.js";
 import MatchScore from "../../components/Match/Matchscore.jsx";
-// import { teamData } from "../../data/match/";
 import ResultTable from "../../components/Match/Resulttable.jsx"
 
 function ResultPage() {
     const [activeContentIndex, setActiveContentIndex] = useState(0);
+    const [matchResult, setMatchResult] = useState(null);
+    const [matchDetails, setMatchDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { matchNo } = useParams();
+
+    useEffect(() => {
+        const fetchMatchResult = async () => {
+            try {
+                const response = await axios.get(`http://localhost/api/Match/result/${matchNo}`);
+                setMatchDetails(response.data);
+            } catch (err) {
+                console.error("매치 결과 정보를 불러오는 데 실패했습니다:", err);
+                setError("매치 정보를 불러오는 중 오류가 발생했습니다.");
+            } finally {
+                setLoading(false);  
+            }
+        };
+        fetchMatchResult();
+    }, [matchNo]);
+
   
   const activeGame = teamData.games[activeContentIndex];
   const matchList = MATCH_SCORE.map(matchInfo => {

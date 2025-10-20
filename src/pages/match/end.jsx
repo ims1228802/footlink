@@ -109,7 +109,7 @@ function EndPage() {
             <Layout>
                 <section id="content">
                     <div class="top-content">
-                        <Link to="/">
+                        <Link to="/match">
                             <h2>일정</h2>
                         </Link>
                         <hr/>
@@ -152,7 +152,7 @@ function EndPage() {
                         <option value="여성">여성</option>
                         <option value="혼성">혼성</option>
                     </select>
-                    <div className="match-content">
+                    <div className="end-content">
                         {List.length > 0 ? List : <p>해당 조건의 매치가 없습니다.</p>}
                     </div>
                 </section>
