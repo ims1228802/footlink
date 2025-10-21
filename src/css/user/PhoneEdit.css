@@ -1,0 +1,89 @@
+.phone-edit-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 24px;
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.page-desc {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.form-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* 🔹 각 입력 필드 */
+.input-phone,
+.input-code {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* 🔹 버튼 공통 스타일 */
+.btn-send,
+.btn-verify,
+.btn-submit {
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: 0.2s;
+}
+
+/* 🔹 인증번호 전송 & 인증 버튼 */
+.btn-send,
+.btn-verify {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-send:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+}
+
+.btn-send:hover:not(:disabled),
+.btn-verify:hover {
+  background-color: #e5f2ff;
+}
+
+/* 🔹 전송 완료 상태 */
+.btn-sent {
+  background-color: #d8f5d0;
+  color: #4caf50;
+  cursor: default;
+}
+
+/* 🔹 변경 완료 버튼 */
+.btn-submit {
+  width: 100%;
+  background-color: #0099ff;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-submit:disabled,
+.btn-submit-disabled {
+  background-color: #cce5ff;
+}
+
+.btn-submit-active {
+  background-color: #0099ff;
+}

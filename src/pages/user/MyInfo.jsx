@@ -22,7 +22,6 @@ const COLORS = ["#EDA77E", "#60BA9E", "#D8D8D8"]; // 승, 패, 무승 색상
 export default function MyInfo() {
   const { data: user, isLoading } = useUser();
 
-  console.log("user:", user);
   const navigate = useNavigate();
 
   // 수정 버튼 클릭
@@ -135,7 +134,7 @@ export default function MyInfo() {
                     <span>등록된 내역이 없습니다.</span>
                     <button
                       className="myinfo-register-btn"
-                      onClick={() => alert("레벨 등록 화면으로 이동")}
+                      onClick={() => navigate("/user/user-level")}
                     >
                       등록하기
                     </button>

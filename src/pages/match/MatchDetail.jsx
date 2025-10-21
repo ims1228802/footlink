@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'; //
 import axios from 'axios';
 import Layout from '../../layout/Layout';
 import './MatchDetail.css';
+import { useUser } from "../../hooks/useUser";
 
 // 아이콘 import 
 import { FaHeart, FaShareSquare, FaUsers, FaTshirt, FaParking, FaRestroom, FaShower, FaStore, FaVectorSquare, FaShoePrints } from 'react-icons/fa';
@@ -20,8 +21,7 @@ function MatchDetailPage() {
     const [isApplying, setIsApplying] = useState(false);
     const [applyError, setApplyError] = useState(null);
     const location = useLocation();
-
-    
+    const { data: user, isLoading } = useUser();
     useEffect(() => {
         const fetchMatchDetails = async () => {
             try {
@@ -77,13 +77,9 @@ function MatchDetailPage() {
                 setApplyError(null); // 이전 에러 초기화
 
                 try {
-                    const applicationData = {
-                        matchNo: matchNo,
-                        userId: user.userId
-                    };
-                    console.log('매치 신청 데이터:', applicationData);
+                    const url = `http://localhost/api/Match/apply/${matchNo}/${user.email}`;
                     // 컴포넌트에서 직접 API 호출
-                    const response = await axios.post('http://localhost/api/Match/apply', applicationData);
+                    const response = await axios.post(url);
                     
                     console.log('매치 신청 성공:', response.data);
                     alert('매치 신청이 완료되었습니다.');

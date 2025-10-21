@@ -7,7 +7,6 @@ export const createMatchPost = createAsyncThunk(
     async (_, { getState, rejectWithValue }) => {
         try {
             const state = getState().matchCreation;
-
             const finalData = {
                 ...state.step1_matchInfo, // { selections: [...] }
                 ...state.step2_details,   // { matchFormat, gender, minLevel, maxLevel }
@@ -51,6 +50,7 @@ const initialState = {
     step3_post: {
         title: '',
         content: '',
+        userId: '',
     },
     // API 제출 상태
     status: 'idle',
