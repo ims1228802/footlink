@@ -10,7 +10,7 @@ import looksOne from "../../assets/team/looks_one.png";
 import userProfile from "../../assets/team/user_profile.png";
 import Layout from "../../layout/Layout";
 import { useState, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { option } from "../../data/team/chart.js";
 import { Radar } from "react-chartjs-2";
 import { 
@@ -74,6 +74,8 @@ export default function TeamDetail() {
                     console.log(`Error feching data: ${error}`);
             });
         },[]);
+
+        const navigator = useNavigate();
 
         // 날짜, 시간 포맷 설정
         const reduceDate = calendarData.reduce((acc, item) => {
@@ -146,6 +148,14 @@ export default function TeamDetail() {
             const scrollY = document.body.style.top;
             document.body.style.cssText = '';
             window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        }
+
+        const onClickHandler = (select) => {
+            switch(select){
+                case 'recruit':
+                    navigator(`/newTeamRecruit?teamCode=${teamCode}`)
+                break;
+            }
         }
         
         const Content = () => {
@@ -259,9 +269,6 @@ export default function TeamDetail() {
                                         <div className="calendar-div" key={item.teamDateCode}>
                                             <div className="time-state">
                                                 <p>{item.startTime}</p>
-                                                <div className="complete">
-                                                    <span>완료</span>
-                                                </div>
                                             </div>
                                             <div className="calendar-info">
                                                 <div className="calendar-title">
@@ -328,6 +335,7 @@ export default function TeamDetail() {
                             <button>초대링크 복사</button>
                             <button>팀 탈퇴하기</button>
                             <button>팀 위임하기</button>
+                            <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
                             <button className="team-delete">팀 삭제하기</button>
                         </div>
                     </div>
