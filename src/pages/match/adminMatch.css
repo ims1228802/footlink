@@ -9,34 +9,7 @@
     --danger-red: #dc3545;       /* (탈퇴) 빨간색 */
 }
 
-/* --- 1. 기본 및 레이아웃 --- */
-body {
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif; /* (예시) 가독성 좋은 폰트 */
-    background-color: var(--light-gray-bg);
-    color: var(--text-color);
-}
 
-/* 전체 레이아웃을 감싸는 div (React 컴포넌트) */
-.admin-layout {
-    display: flex;
-}
-
-/* --- 2. 헤더 (Top Navbar) --- */
-.admin-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background-color: #fff;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    z-index: 1000;
-}
 
 .admin-header .logo {
     font-size: 20px;
@@ -49,28 +22,6 @@ body {
     color: var(--text-muted);
 }
 
-/* --- 3. 사이드바 (Left Sidebar) --- */
-.admin-sidebar {
-    position: fixed;
-    top: 60px; /* 헤더 높이만큼 띄우기 */
-    left: 0;
-    bottom: 0;
-    width: 240px;
-    background-color: var(--light-blue-bg);
-    border-right: 1px solid var(--border-color);
-    padding: 20px 10px;
-    z-index: 999;
-}
-
-.sidebar-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-nav .nav-item {
-    margin-bottom: 5px;
-}
 
 /* 상위 메뉴 아이템 (예: 회원관리) */
 .sidebar-nav .nav-link {
