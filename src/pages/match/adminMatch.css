@@ -1,0 +1,272 @@
+/* --- CSS 변수 (주요 색상) --- */
+:root {
+    --primary-blue: #0d6efd;   /* (활성) 파란색 */
+    --light-blue-bg: #f0f7ff; /* (사이드바) 아주 연한 파란색 */
+    --light-gray-bg: #f8f9fa; /* (메인 배경) 아주 연한 회색 */
+    --text-color: #212529;      /* (본문) 기본 텍스트 색상 */
+    --text-muted: #6c757d;     /* (연한) 텍스트 색상 */
+    --border-color: #dee2e6;     /* (테두리) 연한 회색 */
+    --danger-red: #dc3545;       /* (탈퇴) 빨간색 */
+}
+
+/* --- 1. 기본 및 레이아웃 --- */
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif; /* (예시) 가독성 좋은 폰트 */
+    background-color: var(--light-gray-bg);
+    color: var(--text-color);
+}
+
+/* 전체 레이아웃을 감싸는 div (React 컴포넌트) */
+.admin-layout {
+    display: flex;
+}
+
+/* --- 2. 헤더 (Top Navbar) --- */
+.admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 1000;
+}
+
+.admin-header .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.admin-header .user-profile {
+    color: var(--text-muted);
+}
+
+/* --- 3. 사이드바 (Left Sidebar) --- */
+.admin-sidebar {
+    position: fixed;
+    top: 60px; /* 헤더 높이만큼 띄우기 */
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    background-color: var(--light-blue-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 20px 10px;
+    z-index: 999;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 5px;
+}
+
+/* 상위 메뉴 아이템 (예: 회원관리) */
+.sidebar-nav .nav-link {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 상위 메뉴 활성화 (파란 배경, 흰 글씨) */
+.sidebar-nav .nav-item.active > .nav-link {
+    background-color: var(--primary-blue);
+    color: #fff;
+}
+
+/* 하위 메뉴 (예: 회원목록) */
+.sidebar-nav .submenu {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+.sidebar-nav .submenu li a {
+    display: block;
+    padding: 8px 15px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.sidebar-nav .submenu li a:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000;
+}
+
+/* 하위 메뉴 활성화 (파란 점 + 파란 글씨) */
+.sidebar-nav .submenu li.active a {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.sidebar-nav .submenu li.active a::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px;
+    color: var(--primary-blue);
+}
+
+/* --- 4. 메인 콘텐츠 --- */
+.admin-main {
+    /* 사이드바(240px)와 헤더(60px)를 제외한 영역 */
+    margin-left: 240px;
+    padding-top: 60px;
+    width: calc(100% - 240px);
+    padding: 24px;
+    min-height: 100vh;
+}
+
+.content-header {
+    margin-bottom: 24px;
+}
+
+.content-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* --- 5. 카드 (테이블 감싸는 흰색 박스) --- */
+.card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+}
+
+/* --- 6. 테이블 --- */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+}
+
+.table thead th {
+    background-color: var(--light-gray-bg);
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 12px 10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.table tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    vertical-align: middle;
+}
+
+/* 테이블 마지막 줄 테두리 제거 */
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- 7. 버튼 (수정, 탈퇴) --- */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 수정 버튼 (파란색 테두리) */
+.btn-outline-primary {
+    background-color: #fff;
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-blue);
+    color: #fff;
+}
+
+/* 탈퇴 버튼 (빨간색 테두리) */
+.btn-outline-danger {
+    background-color: #fff;
+    border-color: var(--danger-red);
+    color: var(--danger-red);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--danger-red);
+    color: #fff;
+}
+
+/* --- 8. 페이지네이션 (Pagination) --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+}
+
+.page-item {
+    margin: 0 4px;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 12px;
+    min-width: 38px;
+    box-sizing: border-box;
+    text-align: center;
+    color: var(--text-muted);
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.page-link:hover {
+    background-color: var(--light-gray-bg);
+}
+
+/* 활성화된 페이지 */
+.page-item.active .page-link {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* 비활성화된 페이지 (화살표) */
+.page-item.disabled .page-link {
+    color: #adb5bd;
+    pointer-events: none;
+    background-color: var(--light-gray-bg);
+}

@@ -53,7 +53,7 @@
     display: flex;
 }
 
-.match-add{
+.match-add,.registration-match{
     background-color: #00ADB5;
     width: 85px;
     color: white;

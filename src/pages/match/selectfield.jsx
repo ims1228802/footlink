@@ -30,7 +30,7 @@ const SelectField = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost/api/Match');
+                const response = await axios.get('http://localhost/api/Match/fieldList');
                 setProvince(response.data.pro);
                 setFieldData(response.data.Sta);
             } catch (error) {

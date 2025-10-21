@@ -1,37 +1,71 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import "../../css/team/NewTeamNext.css";
 import "../../css/team/NewTeamRecruitNext.css";
 import Layout from "../../layout/Layout";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { step2_team_recruit_contents, cleanForm, teamCreateRecruitPost } from "../../store/teamSlice";
 
 export default function NewTeamRecruitNext() {
 
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const state = useSelector(state => state.teamCreate.state);
+    const recruitContents = useSelector(state => state.teamCreate.step2_team_recruit_contents);
+    const [ contents, setContents ] = useState(recruitContents);
+
+    useEffect(() => {
+        console.log(state);
+
+        if(state == 'succeeded'){
+            dispatch(cleanForm());
+            navigateHandler('next');
+        }else if(state == "failed"){
+            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+        }else{
+            console.log('로딩중...');
+        }
+    },[dispatch, state]);
 
     const navigateHandler = (route) => {
-        if(route = 'pre'){
+        if(route == 'pre'){
             navigate('/newTeamRecruit');
         }else{
             navigate('/teamList');
         }
     }
 
+    const onChangeHandler = (e) => {
+        const update = {
+            ...contents,
+            contents: e.target.value
+        }
+
+        setContents(update);
+    }
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+
+        dispatch(step2_team_recruit_contents(contents));
+        console.log(recruitContents);
+        dispatch(teamCreateRecruitPost());
+    }
+
     return(
         <Layout>
-        <main>
+        <form onSubmit={onSubmitHandler}>
             <div className="recruit-text">
                 <h2>팀원 모집하기</h2>
                 <p>우리팀을 소개해주세요.</p>
             </div>
             <div className="recruit-div">
                 <div className="recruit-select-button">
-                    <button type="button">팀 단체사진 추가</button>
+                    <button type="button" className="recruit-img-btn" onClick={() => alert('준비중 입니다.')}>팀 단체사진 추가</button>
                 </div>
             </div>
             <div className="recruit-content">
-                
+                <textarea value={contents.contents} onChange={onChangeHandler}/>
             </div>
             <div className="recruit-info">
                 <h2>이런 내용이 포함되어 있으면 좋아요!</h2>
@@ -43,10 +77,10 @@ export default function NewTeamRecruitNext() {
                 </ul>
             </div>
             <div className="button-div">
-                <button type="button" onClick={() => navigateHandler('pre')}>이전으로</button>
-                <button> type="button" onClick={() => navigateHandler('next')}등록하기</button>
+                <button type="button" className="outline-btn" onClick={() => navigateHandler('pre')}>이전으로</button>
+                <button type="submit" className="fill-btn">등록하기</button>
             </div>
-        </main>
+        </form>
         </Layout>
     );
 }

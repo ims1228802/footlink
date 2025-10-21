@@ -10,7 +10,7 @@ import looksOne from "../../assets/team/looks_one.png";
 import userProfile from "../../assets/team/user_profile.png";
 import Layout from "../../layout/Layout";
 import { useState, useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { option } from "../../data/team/chart.js";
 import { Radar } from "react-chartjs-2";
 import { 
@@ -22,23 +22,27 @@ import {
     Tooltip,
     Legend
     } from "chart.js";
+import Modal from "../../components/Modal.jsx";
+import Calendar from "../../components/team/Calendar.jsx";
 
 export default function TeamDetail() {
         const urlLocation = useLocation();
         const [searchParams, setSearchParams] = useSearchParams();
         const [ data, setData ] = useState([]);
         const [ userData, setUserData ] = useState([]);
-        const [ chartsData, setChartsDate ] = useState([]);
+        const [ chartsData, setChartsData ] = useState([]);
+        const [ calendarData, setCalendarData ] = useState([]);
         const [ button, setButton ] = useState('overview');
+        const [ isModalOpen, setModalOpen ] = useState(false);
+        const [ teamCode, setTeamCode ] = useState('');
 
         useEffect(() => {
             setSearchParams(urlLocation.search);
             const teamCode = searchParams.get('teamCode');
-            console.log(teamCode);
+            setTeamCode(teamCode);
 
             axios.get(`http://localhost/api/team/teamDetail?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
                     setData(response.data);
                 })
                 .catch(error => {
@@ -47,7 +51,6 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/userInfo?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
                     setUserData(response.data);
                 })
                 .catch(error => {
@@ -56,13 +59,47 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/states?teamCode=${teamCode}`)
                 .then(response => {
-                    console.log(response.data);
-                    setChartsDate(response.data);
+                    setChartsData(response.data);
+                })
+                .catch(error => {
+                    console.log(`Error feching data: ${error}`);
+            });
+
+            axios.get(`http://localhost/api/team/calendar?teamCode=${teamCode}`)
+                .then(response => {
+                    //console.log(response.data);
+                    setCalendarData(response.data);
                 })
                 .catch(error => {
                     console.log(`Error feching data: ${error}`);
             });
         },[]);
+
+        const navigator = useNavigate();
+
+        // 날짜, 시간 포맷 설정
+        const reduceDate = calendarData.reduce((acc, item) => {
+            const calendarDate = new Date(item.date);
+            const month = calendarDate.getMonth() + 1;
+            const day = calendarDate.getDate();
+
+            const dateText = `${month}월 ${day}일`;
+
+            const regex = /^(\d{2}:\d{2}):\d{2}$/;
+            const startTime = item.startTime.replace(regex, '$1');
+            const endTime = item.endTime.replace(regex, '$1');
+
+            item.startTime = startTime;
+            item.endTime = endTime;
+
+            if(!acc[dateText]){
+                acc[dateText] = [];
+            }
+            
+            acc[dateText].push(item);
+
+            return acc;
+        },{});
 
         ChartJS.register(
             RadialLinearScale,
@@ -80,13 +117,13 @@ export default function TeamDetail() {
                     label: '',
                     data: [
                             chartsData.attack,
-                            chartsData.defense, 
-                            chartsData.dribble, 
-                            chartsData.pass, 
-                            chartsData.physical, 
-                            chartsData.shot, 
                             chartsData.speed, 
-                            chartsData.stamina
+                            chartsData.dribble, 
+                            chartsData.stamina,
+                            chartsData.defense, 
+                            chartsData.physical, 
+                            chartsData.pass, 
+                            chartsData.shot, 
                         ],
                     fill: true,     //선 안쪽 색상 채워짐
                     backgroundColor: 'rgba(0,173,181,0.6)',   // 선 안쪽 색상
@@ -97,7 +134,29 @@ export default function TeamDetail() {
             ],
         }
 
-        console.log(chartData);
+        const openModel = () => {
+            document.body.style.cssText = `
+            position: fixed;
+            top: -${window.scrollY}px;
+            overflow-y: scroll;
+            width: 100%;`;
+            setModalOpen(true);
+        }
+
+        const closeModel = () => {
+            setModalOpen(false);
+            const scrollY = document.body.style.top;
+            document.body.style.cssText = '';
+            window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        }
+
+        const onClickHandler = (select) => {
+            switch(select){
+                case 'recruit':
+                    navigator(`/newTeamRecruit?teamCode=${teamCode}`)
+                break;
+            }
+        }
         
         const Content = () => {
             switch(button){
@@ -110,7 +169,7 @@ export default function TeamDetail() {
                                     <p className="member-view" onClick={() => setButton('member')}>전체보기</p>
                                 </div>
                                 {userData.map((item, idx) => idx < 3 ? (
-                                    <div className="profile-user">
+                                    <div className="profile-user" key={item.name}>
                                         <div className="profile-img">
                                             <img src={userProfile}/>
                                         </div>
@@ -173,35 +232,76 @@ export default function TeamDetail() {
                     )
                 case 'calendar':
                     return(
-                        <>
-                            <div className="team-member">
-                                <div className="profile-title">
-                                    <p>일정</p>
-                                    <button className="member-view" onClick={() => setButton('member')}>일정추가</button>
+                        <div className="team-member">
+                            <div className="profile-title">
+                                <p>일정</p>
+                                <button className="calendar-btn" onClick={() => openModel()}>일정추가</button>
+                            </div>
+                            <div className="calendar-box">
+                                <p>8월 3일</p>
+                                <div className="calendar-div">
+                                    <div className="time-state">
+                                        <p>21:00</p>
+                                        <div className="complete">
+                                            <span>완료</span>
+                                        </div>
+                                    </div>
+                                    <div className="calendar-info">
+                                        <div className="calendar-title">
+                                            <span>전주 삼잇풋살장 A구장</span>
+                                            <div className="stadium-info">
+                                                <span>남</span>
+                                            </div>
+                                            <div className="stadium-info">
+                                                <span>6 vs 6</span>
+                                            </div>
+                                        </div>
+                                        <div className="calendar-level">
+                                            <span>모집레벨: 아마추어5 - 세미프로2</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </>
+                            {Object.keys(reduceDate).map((date) => Object.keys(reduceDate).length > 0 ? (
+                                <div className="calendar-box">
+                                    <p>{date}</p>
+                                    {reduceDate[date].map(item => (
+                                        <div className="calendar-div" key={item.teamDateCode}>
+                                            <div className="time-state">
+                                                <p>{item.startTime}</p>
+                                            </div>
+                                            <div className="calendar-info">
+                                                <div className="calendar-title">
+                                                    <span>{item.placeName}</span>
+                                                </div>
+                                                <div className="calendar-level">
+                                                    <span>진행시간: {item.startTime} - {item.endTime}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : '일정 목록이 존재하지 않습니다.')}
+                        </div>
                     )
                 case 'member':
                     return(
-                        <>
-                            <div className="team-member">
-                                <div className="profile-title">
-                                    <p>멤버</p>
-                                </div>
-                                {userData.map((item) => (
-                                    <div className="profile-user">
-                                        <div className="profile-img">
-                                            <img src={userProfile}/>
-                                        </div>
-                                        <div className="profile-text">
-                                            <p>{item.name}</p>
-                                            <p>{item.level}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                        <div className="team-member">
+                            <div className="profile-title">
+                                <p>멤버</p>
                             </div>
-                        </>
+                            {userData.map((item) => (
+                                <div className="profile-user">
+                                    <div className="profile-img">
+                                        <img src={userProfile}/>
+                                    </div>
+                                    <div className="profile-text">
+                                        <p>{item.name}</p>
+                                        <p>{item.level}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     )
             }
         }
@@ -235,6 +335,7 @@ export default function TeamDetail() {
                             <button>초대링크 복사</button>
                             <button>팀 탈퇴하기</button>
                             <button>팀 위임하기</button>
+                            <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
                             <button className="team-delete">팀 삭제하기</button>
                         </div>
                     </div>
@@ -256,6 +357,9 @@ export default function TeamDetail() {
                     </div>
                 </div>
             </main>
+            <Modal isOpen={isModalOpen} onClose={closeModel}>
+                <Calendar onClose={closeModel} teamCode={teamCode} />
+            </Modal>
         </Layout>
     );
 }

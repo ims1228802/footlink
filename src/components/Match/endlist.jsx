@@ -8,13 +8,23 @@ export default function EndList(props) {
                     <Link to="/result">
                         <h2>{props.matchTime}</h2>
                         <div class="end-detail">
-                            <p>{props.filed}</p><p>{props.gen}</p>-<p>{props.level}</p>
+                            <p>{props.stadiumNm}</p><p>{props.genderNm}</p>-<p>{props.minLevelName}~{props.maxLevelName}</p>
                         </div>
                         <div class= "end-team-arr">
-                            <img src={props.img} alt="" /><p>{props.team1}</p>
+                            <div class= "winner-team-arr"> 
+                                <img src={props.img} alt="" /><p>{props.winnerTeamName}</p>
+                            </div>
+                            <div class="winner-score">
+                                <p>{props.winnerScore}</p>
+                            </div>
                         </div>
                         <div class= "end-team-arr">
-                            <img src={props.img} alt="" /><p>{props.team2}</p>
+                            <div class= "loser-team-arr">
+                                <img src={props.img} alt="" /><p>{props.loserTeamName}</p>
+                            </div>
+                            <div class="loser-score">
+                                <p>{props.loserScore}</p>
+                            </div>
                         </div>
                     </Link>
                 </div>

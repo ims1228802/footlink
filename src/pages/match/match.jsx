@@ -5,6 +5,8 @@ import MatchGrid from "../../components/Match/Matchgrid";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 const levelData = [
     { name: '비기너', min: 1, max: 3 },
@@ -17,6 +19,8 @@ function HomePage() {
     const [originalMatchList, setOriginalMatchList] = useState([]);
     const [filteredMatchList, setFilteredMatchList] = useState([]);
     const [province, setProvince] = useState([]);
+    const navigate = useNavigate();
+    const { data: user, isLoading } = useUser();
 
     // 1. 날짜 상태를 HomePage에서 관리
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -35,6 +39,7 @@ function HomePage() {
                 setOriginalMatchList(response.data.matchList);
                 console.log(response.data.matchList);
                 setProvince(response.data.pro);
+                
             } catch (error) {
                 console.error("API 호출 중 오류 발생:", error);
                 setOriginalMatchList([]);
@@ -108,9 +113,9 @@ function HomePage() {
             <Layout>
                 <section id="content">
                     <div className="top-content">
-                        <Link to="/match"><h2>일정</h2></Link>
+                        <h2 onClick={() => navigate("/match")}>일정</h2>
                         <hr />
-                        <Link to="/end"><h2>결과</h2></Link>
+                        <h2 onClick={() => navigate("/end")}>결과</h2>
                     </div>
                     {/* 3. DateNavigator에 상태와 함수를 props로 전달 */}
                     <DateNavigator
@@ -154,11 +159,16 @@ function HomePage() {
                                 <option value="혼성">혼성</option>
                             </select>
                         </div>
-                        <div>
+                        <>
+                            {user && user.role === 'atrt_01' ? (
+                                <Link to="/adminMatch">
+                                    <button className="registration-match">결과 등록</button>
+                                </Link>
+                            ) : null}
                             <Link to="/selectfield">
                                 <button className="match-add">매치등록</button>
                             </Link>
-                        </div>
+                        </>
                     </div>
                     <div className="match-content">
                         {List.length > 0 ? List : <p>해당 조건의 매치가 없습니다.</p>}

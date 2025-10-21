@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import '../../css/team/TeamSubMenu.css'
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/useUser';
 
 export default function TeamSubMenu({selectMenu}) {
     const navigate = useNavigate();
-    const user = useSelector(state => state.user.user);
+    const { data: user, isLoading } = useUser();
 
     const navigateHandler = () => {
-        
         console.log(user);
 
         if(user){
@@ -52,7 +52,7 @@ export default function TeamSubMenu({selectMenu}) {
                     <input type='checkbox' id='time' name='time' className='appearance-none'/>
                 </label>
             </div>
-            <button className='outline-1 outline-cyan-500 text-cyan-500' onClick={navigateHandler}>{selectMenu == 'teamList' ? '팀 생성하기' : '팀원 모집하기'}</button>
+            {selectMenu == 'teamList' ? <button className='outline-1 outline-cyan-500 text-cyan-500' onClick={navigateHandler}>팀 생성하기</button> : undefined}
         </div>
     );
 }
