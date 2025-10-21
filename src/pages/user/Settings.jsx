@@ -13,10 +13,10 @@ export default function Settings() {
       {/* 계정 설정 */}
       <section className="settings-section">
         <h2 className="settings-subtitle">계정설정</h2>
-        <div className="settings-row">
+        {/* <div className="settings-row">
           <span className="settings-label">SNS계정</span>
           <span className="sns-type">KAKAO</span>
-        </div>
+        </div> */}
         <div className="settings-row">
           <span className="settings-label">휴대폰번호</span>
           <span className="settings-text">010-9999-9999</span>
