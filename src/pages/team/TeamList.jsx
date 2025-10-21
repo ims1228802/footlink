@@ -97,7 +97,7 @@ export default function TeamList() {
                     <TeamSubMenu selectMenu={menu}/>
                     {filterList.length > 0 ? 
                         filterList.map((list) => list.isTemp == "정석" ? (
-                        <div className='team_div' key={list.teamCode}>
+                        <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
                                 <img src={teamImg} />
                             </div>
@@ -134,7 +134,7 @@ export default function TeamList() {
                                     <span>{list.favoriteCount}</span>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                         ) :
                         undefined) : 
                     <div className='team_div'>팀 정보가 존재하지 않습니다.</div>}
