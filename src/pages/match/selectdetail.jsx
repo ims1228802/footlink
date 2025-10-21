@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveStep3, createMatchPost, clearForm } from '../../store/matchSlice';
 import Layout from '../../layout/Layout';
+import { useUser } from '../../hooks/useUser';
 
 const SelectDetail = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
- 
+    const { data: user, isLoading } = useUser();
+    const userId = user.id;
     const savedStep3Data = useSelector(state => state.matchCreation.step3_post);
     const { status, error } = useSelector(state => state.matchCreation);
 
@@ -18,7 +19,7 @@ const SelectDetail = () => {
 
     const handleRegister = () => {
         console.log("1. '등록하기' 버튼 클릭됨.");
-        const step3Data = { title, content };
+        const step3Data = { title, content, userId };
         dispatch(saveStep3(step3Data));
         console.log("2. saveStep3 액션 dispatch 완료.");
         console.log("3. createMatchPost 액션 dispatch 시도...");

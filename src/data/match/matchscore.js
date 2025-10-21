@@ -1,4 +1,4 @@
-import teamImg from "./assets/Teamicon.svg";
+import teamImg from "../../../public/Teamicon.svg";
 
 export const MATCH_SCORE = [
     {

@@ -1,62 +1,116 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./adminMatch.css";
+import axios from "axios";
 
-// 1. 컴포넌트 밖이나 state에서 매치 데이터를 관리합니다.
-const myMatches = [
-    {
-        id: 'M-1024',
-        date: '2025-10-20 (월)',
-        time: '19:00 - 21:00',
-        field: '용산 아이파크몰 풋살장',
-        status: '모집중',
-        statusColor: 'green',
-        apply: '3 / 6 (팀)',
-        action: 'modify'
-    },
-    {
-        id: 'M-1023',
-        date: '2025-10-18 (토)',
-        time: '10:00 - 12:00',
-        field: '수원 월드컵 보조구장',
-        status: '모집완료',
-        statusColor: 'red',
-        apply: '6 / 6 (팀)',
-        action: 'result'
-    },
-    {
-        id: 'M-1020',
-        date: '2025-10-15 (수)',
-        time: '20:00 - 22:00',
-        field: '고양 어울림누리 풋살장',
-        status: '경기종료',
-        statusColor: 'gray',
-        apply: '-',
-        action: 'done'
-    }
-];
 
-// 버튼을 동적으로 렌더링하는 헬퍼 컴포넌트 (선택 사항)
-const MatchActions = ({ action, matchId }) => {
-    if (action === 'modify') {
-        return (
-            <>
-                <Link to={`/match/edit/${matchId}`} className="btn btn-sm btn-outline-primary">수정</Link>
-                <button className="btn btn-sm btn-outline-danger">취소</button>
-            </>
-        );
-    }
-    if (action === 'result') {
-        return <Link to={`/match/result/${matchId}`} className="btn btn-sm btn-outline-primary">결과입력</Link>;
-    }
-    if (action === 'done') {
-        return <button className="btn btn-sm btn-outline-secondary" disabled>완료</button>;
-    }
-    return null;
+const toYYYYMMDD = (date) => {
+    if (!date) return ''; 
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
 };
 
-
 function AdminMatch() {
+    const [originalMatchList, setOriginalMatchList] = useState([]);   
+    const [province, setProvince] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [filteredMatchList, setFilteredMatchList] = useState([]);
+
+    const [filters, setFilters] = useState({
+        region: '',
+        excludeClosed: false,
+        level: 'all',
+        gender: 'all'
+    });
+    const MatchActions = ({ status, matchNo }) => {
+        switch (status) {
+            case '모집중':
+                return null
+         case '모집 완료': 
+            return <Link to={`/match/result/${matchNo}`} className="btn btn-sm btn-outline-primary">결과입력</Link>;
+        
+         case '매치 종료':
+            return(
+                <>
+                    <Link to={`/match/edit/${matchNo}`} className="btn btn-sm btn-outline-primary">수정</Link>
+                    <button className="btn btn-sm btn-outline-danger">취소</button>
+                </>
+            )
+        default:
+            return null;
+        }
+    };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost/api/Match/admin');
+                setOriginalMatchList(response.data.matchList);
+                console.log(response.data.matchList);
+                setProvince(response.data.pro);
+                
+            } catch (error) {
+                console.error("API 호출 중 오류 발생:", error);
+                setOriginalMatchList([]);
+                setFilteredMatchList([]);
+            }
+        };
+        fetchData();
+    }, []);
+    useEffect(() => {
+            let list = [...originalMatchList];
+    
+            if (selectedDate) {
+                const targetDateString = toYYYYMMDD(selectedDate);
+                list = list.filter(match => {
+                    if (!match.matchDate) return false;
+                    return match.matchDate === targetDateString;
+                });
+            }
+    
+            // 지역 필터링
+            if (filters.region) {
+                list = list.filter(match => match.region === filters.region);
+            }
+    
+            // 마감 제외 필터링
+            if (filters.excludeClosed) {
+                list = list.filter(match => !match.isClosed);
+            }
+    
+            // 성별 필터링
+            if (filters.gender !== 'all') {
+                list = list.filter(match => match.genderName === filters.gender);
+            }
+    
+            setFilteredMatchList(list);
+        }, [filters, selectedDate, originalMatchList]);
+
+    const handleFilterChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+    
+    const handleDateChange = (e) => {
+        setSelectedDate(new Date(e.target.value + 'T00:00:00'));
+    };
+
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case '모집중':
+                return { color: 'green', fontWeight: 'bold' };
+            case '모집 완료':
+                return { color: 'red', fontWeight: 'bold' };
+            case '매치 종료':
+                return { color: 'gray' };
+            default:
+                return { color: 'black' }; // 기본값
+        }
+    };
     return (
         <section className="mypage-contents">
             <div className="content-header">
@@ -64,17 +118,33 @@ function AdminMatch() {
                     나의 매치 관리
                 </h2>
             </div>
-
-            {/* common.css에 .card 스타일이 없다면, main.css를 import 해야 합니다. */}
             <div className="card">
                 <div className="card-body">
                     <div className="table-responsive">
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>매치 ID</th>
-                                    <th>날짜</th>
+                                    <th>매치 NO</th>
+                                    <th>
+                                        <div className="card-body d-flex justify-content-center align-items-center">
+                                            <label htmlFor="match-date-picker" className="form-label me-3 mb-0 fw-bold">날짜:</label>
+                                            <input
+                                                type="date"
+                                                id="match-date-picker"
+                                                className="form-control"
+                                                style={{ width: '200px' }}
+                                                value={toYYYYMMDD(selectedDate)} 
+                                                onChange={handleDateChange}
+                                            />
+                                        </div>
+                                    </th>
                                     <th>시간</th>
+                                    <th>
+                                        <select name="region" value={filters.region} onChange={handleFilterChange}>
+                                            <option value="">전체 지역</option>
+                                            {province.map((pro) => (<option key={pro.id} value={pro.name}>{pro.name}</option>))}
+                                        </select>
+                                    </th>
                                     <th>구장</th>
                                     <th>상태</th>
                                     <th>신청 현황</th>
@@ -83,16 +153,21 @@ function AdminMatch() {
                             </thead>
                             <tbody>
                                 {/* 2. 데이터를 map()으로 순회하며 렌더링 */}
-                                {myMatches.map((match) => (
-                                    <tr key={match.id} className="text-center">
-                                        <td>{match.id}</td>
-                                        <td>{match.date}</td>
-                                        <td>{match.time}</td>
-                                        <td>{match.field}</td>
-                                        <td><span style={{ color: match.statusColor }}>{match.status}</span></td>
-                                        <td>{match.apply}</td>
+                                {filteredMatchList.map((match) => (
+                                    <tr key={match.matchNo} className="text-center">
+                                        <td>{match.matchNo}</td>
+                                        <td>{match.matchDate}</td>
+                                        <td>{match.matchTime?.substring(0, 5)} - {match.matchEndTime?.substring(0, 5)}</td>
+                                        <td>{match.region}</td>
+                                        <td>{match.staName}</td>
                                         <td>
-                                            <MatchActions action={match.action} matchId={match.id} />
+                                            <span style={getStatusStyle(match.matchStts)}>
+                                                {match.matchStts}
+                                            </span>
+                                        </td>
+                                        <td>{match.applyCount}/{match.totalPlayers}</td>
+                                        <td>
+                                            <MatchActions status={match.matchStts} matchNo={match.matchNo} />
                                         </td>
                                     </tr>
                                 ))}

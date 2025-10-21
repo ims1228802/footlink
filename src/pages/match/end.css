@@ -1,46 +1,148 @@
-.end-filter{
-    display: flex;
-}
-.end-filter p{
-    background-color: #00ADB5;
-    width: 82px;
-    color: white;
-    text-align: center;
-    border-radius: 20px;
-    height: 33px;
-    align-content: center;
-}
-.end-list{
-    margin-top:30px;
-}
-.end-item{
-    border-bottom: 1px solid silver;
-}
-.end-detail{
+.top-content {
     display: flex;
     align-items: center;
+    gap: 12px; /* 탭과 구분선 사이 간격 */
+    padding: 0 16px;
+    margin-bottom: 20px;
 }
-.end-item h2{
-    margin:0px
+.top-content a {
+    text-decoration: none;
+    color: #888; /* 비활성 탭 색상 */
 }
-.end-team-arr{
-    display: flex;
-    align-items: center;
-    margin: 5px;
-    justify-content: space-between;
+.top-content a.active {
+    color: #333; /* 활성 탭 색상 */
+    font-weight: bold;
 }
-.winner-team-arr, .loser-team-arr{
-    display: flex;
-    align-items: center;
+.top-content a h2 {
+    margin: 0;
+    font-size: 18px;
+}
+.top-content .tab-divider {
+    color: #ccc;
+    font-size: 16px;
 }
 
-.end-team-arr img{
-    width: 45px;
-    height: 45px;
+/* ======== 필터 바 ======== */
+.filter-bar {
+    padding: 0 16px; /* 좌우 여백 */
+    margin-bottom: 20px;
 }
-@media (min-width: 1024px) {
-  .end-content {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 20px;
-  }
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 버튼 사이 간격 */
+}
+
+/* ======== 필터 버튼 (녹색 알약 스타일) ======== */
+.filter-buttons select,
+.filter-buttons .filter-checkbox {
+    /* 공통 버튼 디자인 */
+    height: 33px;
+    border: none;
+    background-color: #00ADB5; /* 이미지의 녹색 */
+    color: white;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    
+    /* 정렬 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* '마감 제외' 체크박스 숨기기 */
+.filter-buttons .filter-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+/* select 태그 기본 화살표 숨기기 */
+.filter-buttons select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px; /* 커스텀 화살표 공간 */
+    
+    /* 커스텀 화살표 (흰색) */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 20px;
+}
+
+/* select의 기본 <option> 색상 (placeholder) */
+.filter-buttons select:invalid {
+    color: #f0f0f0; /* '지역', '레벨' 등 기본 텍스트 약간 흐리게 */
+}
+
+
+/* ======== 결과 리스트 ======== */
+.end-content {
+    padding: 0 16px; /* 리스트 좌우 여백 */
+}
+
+
+.end-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 0;
+}
+
+.end-detail {
+    margin-bottom: 16px;
+}
+.end-detail-divider {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.end-detail strong { 
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.end-detail p { 
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* "이글FC 15" 한 줄 */
+.end-team-arr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 팀 정보와 점수를 양 끝으로 */
+    margin-bottom: 10px;
+}
+.end-team-arr:last-child {
+    margin-bottom: 0;
+}
+
+/* 로고 + 팀 이름 */
+.winner-team-arr, .loser-team-arr {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 로고와 이름 사이 간격 */
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.end-team-arr img {
+    width: 32px; /* 이미지 크기 조정 */
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+
+/* 점수 */
+.score { /* EndList.jsx에서 점수를 <span class="score">15</span>로 감쌌다고 가정 */
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
 }

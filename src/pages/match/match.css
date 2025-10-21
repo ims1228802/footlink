@@ -1,9 +1,29 @@
-.top-content{
-    display: flex;
-}
 
-.top-content hr{
-    margin :20px;
+
+.top-content {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    padding: 0 16px;
+    margin-bottom: 20px;
+}
+.top-content h2 {
+    text-decoration: none;
+    color: #888;
+    margin: 0;
+    font-size: 18px;
+    cursor: pointer; 
+}
+.top-content h2:first-child { 
+    color: #333; 
+    font-weight: bold;
+}
+.top-content hr { 
+    border: none;
+    width: 1px;
+    height: 16px;
+    background-color: #ccc;
+    margin: 0;
 }
 
 
@@ -12,7 +32,6 @@
   grid-template-columns: 1fr;
   gap: 16px;
 }
-
 
 @media (min-width: 768px) {
   .match-content {
@@ -27,11 +46,14 @@
   }
 }
 
+/* ======== .main-top 및 버튼 ======== */
 .main-top{
     display: flex;
     justify-content: space-between;
     margin-bottom: 72px;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .main-top p{
@@ -49,8 +71,10 @@
     display: block;    
 }
 
-.match-filter{
+.match-filter {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 버튼 사이 간격 */
 }
 
 .match-add,.registration-match{
@@ -62,22 +86,44 @@
     height: 33px;
     align-content: center;
     font-size: 16px;
-}
-
-.match-filter select, .match-filter .filter-checkbox {
-    margin-right: 10px; /* 필터 간 간격 */
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
-}
-
-.filter-checkbox {
-    display: flex;
-    align-items: center;
+    border: none; /* button 태그일 경우를 대비해 border 제거 */
     cursor: pointer;
 }
 
-.filter-checkbox input[type="checkbox"] {
-    margin-right: 5px;
+
+.match-filter select,
+.match-filter .filter-checkbox {
+    /* 공통 버튼 디자인 */
+    height: 33px;
+    border: none;
+    background-color: #00ADB5;
+    color: white;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-filter .filter-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+
+.match-filter select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 20px;
+}
+
+.match-filter select:invalid {
+    color: #f0f0f0; 
 }
