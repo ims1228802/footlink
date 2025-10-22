@@ -37,6 +37,10 @@ export default function TeamDetail() {
         const [ button, setButton ] = useState('overview');
         const [ isModalOpen, setModalOpen ] = useState(false);
         const [ teamCode, setTeamCode ] = useState('');
+        const navigator = useNavigate();
+
+        let isUser = false;
+        let author = '';
 
         useEffect(() => {
             setSearchParams(urlLocation.search);
@@ -53,6 +57,7 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/userInfo?teamCode=${teamCode}`)
                 .then(response => {
+                    //console.log(response.data);
                     setUserData(response.data);
                 })
                 .catch(error => {
@@ -76,8 +81,6 @@ export default function TeamDetail() {
                     console.log(`Error feching data: ${error}`);
             });
         },[]);
-
-        const navigator = useNavigate();
 
         // 날짜, 시간 포맷 설정
         const reduceDate = calendarData.reduce((acc, item) => {
@@ -134,6 +137,16 @@ export default function TeamDetail() {
                     pointHoverBorderColor: '#545455'
                 }
             ],
+        }
+
+        if(user){
+            userData.forEach(item => {
+                if(item.userId == user.id){
+                    isUser = true;
+                    author = item.teamAuthrtName;
+                    //console.log(author);
+                }
+            });
         }
 
         const openModel = () => {
@@ -377,15 +390,28 @@ export default function TeamDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="side-button">
-                            <button type="button">모집 신청 내역</button>
-                            <button type="button" onClick={() => alert('기능 준비중입니다.')}>초대링크 복사</button>
-                            <button type="button" onClick={() => onClickHandler('outTeam')}>팀 탈퇴하기</button>
-                            <button type="button">팀 위임하기</button>
-                            <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
-                            <button type="button" onClick={() => onClickHandler('teamEdit')}>팀 정보 수정하기</button>
-                            <button type="button" className="team-delete" onClick={() => onClickHandler('teamDelete')}>팀 삭제하기</button>
-                        </div>
+                        {user ? 
+                        (<div className="side-button">
+                            {isUser ? (
+                                <>
+                                    <button type="button" onClick={() => alert('기능 준비중입니다.')}>초대링크 복사</button>
+                                    <button type="button" onClick={() => onClickHandler('outTeam')}>팀 탈퇴하기</button>
+                                    {author == '팀장' ? <button type="button">팀 위임하기</button> : undefined}
+                                    {(author == '팀장' || author == '팀관리자') ? (
+                                    <>
+                                        <button type="button">모집 신청 내역</button>
+                                        <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
+                                        <button type="button" onClick={() => onClickHandler('teamEdit')}>팀 정보 수정하기</button>
+                                    </>
+                                    ) : undefined }
+                                    {author == '팀장' ? <button type="button" className="team-delete" onClick={() => onClickHandler('teamDelete')}>팀 삭제하기</button> : undefined}  
+                                </>
+                            ) : (
+                                <>
+                                    <button type="button" onClick={() => onClickHandler('outTeam')}>가입 신청하기</button>
+                                </>
+                            )}
+                        </div>) : undefined}
                     </div>
                     <div className="contents-div">
                         <nav>

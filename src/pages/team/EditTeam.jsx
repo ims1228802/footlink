@@ -19,18 +19,89 @@ export default function EditTeam(){
     const [ isModalOpen, setModalOpen ] = useState(false);
     const [ selectModal, setSelectModel ] = useState('');
     const [ team, setTeam ] = useState(teamSelector);
+    const teamInfo = location.state.data;
+    const teamRegion = teamInfo.regionName.split(' ');
+    const week = ['일','월','화','수','목','금','토'];
+    const engWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const selectedWeek = teamInfo.activeDoWeek.split(',');
+    const selectedWeekIdx = [];
+    let selectGender = '';
+    let selectTime = '';
+    let selectAge = '';
 
     useEffect(() => {
-        console.log(location.state.data);
+        console.log(teamInfo);
         console.log(team);
 
         const update = {
             ...team,
-            
+            teamCode: teamInfo.teamCode,
+            teamName: teamInfo.teamName,
+            stadium: teamInfo.stadium,
+            area: teamRegion[0],
+            city: teamRegion[1],
+            gender: selectGender,
+            activeTime: selectTime,
+            age: selectAge,
+            week: selectedWeekIdx,
         }
     
         setTeam(update);
     },[]);
+
+    week.forEach((item, idx) => {
+        if(selectedWeek.includes(item)){
+            selectedWeekIdx.push(idx);
+        }
+    });
+
+    switch(teamInfo.gender){
+        case '남자':
+            selectGender = 'man';
+        break;
+        case '여자':
+            selectGender = 'woman';
+        break;
+        default:
+            selectGender = 'everyone';
+        break;
+    }
+
+    switch(teamInfo.teamAge){
+        case '10대':
+            selectAge = 10;
+        break;
+        case '20대':
+            selectAge = 20;
+        break;
+        case '30대':
+            selectAge = 30;
+        break;
+        case '40대':
+            selectAge = 40;
+        break;
+        case '50대':
+            selectAge = 50;
+        break;
+        default:
+            selectAge = 60;
+        break;
+    }
+
+    switch(teamInfo.meetingTime){
+        case '아침':
+            selectTime = 'morning';
+        break;
+        case '점심':
+            selectTime = 'lunch';
+        break;
+        case '저녁':
+            selectTime = 'dinner';
+        break;
+        default:
+            selectTime = 'lateNight';
+        break;
+    }
 
     console.log(teamSelector);
 
@@ -55,9 +126,12 @@ export default function EditTeam(){
         console.log(route);
 
         if (route == 'pre'){
-            navigate('/teamList');
+            navigate(`/teamDetail?teamCode=${teamInfo.teamCode}`);
         }else{
-            navigate('/newTeamNext');
+            navigate('/editTeamNext',{state: {
+                    data: teamInfo,
+                    chartData: location.state.chartData
+                }});
         }
     }
 
@@ -209,56 +283,36 @@ export default function EditTeam(){
                     <div className="section-week">
                         <p>활동 요일</p>
                         <section className="checkbox-section" onChange={inputHandler}>
-                            <input id="monday" name="monday" className="week" type="checkbox" value={1}/>
-                            <label htmlFor="monday" className="checkbox-layout">
-                                <p>월</p>
-                            </label>
-                            <input id="tuesday" name="tuesday" className="week" type="checkbox" value={2}/>
-                            <label htmlFor="tuesday" className="checkbox-layout">
-                                <p>화</p>
-                            </label>
-                            <input id="wednesday" name="wednesday" className="week" type="checkbox" value={3}/>
-                            <label htmlFor="wednesday" className="checkbox-layout">
-                                <p>수</p>
-                            </label>
-                            <input id="thursday" name="thursday" className="week" type="checkbox" value={4}/>
-                            <label htmlFor="thursday" className="checkbox-layout">
-                                <p>목</p>
-                            </label>
-                            <input id="friday" name="friday" className="week" type="checkbox" value={5}/>
-                            <label htmlFor="friday" className="checkbox-layout">
-                                <p>금</p>
-                            </label>
-                            <input id="saturday" name="saturday" className="week" type="checkbox" value={6}/>
-                            <label htmlFor="saturday" className="checkbox-layout"> 
-                                <p>토</p>
-                            </label>
-                            <input id="sunday" name="sunday" className="week" type="checkbox" value={0}/>
-                            <label htmlFor="sunday" className="checkbox-layout">
-                                <p>일</p>
-                            </label>
+                            {week.map((_,idx) => (
+                                <>
+                                    <input id={engWeek[(idx+1)%7]} name={engWeek[(idx+1)%7]} className="week" type="checkbox" value={(idx+1)%7} defaultChecked={selectedWeek.includes(week[(idx+1)%7])}/>
+                                    <label htmlFor={engWeek[(idx+1)%7]} className="checkbox-layout">
+                                        <p>{week[(idx+1)%7]}</p>
+                                    </label>    
+                                </>
+                            ))}
                         </section>
                     </div>
                     <div className="time-div">
                         <p>활동 시간</p>
                     </div>
                     <section className="checkbox-section" onChange={inputHandler}>
-                        <input id="morning" name="activeTime" className="active-time" type="radio" value="morning"/>
+                        <input id="morning" name="activeTime" className="active-time" type="radio" value="morning" defaultChecked={teamInfo.meetingTime == '아침' ? true : false}/>
                         <label htmlFor="morning" className="checkbox-layout-l">
                             <p>아침</p>
                             <p>06시 ~ 12시</p>
                         </label>
-                        <input id="lunch" name="activeTime" className="active-time" type="radio" value="lunch"/>
+                        <input id="lunch" name="activeTime" className="active-time" type="radio" value="lunch" defaultChecked={teamInfo.meetingTime == '점심' ? true : false}/>
                         <label htmlFor="lunch" className="checkbox-layout-l">
                             <p>점심</p>
                             <p>12시 ~ 18시</p>
                         </label>
-                        <input id="dinner" name="activeTime" className="active-time" type="radio" value="dinner"/>
+                        <input id="dinner" name="activeTime" className="active-time" type="radio" value="dinner" defaultChecked={teamInfo.meetingTime == '저녁' ? true : false}/>
                         <label htmlFor="dinner" className="checkbox-layout-l">
                             <p>저녁</p>
                             <p>18시 ~ 24시</p>
                         </label>
-                        <input id="lateNight" name="activeTime" className="active-time" type="radio" value="lateNight"/>
+                        <input id="lateNight" name="activeTime" className="active-time" type="radio" value="lateNight" defaultChecked={teamInfo.meetingTime == '심야' ? true : false}/>
                         <label htmlFor="lateNight" className="checkbox-layout-l">
                             <p>심야</p>
                             <p>24시 ~ 06시</p>
@@ -290,27 +344,27 @@ export default function EditTeam(){
                     <div className="age-div">
                         <p>주요 나이대</p>
                         <section className="checkbox-section" onChange={inputHandler}>
-                            <input type="radio" id="age-10" name="age" value={10}/>
+                            <input type="radio" id="age-10" name="age" value={10} defaultChecked={teamInfo.teamAge == '10대' ? true : false}/>
                             <label htmlFor="age-10" className="checkbox-layout">
                                 <p>10대</p>
                             </label>
-                            <input type="radio" id="age-20" name="age" value={20}/>
+                            <input type="radio" id="age-20" name="age" value={20} defaultChecked={teamInfo.teamAge == '20대' ? true : false}/>
                             <label htmlFor="age-20" className="checkbox-layout">
                                 <p>20대</p>
                             </label>
-                            <input type="radio" id="age-30" name="age" value={30}/>
+                            <input type="radio" id="age-30" name="age" value={30} defaultChecked={teamInfo.teamAge == '30대' ? true : false}/>
                             <label htmlFor="age-30" className="checkbox-layout">
                                 <p>30대</p>
                             </label>
-                            <input type="radio" id="age-40" name="age" value={40}/>
+                            <input type="radio" id="age-40" name="age" value={40} defaultChecked={teamInfo.teamAge == '40대' ? true : false}/>
                             <label htmlFor="age-40" className="checkbox-layout">
                                 <p>40대</p>
                             </label>
-                            <input type="radio" id="age-50" name="age" value={50}/>
+                            <input type="radio" id="age-50" name="age" value={50} defaultChecked={teamInfo.teamAge == '50대' ? true : false}/>
                             <label htmlFor="age-50" className="checkbox-layout">
                                 <p>50대</p>
                             </label>
-                            <input type="radio" id="age-60" name="age" value={60}/>
+                            <input type="radio" id="age-60" name="age" value={60} defaultChecked={teamInfo.teamAge == '60대 이상' ? true : false}/>
                             <label htmlFor="age-60" className="checkbox-layout">
                                 <p>60대 이상</p>
                             </label>
@@ -319,15 +373,15 @@ export default function EditTeam(){
                     <div className="gender-div">
                         <p>성별</p>
                         <section className="checkbox-section" onChange={inputHandler}>
-                            <input type="radio" id="man" name="gender" value="man"/>
+                            <input type="radio" id="man" name="gender" value="man" defaultChecked={teamInfo.gender == '남자' ? true : false}/>
                             <label htmlFor="man" className="checkbox-layout-gender" >
                                 <p>남</p>
                             </label>
-                            <input type="radio" id="woman" name="gender" value="woman"/>
+                            <input type="radio" id="woman" name="gender" value="woman" defaultChecked={teamInfo.gender == '여자' ? true : false}/>
                             <label htmlFor="woman" className="checkbox-layout-gender" >
                                 <p>여</p>
                             </label>
-                            <input type="radio" id="everyone" name="gender" value="everyone"/>
+                            <input type="radio" id="everyone" name="gender" value="everyone" defaultChecked={teamInfo.gender == '남녀모두' ? true : false}/>
                             <label htmlFor="everyone" className="checkbox-layout-gender">
                                 <p>남녀모두</p>
                             </label>

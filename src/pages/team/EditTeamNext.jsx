@@ -4,7 +4,8 @@ import "../../css/team/NewTeamNext.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { step2_team_state, cleanForm, teamCreatePost } from "../../store/teamSlice.js";
+import { useLocation } from "react-router-dom";
+import { step2_team_state, cleanForm, teamEditPut } from "../../store/teamSlice.js";
 import { option } from "../../data/team/chart.js";
 import { Radar } from "react-chartjs-2";
 import { 
@@ -18,13 +19,20 @@ import {
     } from "chart.js";
 
 export default function EditTeamNext() {
+    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const state = useSelector(state => state.teamCreate.state);
     const teamStateSelector = useSelector(state => state.teamCreate.step2_team_state);
     const [ teamState, setTeamState ] = useState(teamStateSelector);
+    const selectedState = location.state.chartData;
+    const teamInfo = location.state.data;
+
+    //console.log(teamState);
+    console.log(selectedState);
 
     useEffect(() => {
+        console.log(state);
         if(state == 'succeeded'){
             dispatch(cleanForm());
             navigateHandler('next');
@@ -34,6 +42,23 @@ export default function EditTeamNext() {
             console.log('로딩중...');
         }
     },[dispatch, state]);
+
+    useEffect(() => {
+        const update = {
+            ...teamState,
+            level: teamInfo.level,
+            attack: selectedState.datasets[0].data[0],
+            speed: selectedState.datasets[0].data[1],
+            dribble: selectedState.datasets[0].data[2],
+            stamina: selectedState.datasets[0].data[3],
+            defense: selectedState.datasets[0].data[4],
+            physical: selectedState.datasets[0].data[5],
+            pass: selectedState.datasets[0].data[6],
+            shot: selectedState.datasets[0].data[7],
+        }
+
+        setTeamState(update);
+    },[]);
 
     ChartJS.register(
             RadialLinearScale,
@@ -72,9 +97,14 @@ export default function EditTeamNext() {
         console.log(route);
 
         if (route == 'pre'){
-            navigate('/newTeam');
+            navigate('/editTeam', {
+                state: {
+                    data: location.state.data,
+                    chartData: location.state.chartData,
+                }
+            });
         }else{
-            navigate('/teamList');
+            navigate(`/teamDetail?teamCode=${teamInfo.teamCode}`);
         }
     }
 
@@ -93,7 +123,7 @@ export default function EditTeamNext() {
 
         console.log(teamState);
         dispatch(step2_team_state(teamState));
-        dispatch(teamCreatePost());
+        dispatch(teamEditPut());
     }
 
     return(
@@ -149,7 +179,7 @@ export default function EditTeamNext() {
                 </div>
                 <div className="button-div">
                     <button type="button" className="outline-btn" onClick={() => navigateHandler('pre')}>이전으로</button>
-                    <button type="submit" className="fill-btn">생성하기</button>
+                    <button type="submit" className="fill-btn">수정하기</button>
                 </div>
             </form>
         </Layout>
