@@ -44,8 +44,9 @@ import NoticeDetail from "../pages/user/NoticeDetail.jsx";
 import Faq from "../pages/user/Faq.jsx";
 import FaqDetail from "../pages/user/FaqDetail.jsx";
 import Settings from "../pages/user/Settings.jsx";
-
-
+import UserLevel from "../pages/user/UserLevel.jsx";
+import PhoneEdit from "../pages/user/PhoneEdit.jsx";
+import PasswordReset from "../pages/user/PasswordReset.jsx";
 
 
 const router = createBrowserRouter([
@@ -92,8 +93,12 @@ const router = createBrowserRouter([
       { path: "faq", element: <Faq /> },
       { path: "faq/:id", element: <FaqDetail /> },
       { path: "settings", element: <Settings /> },
+      { path: "user-level", element: <UserLevel /> }, 
+      { path: "edit-phone", element :<PhoneEdit /> },
+      { path: "reset-password", element: <PasswordReset /> },       
     ],
   },
+ 
 ]);
 
 export default function Router() {

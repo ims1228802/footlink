@@ -1,0 +1,96 @@
+.level-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.level-select-text h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.level-select-text p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.level-select {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.select-area {
+  width: 32px;
+  height: 12px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.select-area.fill {
+  background-color: #06b6d4; /* 메인 포인트 컬러 (하늘색 느낌) */
+}
+
+.position-section {
+  margin-top: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  color: #444;
+  margin: 10px 0;
+}
+
+.position-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pos-btn {
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background-color: white;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pos-btn:hover,
+.pos-btn.active {
+  background-color: #dff8ff;
+  border-color: #06b6d4;
+  color: #06b6d4;
+}
+
+.save-btn {
+  margin-top: 30px;
+  background-color: #e0f9ff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  width: 100%;
+  color: #666;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  background-color: #baf0ff;
+}
