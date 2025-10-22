@@ -47,6 +47,8 @@ import Settings from "../pages/user/Settings.jsx";
 import UserLevel from "../pages/user/UserLevel.jsx";
 import PhoneEdit from "../pages/user/PhoneEdit.jsx";
 import PasswordReset from "../pages/user/PasswordReset.jsx";
+import EditTeam from "../pages/team/EditTeam.jsx";
+import EditTeamNext from "../pages/team/EditTeamNext.jsx";
 
 
 const router = createBrowserRouter([
@@ -61,8 +63,10 @@ const router = createBrowserRouter([
   { path: "/teamList", element: <Team /> },
   { path: "/teamDetail", element: <TeamDetail /> },
   { path: "/newTeam", element: <NewTeam /> },
+  { path: "/editTeam", element: <EditTeam /> },
   { path: "/newTeamRecruit", element: <NewTeamRecruit /> },
   { path: "/newTeamNext", element: <NewTeamNext /> },
+  { path: "/editTeamNext", element: <EditTeamNext /> },
   { path: "/newTeamRecruitNext", element: <NewTeamRecruitNext /> },
   { path: "/match", element: <HomePage /> },
   { path: "/result", element: <ResultPage /> },
