@@ -22,20 +22,31 @@ function MatchDetailPage() {
     const [applyError, setApplyError] = useState(null);
     const location = useLocation();
     const { data: user, isLoading } = useUser();
+    const [isLiked, setIsLiked] = useState(false); 
+    const [isLiking, setIsLiking] = useState(false);
+
     useEffect(() => {
         const fetchMatchDetails = async () => {
-            try {
-                const response = await axios.get(`http://localhost/api/Match/${matchNo}`);
+            try {
+                let url = `http://localhost/api/Match/${matchNo}`;
+                if (user && user.email) {
+                    url += `?email=${user.email}`;
+                }
+                const response = await axios.get(url);
                 setMatchDetails(response.data);
-            } catch (err) {
-                console.error("매치 상세 정보를 불러오는 데 실패했습니다:", err);
-                setError("매치 정보를 불러오는 중 오류가 발생했습니다.");
-            } finally {
-                setLoading(false);  
-            }
-        };
-        fetchMatchDetails();
-    }, [matchNo]);
+                setIsLiked(response.data.isLikedByUser || false);
+            } catch (err) {
+                console.error("매치 상세 정보를 불러오는 데 실패했습니다:", err);
+                setError("매치 정보를 불러오는 중 오류가 발생했습니다.");
+            } finally {
+                setLoading(false);  
+            }
+        };
+        
+        if (matchNo) {
+            fetchMatchDetails();
+        }
+    }, [matchNo, user]);
     useEffect(() => {
         const fetchUserInfo = async () => {
           const token = localStorage.getItem("accessToken");
@@ -70,15 +81,52 @@ function MatchDetailPage() {
         return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${dayOfWeek}요일 ${formatTime(startTime)}~${formatTime(endTime)}`;
     };
 
+    const handleLikeToggle = async () => {
+        if (!user) {
+            if (window.confirm('로그인이 필요한 기능입니다. 로그인 페이지로 이동하시겠습니까?')) {
+                navigate('/login', { state: { from: location.pathname } });
+            }
+            return;
+        }
+
+        if (isLiking) return;
+        setIsLiking(true);
+
+        const originalIsLiked = isLiked;
+        setIsLiked(prev => !prev); 
+
+        try {
+
+            if (originalIsLiked) {
+                
+                await axios.delete(`http://localhost/api/Match/like/${matchNo}/${user.email}`);
+            } else {
+           
+                await axios.post(`http://localhost/api/Match/like/${matchNo}/${user.email}`);
+            }
+
+        } catch (err) {
+            console.error('좋아요 처리에 실패했습니다:', err);
+            alert('좋아요 처리에 실패했습니다. 다시 시도해주세요.');
+            setIsLiked(originalIsLiked); 
+        } finally {
+            // 7. 로딩 상태 해제
+            setIsLiking(false);
+        }
+    };
+
      const applyMatch = async () => {
+        if (matchDetails && matchDetails.totalPlayers === matchDetails.applyCount) {
+            alert("이미 모집이 완료된 매치입니다.");
+            return;
+        }
         if (user) {
             if (window.confirm('매치를 신청하시겠습니까?')) {
-                setIsApplying(true); // 로딩 시작
-                setApplyError(null); // 이전 에러 초기화
+                setIsApplying(true); 
+                setApplyError(null); 
 
                 try {
                     const url = `http://localhost/api/Match/apply/${matchNo}/${user.email}`;
-                    // 컴포넌트에서 직접 API 호출
                     const response = await axios.post(url);
                     
                     console.log('매치 신청 성공:', response.data);
@@ -125,6 +173,7 @@ function MatchDetailPage() {
         );
     }
 
+    const isMatchFull = matchDetails && matchDetails.totalPlayers === matchDetails.applyCount;
     return (
         <>
             <Layout>
@@ -135,7 +184,15 @@ function MatchDetailPage() {
                     <div className="match-info-container">
                         <div className="title-row">
                             <h1>{matchDetails.staName}{matchDetails.fieldName}</h1>
-                            <FaHeart size={24} color="#ccc" />
+                            <FaHeart 
+                                size={24}
+                                color={isLiked ? '#ff0000' : '#ccc'} 
+                                onClick={handleLikeToggle}
+                                style={{ 
+                                    cursor: isLiking ? 'wait' : 'pointer',
+                                    marginLeft: '10px' 
+                                }}
+                            />
                         </div>
                         <p className="location">
                             {matchDetails.staAddr}
@@ -146,10 +203,17 @@ function MatchDetailPage() {
                         <p className="date-time">
                             {formatDateTime(matchDetails.matchDate, matchDetails.matchTime, matchDetails.matchEndTime)}
                         </p>
-                        <button className="apply-button" onClick={applyMatch} disabled={isApplying}>
-                            {isApplying ? '신청 처리 중...' : '신청하기'}
-                        </button>
-                        {/* 신청 실패 시 에러 메시지 표시 */}
+                        <p>
+                            모집인원: {matchDetails.totalPlayers}명 (현재 {matchDetails.applyCount}명 신청)
+                        </p>
+                        <button 
+                            className="apply-button" 
+                            onClick={applyMatch} 
+                            disabled={isApplying || isMatchFull}
+                        >
+                            {isMatchFull ? '모집 완료' : (isApplying ? '신청 처리 중...' : '신청하기')}
+                        </button>
+
                         {applyError && <p className="error-message">{applyError}</p>}
                     </div>
 
@@ -202,7 +266,6 @@ function MatchDetailPage() {
                             <div className={matchDetails.parkingYn === 'Y' ? 'facility-item' : 'facility-item disabled'}>
                                 <FaParking />
                                 <span className="facility-label">주차장</span>
-                                {/* 주차장이 있을 때만 주차 정보를 보여줍니다. */}
                                 {matchDetails.parkingYn === 'Y' && 
                                     <span className="facility-description">{'주차 가능' || '주차 불가능'}</span>
                                 }
