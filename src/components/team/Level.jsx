@@ -1,10 +1,19 @@
-import React from "react";
-import { level } from "../../data/team/level"; "../../data/team/level";
+import React, { useEffect } from "react";
+import { level } from "../../data/team/level";
 import { useState } from "react";
 
 export default function Level({ teamState, setTeamState }) {
     const [ clickCount, setClickCount ] = useState(0);
     const number = level.length;
+    const selectLevel = teamState.level;
+
+    useEffect(() => {
+        level.forEach((item, idx) => {
+            if(item.level == selectLevel){
+                setClickCount(idx);
+            }
+        });
+    },[teamState]);
 
     const onClickHandler = (idx) => {
         setClickCount(idx);
