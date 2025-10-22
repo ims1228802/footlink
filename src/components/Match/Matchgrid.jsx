@@ -18,7 +18,7 @@ export default function MatchGrid(props) {
                     <p class="match-method">{props.matchTypeName}</p>
                 </div>
                 <p>모집 레벨 : {props.minLevelName}~{props.maxLevelName}</p>
-                <p>모집 현황 : 5/{props.totalPlayers}</p>
+                <p>모집 현황 : {props.applyCount}/{props.totalPlayers}</p>
             </div>
         </div>
     );
