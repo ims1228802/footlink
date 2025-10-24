@@ -5,10 +5,11 @@ import location from "../../assets/team/location_on.png"
 import homeGround from "../../assets/team/home_ground.png";
 import recruitTime from "../../assets/team/recruit_time.png";
 import avgTime from "../../assets/team/avg_time.png";
-import user from "../../assets/team/User.png";
+import userImg from "../../assets/team/User.png";
 import looksOne from "../../assets/team/looks_one.png";
 import userProfile from "../../assets/team/user_profile.png";
 import Layout from "../../layout/Layout";
+import { useUser } from '../../hooks/useUser';
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { option } from "../../data/team/chart.js";
@@ -27,6 +28,7 @@ import Calendar from "../../components/team/Calendar.jsx";
 
 export default function TeamDetail() {
         const urlLocation = useLocation();
+        const { data: user, isLoading } = useUser();
         const [searchParams, setSearchParams] = useSearchParams();
         const [ data, setData ] = useState([]);
         const [ userData, setUserData ] = useState([]);
@@ -35,6 +37,10 @@ export default function TeamDetail() {
         const [ button, setButton ] = useState('overview');
         const [ isModalOpen, setModalOpen ] = useState(false);
         const [ teamCode, setTeamCode ] = useState('');
+        const navigator = useNavigate();
+
+        let isUser = false;
+        let author = '';
 
         useEffect(() => {
             setSearchParams(urlLocation.search);
@@ -51,6 +57,7 @@ export default function TeamDetail() {
 
             axios.get(`http://localhost/api/team/userInfo?teamCode=${teamCode}`)
                 .then(response => {
+                    //console.log(response.data);
                     setUserData(response.data);
                 })
                 .catch(error => {
@@ -74,8 +81,6 @@ export default function TeamDetail() {
                     console.log(`Error feching data: ${error}`);
             });
         },[]);
-
-        const navigator = useNavigate();
 
         // 날짜, 시간 포맷 설정
         const reduceDate = calendarData.reduce((acc, item) => {
@@ -134,6 +139,16 @@ export default function TeamDetail() {
             ],
         }
 
+        if(user){
+            userData.forEach(item => {
+                if(item.userId == user.id){
+                    isUser = true;
+                    author = item.teamAuthrtName;
+                    //console.log(author);
+                }
+            });
+        }
+
         const openModel = () => {
             document.body.style.cssText = `
             position: fixed;
@@ -153,7 +168,52 @@ export default function TeamDetail() {
         const onClickHandler = (select) => {
             switch(select){
                 case 'recruit':
-                    navigator(`/newTeamRecruit?teamCode=${teamCode}`)
+                    navigator(`/newTeamRecruit?teamCode=${teamCode}`);
+                break;
+                case 'teamEdit':
+                    navigator(`/editTeam`, 
+                        {state: {
+                            data: data, 
+                            chartData: chartData, 
+                        }
+                    });
+                break;
+                case 'teamDelete':
+                    if(confirm('정말로 팀을 삭제하시겠습니까?')){
+                        axios.put('http://localhost/api/team/deleteTeam', {
+                            params: {
+                                teamCode: teamCode
+                            }
+                        })
+                        .then(response => {
+                            alert('팀 삭제가 완료되었습니다.')
+                            console.log(response.data);
+                            navigator('/teamList');
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                        // console.log('팀 삭제 완료');
+                    }
+                break;
+                case 'outTeam':
+                    if(confirm('정말로 팀을 탈퇴하시겠습니까?')){
+                        axios.delete('http://localhost/api/team/outTeam', {
+                            params: {
+                                teamCode: teamCode,
+                                user: user.id
+                            }
+                        })
+                        .then(response => {
+                            alert('팀 탈퇴가 완료되었습니다');
+                            console.log(response.data);
+                            navigator('/teamList');
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                        // console.log('팀 삭제 완료');
+                    }
                 break;
             }
         }
@@ -212,7 +272,7 @@ export default function TeamDetail() {
                                 </div>
                                 <div className="info-div">
                                     <div className="img-icon">
-                                        <img src={user} />
+                                        <img src={userImg} />
                                         <p>멤버</p>
                                     </div>
                                     {data.userCount} 명
@@ -330,14 +390,28 @@ export default function TeamDetail() {
                                 </div>
                             </div>
                         </div>
-                        <div className="side-button">
-                            <button>모집 신청 내역</button>
-                            <button>초대링크 복사</button>
-                            <button>팀 탈퇴하기</button>
-                            <button>팀 위임하기</button>
-                            <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
-                            <button className="team-delete">팀 삭제하기</button>
-                        </div>
+                        {user ? 
+                        (<div className="side-button">
+                            {isUser ? (
+                                <>
+                                    <button type="button" onClick={() => alert('기능 준비중입니다.')}>초대링크 복사</button>
+                                    <button type="button" onClick={() => onClickHandler('outTeam')}>팀 탈퇴하기</button>
+                                    {author == '팀장' ? <button type="button">팀 위임하기</button> : undefined}
+                                    {(author == '팀장' || author == '팀관리자') ? (
+                                    <>
+                                        <button type="button">모집 신청 내역</button>
+                                        <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
+                                        <button type="button" onClick={() => onClickHandler('teamEdit')}>팀 정보 수정하기</button>
+                                    </>
+                                    ) : undefined }
+                                    {author == '팀장' ? <button type="button" className="team-delete" onClick={() => onClickHandler('teamDelete')}>팀 삭제하기</button> : undefined}  
+                                </>
+                            ) : (
+                                <>
+                                    <button type="button" onClick={() => onClickHandler('outTeam')}>가입 신청하기</button>
+                                </>
+                            )}
+                        </div>) : undefined}
                     </div>
                     <div className="contents-div">
                         <nav>
