@@ -1,39 +1,75 @@
-.match-card{
-  width: 330px;
-  height: 308px;
-  border: 1px solid silver;
-  border-radius: 8px;
-  margin-right: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+.match-card {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid silver;
+    border-radius: 8px;
+    margin-right: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    
+    display: flex;
+    flex-direction: column;
 }
-.card-top{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 4px;
-  height: 26px;
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 4px;
+    height: 26px;
+    
+    flex-shrink: 0; 
 }
+
+.match-information {
+    padding: 12px; 
+    display: flex; 
+    flex-direction: column;
+    flex-grow: 1; 
+    overflow: hidden; 
+}
+
 .match-state {
-  background-color: #46A663;
-  width: 105px;
-  color: white;
-  border-radius: 8px;
-  text-align: center;
+    background-color: #46A663;
+    width: 105px;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    box-sizing: border-box;
 }
+
 .match-gen,
-.match-method{
+.match-method {
     border: 1px solid;
     border-radius: 7px;
     width: 50px;
     height: 20px;
     text-align: center;
     font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box; 
 }
-.match-method-arr{
-  display: flex;
+
+.match-method-arr {
+    display: flex;
+    gap: 4px; 
 }
-p{
-  margin: 5px;
+
+.match-information p {
+    margin: 4px 0; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.match-information .match-gen,
+.match-information .match-method {
+    margin: 0; 
 }

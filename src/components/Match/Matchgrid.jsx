@@ -2,11 +2,13 @@ import "./Matchgrid.css";
 
 
 export default function MatchGrid(props) { 
+    const springServerUrl = "http://localhost";
+    const absoluteFilePath = `${springServerUrl}${props.filePath}`;
     const startTime = props.matchTime.slice(0, 5);
     const endTime = props.matchEndTime.slice(0, 5);
     return (
         <div class="match-card">
-            <img src={props.filePath} style={{ width: '328px' }} />
+            <img src={absoluteFilePath}/>
             <div class="match-information">
                 <div class="card-top">
                     <h3>{startTime}~{endTime}</h3>

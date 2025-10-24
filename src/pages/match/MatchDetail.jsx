@@ -24,6 +24,8 @@ function MatchDetailPage() {
     const { data: user, isLoading } = useUser();
     const [isLiked, setIsLiked] = useState(false); 
     const [isLiking, setIsLiking] = useState(false);
+    const springServerUrl = "http://localhost";
+    
 
     useEffect(() => {
         const fetchMatchDetails = async () => {
@@ -174,11 +176,12 @@ function MatchDetailPage() {
     }
 
     const isMatchFull = matchDetails && matchDetails.totalPlayers === matchDetails.applyCount;
+    const absoluteFilePath = `${springServerUrl}${matchDetails.filePath}`;
     return (
         <>
             <Layout>
                 <div className="page-container">
-                    <div className="image-banner" style={{ backgroundImage: `url(${matchDetails.fieldImageUrl || 'default_banner_image_url.jpg'})` }}>
+                    <div className="image-banner" style={{ backgroundImage: `url(${absoluteFilePath || 'default_banner_image_url.jpg'})` }}>
                         <img className="sports-logo" src={matchDetails.logoUrl || '/path/to/default/logo.png'} alt="Sports Logo" />
                     </div>
                     <div className="match-info-container">
