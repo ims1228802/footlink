@@ -34,8 +34,7 @@ function AdminMatch() {
          case '매치 종료':
             return(
                 <>
-                    <Link to={`/match/edit/${matchNo}`} className="btn btn-sm btn-outline-primary">수정</Link>
-                    <button className="btn btn-sm btn-outline-danger">취소</button>
+                    <Link to={`/editResult/${matchNo}`} className="btn btn-sm btn-outline-primary">수정</Link>
                 </>
             )
         default:
