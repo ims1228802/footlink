@@ -8,7 +8,7 @@
 
 .layout-content {
   flex: 1; /* Header/Footer 제외하고 남은 공간 채움 */
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
   

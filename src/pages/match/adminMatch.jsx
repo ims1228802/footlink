@@ -29,13 +29,12 @@ function AdminMatch() {
             case '모집중':
                 return null
          case '모집 완료': 
-            return <Link to={`/match/result/${matchNo}`} className="btn btn-sm btn-outline-primary">결과입력</Link>;
+            return <Link to={`/addResult/${matchNo}`} className="btn btn-sm btn-outline-primary">결과입력</Link>;
         
          case '매치 종료':
             return(
                 <>
-                    <Link to={`/match/edit/${matchNo}`} className="btn btn-sm btn-outline-primary">수정</Link>
-                    <button className="btn btn-sm btn-outline-danger">취소</button>
+                    <Link to={`/editResult/${matchNo}`} className="btn btn-sm btn-outline-primary">수정</Link>
                 </>
             )
         default:
@@ -152,7 +151,6 @@ function AdminMatch() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* 2. 데이터를 map()으로 순회하며 렌더링 */}
                                 {filteredMatchList.map((match) => (
                                     <tr key={match.matchNo} className="text-center">
                                         <td>{match.matchNo}</td>
@@ -177,7 +175,6 @@ function AdminMatch() {
                 </div>
             </div>
 
-            {/* 페이지네이션 (이 부분도 데이터에 따라 동적으로 생성해야 함) */}
             <div className="pagination-area mt-30 mb-50">
                 <nav>
                     <ul className="pagination justify-content-center">

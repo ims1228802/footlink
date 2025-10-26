@@ -25,6 +25,7 @@ import SelectDetail from "../pages/match/SelectDetail.jsx";
 import MatchDetailPage from "../pages/match/MatchDetail.jsx";
 import AdminMatch from "../pages/match/adminMatch.jsx";
 import AddResult from "../pages/match/AddResult.jsx";
+import EditResult from "../pages/match/MatchResultEdit.jsx";
 //user
 import LoginPage from "../pages/user/LoginPage.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
@@ -51,6 +52,7 @@ import EditTeam from "../pages/team/EditTeam.jsx";
 import EditTeamNext from "../pages/team/EditTeamNext.jsx";
 import FindEmailNext from "../pages/user/FindEmailNext.jsx";
 import FindPasswordNext from "../pages/user/FindPasswordNext.jsx"; 
+
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/main" /> },
@@ -81,6 +83,7 @@ const router = createBrowserRouter([
   { path: "/addResult/:matchNo", element :<AddResult /> },
   { path: "/find-Email-Next", element: <FindEmailNext /> },
   { path: "/find-Password-Next", element: <FindPasswordNext /> },
+  { path: "/editResult/:matchNo", element :<EditResult /> },
   {
     path: "/user",
     element: (
