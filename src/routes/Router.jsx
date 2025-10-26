@@ -49,6 +49,8 @@ import PhoneEdit from "../pages/user/PhoneEdit.jsx";
 import PasswordReset from "../pages/user/PasswordReset.jsx";
 import EditTeam from "../pages/team/EditTeam.jsx";
 import EditTeamNext from "../pages/team/EditTeamNext.jsx";
+import EditTeamRecruit from "../pages/team/EditTeamRecruit.jsx";
+import EditTeamRecruitNext from "../pages/team/EditTeamRecruitNext.jsx";
 
 
 const router = createBrowserRouter([
@@ -65,9 +67,11 @@ const router = createBrowserRouter([
   { path: "/newTeam", element: <NewTeam /> },
   { path: "/editTeam", element: <EditTeam /> },
   { path: "/newTeamRecruit", element: <NewTeamRecruit /> },
+  { path: "/editTeamRecruit", element: <EditTeamRecruit /> },
   { path: "/newTeamNext", element: <NewTeamNext /> },
   { path: "/editTeamNext", element: <EditTeamNext /> },
   { path: "/newTeamRecruitNext", element: <NewTeamRecruitNext /> },
+  { path: "/editTeamRecruitNext", element: <EditTeamRecruitNext /> },
   { path: "/match", element: <HomePage /> },
   { path: "/result", element: <ResultPage /> },
   { path: "/end", element: <EndPage /> },

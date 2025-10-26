@@ -254,7 +254,7 @@ export default function EditTeam(){
     return(
         <Layout>
             <form onSubmit={submitHandler}>
-                <h2>팀 생성하기</h2>
+                <h2>팀 수정하기</h2>
                 <div className="flex-div">
                     <div>
                         <p>팀 엠블렘</p>
@@ -272,7 +272,7 @@ export default function EditTeam(){
                         <p>팀 이름</p>
                         <input type="text" id="teamName" name="teamName" placeholder="팀 이름을 입력해주세요" value={team.teamName} onChange={inputHandler}/>
                         <p>팀 코드</p>
-                        <input type="text" id="teamCode" name="teamCode" placeholder="팀 코드를 입력해주세요" value={team.teamCode} onChange={inputHandler}/>
+                        <input type="text" id="teamCode" name="teamCode" placeholder="팀 코드를 입력해주세요" value={team.teamCode} onChange={inputHandler} readOnly/>
                     </div>
                 </div>
                 <div className="date-div">
