@@ -1,0 +1,150 @@
+.findemailnext-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 20px;
+  font-family: "Pretendard", sans-serif;
+}
+
+.findemailnext-box {
+  background: #fff;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px 32px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+/* 뒤로가기 */
+.findemailnext-backlink {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.findemailnext-backicon {
+  width: 18px;
+  height: 18px;
+}
+
+/* 타이틀 */
+.findemailnext-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 28px;
+}
+
+/* 설명 */
+.findemailnext-description {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.findemailnext-desc-line:first-child {
+  font-weight: 600;
+  font-size: 15px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.findemailnext-desc-line:last-child {
+  font-size: 13.5px;
+  color: #666;
+}
+
+/* 이메일 결과 박스 */
+.findemailnext-emailbox {
+  width: 100%;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: left;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.findemailnext-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.findemailnext-item:last-child {
+  margin-bottom: 0;
+}
+
+.findemailnext-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.findemailnext-email,
+.findemailnext-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* 버튼 영역 */
+.findemailnext-btnbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.findemailnext-btn {
+  display: block;
+  padding: 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background 0.2s;
+}
+
+/* 메인 버튼 */
+.findemailnext-btn--main {
+  background: #00c2a0;
+  color: #fff;
+}
+
+.findemailnext-btn--main:hover {
+  background: #00a68a;
+}
+
+/* 서브 버튼 */
+.findemailnext-btn--sub {
+  background: #e6f9f7;
+  color: #00a89a;
+}
+
+.findemailnext-btn--sub:hover {
+  background: #d1f3f0;
+}
+
+@media (max-width: 480px) {
+  .findemailnext-box {
+    padding: 32px 20px;
+  }
+
+  .findemailnext-backlink {
+    top: 16px;
+    left: 16px;
+  }
+
+  .findemailnext-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

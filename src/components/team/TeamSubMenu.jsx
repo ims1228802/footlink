@@ -52,7 +52,7 @@ export default function TeamSubMenu({selectMenu}) {
                     <input type='checkbox' id='time' name='time' className='appearance-none'/>
                 </label>
             </div>
-            <button className='outline-1 outline-cyan-500 text-cyan-500' onClick={navigateHandler}>{selectMenu == 'teamList' ? '팀 생성하기' : '팀원 모집하기'}</button>
+            {selectMenu == 'teamList' ? <button className='outline-1 outline-cyan-500 text-cyan-500' onClick={navigateHandler}>팀 생성하기</button> : undefined}
         </div>
     );
 }

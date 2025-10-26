@@ -23,6 +23,8 @@ import SelectField from "../pages/match/SelectField.jsx";
 import SelectMatch from "../pages/match/SelectMatch.jsx";
 import SelectDetail from "../pages/match/SelectDetail.jsx";
 import MatchDetailPage from "../pages/match/MatchDetail.jsx";
+import AdminMatch from "../pages/match/adminMatch.jsx";
+import AddResult from "../pages/match/AddResult.jsx";
 //user
 import LoginPage from "../pages/user/LoginPage.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
@@ -42,8 +44,13 @@ import NoticeDetail from "../pages/user/NoticeDetail.jsx";
 import Faq from "../pages/user/Faq.jsx";
 import FaqDetail from "../pages/user/FaqDetail.jsx";
 import Settings from "../pages/user/Settings.jsx";
-
-
+import UserLevel from "../pages/user/UserLevel.jsx";
+import PhoneEdit from "../pages/user/PhoneEdit.jsx";
+import PasswordReset from "../pages/user/PasswordReset.jsx";
+import EditTeam from "../pages/team/EditTeam.jsx";
+import EditTeamNext from "../pages/team/EditTeamNext.jsx";
+import FindEmailNext from "../pages/user/FindEmailNext.jsx";
+import FindPasswordNext from "../pages/user/FindPasswordNext.jsx"; 
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/main" /> },
@@ -57,8 +64,10 @@ const router = createBrowserRouter([
   { path: "/teamList", element: <Team /> },
   { path: "/teamDetail", element: <TeamDetail /> },
   { path: "/newTeam", element: <NewTeam /> },
+  { path: "/editTeam", element: <EditTeam /> },
   { path: "/newTeamRecruit", element: <NewTeamRecruit /> },
   { path: "/newTeamNext", element: <NewTeamNext /> },
+  { path: "/editTeamNext", element: <EditTeamNext /> },
   { path: "/newTeamRecruitNext", element: <NewTeamRecruitNext /> },
   { path: "/match", element: <HomePage /> },
   { path: "/result", element: <ResultPage /> },
@@ -68,7 +77,10 @@ const router = createBrowserRouter([
   { path: "/selectdetail", element: <SelectDetail /> },
   { path: "/match/:matchNo", element :<MatchDetailPage /> },
   { path: "/end/:matchNo", element :<ResultPage /> },
-
+  { path: "/adminMatch", element :<AdminMatch /> },
+  { path: "/addResult/:matchNo", element :<AddResult /> },
+  { path: "/find-Email-Next", element: <FindEmailNext /> },
+  { path: "/find-Password-Next", element: <FindPasswordNext /> },
   {
     path: "/user",
     element: (
@@ -88,8 +100,12 @@ const router = createBrowserRouter([
       { path: "faq", element: <Faq /> },
       { path: "faq/:id", element: <FaqDetail /> },
       { path: "settings", element: <Settings /> },
+      { path: "user-level", element: <UserLevel /> }, 
+      { path: "edit-phone", element :<PhoneEdit /> },
+      { path: "reset-password", element: <PasswordReset /> },       
     ],
   },
+ 
 ]);
 
 export default function Router() {

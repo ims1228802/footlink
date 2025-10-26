@@ -28,6 +28,22 @@ const initialState = {
         pass: 0,
         shot: 0
     },
+    // 팀원 모집 팀코드, 구장, 지역, 도시, 나이, 레벨 
+    step1_team_recruit_info: {
+        teamCode: '',
+        teamDistinction: '',
+        stadium: '',
+        city: '',
+        area: '',
+        age: '',
+        gender: '',
+        level: ''
+    },
+    // 작성글, 이미지
+    step2_team_recruit_contents: {
+        teamImg: '',
+        contents: ''
+    },
     // api 상태
     state: '',
     error: '',
@@ -63,6 +79,33 @@ export const teamCreatePost = createAsyncThunk(
         });
     });
 
+export const teamCreateRecruitPost = createAsyncThunk(
+    'teamCreate/post',async (_,{ getState, rejectWithValue }) => {
+        const state = getState().teamCreate;
+
+        const field = {
+            ...state.step1_team_recruit_info,
+            ...state.step2_team_recruit_contents
+        }
+
+        console.log('api 요청 시작');
+
+        await axios.post('http://localhost/api/team/addTeamRecruit', field)
+        .then(response=> {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error(`api 요청중 에러 발생: ${error}`);
+            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+
+            if (error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
+        });
+    });
+
 //slice 정의
 const teamSlice = createSlice({
     name: 'teamCreate',
@@ -74,9 +117,17 @@ const teamSlice = createSlice({
         step2_team_state: (state, action) => {
             state.step2_team_state = action.payload;
         },
+        step1_team_recruit_info: (state, action) => {
+            state.step1_team_recruit_info = action.payload;
+        },
+        step2_team_recruit_contents: (state, action) => {
+            state.step2_team_recruit_contents = action.payload;
+        },
         cleanForm: (state) => {
             state.step1_team_info = initialState.step1_team_info;
             state.step2_team_state = initialState.step2_team_state;
+            state.step1_team_recruit_info = initialState.step1_team_recruit_info;
+            state.step2_team_recruit_contents = initialState.step2_team_recruit_contents;
             state.state = initialState.state;
             state.error = initialState.error;
         }
@@ -97,5 +148,5 @@ const teamSlice = createSlice({
 });
 
 // 액션과 리듀서를 한번에 export
-export const { step1_team_info, step2_team_state, cleanForm } = teamSlice.actions;
+export const { step1_team_info, step2_team_state, step1_team_recruit_info, step2_team_recruit_contents, cleanForm } = teamSlice.actions;
 export default teamSlice.reducer;

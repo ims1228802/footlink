@@ -27,12 +27,6 @@ function EndPage() {
         gender: 'all'
     });
     
-    
-    // const endList = END_LIST.map(endInfo => {
-    //     return(
-    //         <EndList {...endInfo} />
-    //     )
-    // })
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -64,11 +58,6 @@ function EndPage() {
             // 지역 필터링
             if (filters.region) {
                 list = list.filter(match => match.region === filters.region);
-            }
-    
-            // 마감 제외 필터링
-            if (filters.excludeClosed) {
-                list = list.filter(match => !match.isClosed);
             }
     
             // 레벨 필터링
@@ -108,51 +97,47 @@ function EndPage() {
         <>
             <Layout>
                 <section id="content">
-                    <div class="top-content">
-                        <Link to="/">
+                    <div className="top-content">
+                        <Link to="/match">
                             <h2>일정</h2>
                         </Link>
-                        <hr/>
-                        <Link to="/end"><h2>결과</h2></Link>
+                        <span className="tab-divider">|</span>
+                        <Link to="/end" className="active">
+                            <h2>결과</h2>
+                        </Link>
                     </div>
+
                     <DateNavigator 
                         selectedDate={selectedDate}
                         onDateChange={setSelectedDate}
                     />
-                    <select name="region" value={filters.region} onChange={handleFilterChange}>
-                        <option value="">전체 지역</option>
-                        {province.map((pro) => (<option key={pro.id} value={pro.name}>{pro.name}</option>))}
-                    </select>
+                    
+                    <div className="filter-bar">
+                        <div className="filter-buttons">
+                            <select name="region" value={filters.region} onChange={handleFilterChange}>
+                                <option value="">지역</option>
+                                {province.map((pro) => (<option key={pro.id} value={pro.name}>{pro.name}</option>))}
+                            </select>
 
-                    {/* 마감 제외 필터 */}
-                    <label className="filter-checkbox">
-                        <input
-                            type="checkbox"
-                            name="excludeClosed"
-                            checked={filters.excludeClosed}
-                            onChange={handleFilterChange}
-                        />
-                        마감 제외
-                    </label>
+                            <select name="level" value={filters.level} onChange={handleFilterChange}>
+                                <option value="all">레벨</option>
+                                {levelData.map((level) => (
+                                    <option key={level.name} value={level.name}>
+                                        {level.name}
+                                    </option>
+                                ))}
+                            </select>
+  
+                            <select name="gender" value={filters.gender} onChange={handleFilterChange}>
+                                <option value="all">성별</option>
+                                <option value="남성">남성</option>
+                                <option value="여성">여성</option>
+                                <option value="혼성">혼성</option>
+                            </select>
+                        </div>
 
-                    {/* 레벨 필터 */}
-                    <select name="level" value={filters.level} onChange={handleFilterChange}>
-                        <option value="all">모든 레벨</option>
-                        {levelData.map((level) => (
-                            <option key={level.name} value={level.name}>
-                                {level.name}
-                            </option>
-                        ))}
-                    </select>
-
-                    {/* 성별 필터 */}
-                    <select name="gender" value={filters.gender} onChange={handleFilterChange}>
-                        <option value="all">모든 성별</option>
-                        <option value="남성">남성</option>
-                        <option value="여성">여성</option>
-                        <option value="혼성">혼성</option>
-                    </select>
-                    <div className="match-content">
+                    </div>
+                    <div className="end-content">
                         {List.length > 0 ? List : <p>해당 조건의 매치가 없습니다.</p>}
                     </div>
                 </section>

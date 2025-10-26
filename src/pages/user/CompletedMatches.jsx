@@ -1,43 +1,50 @@
 import React, { useEffect, useState } from "react";
-import completeMatches from "../../data/completeMatches";
-import styles from "../../css/user/CompletedMatches.module.css"; // ✅ CSS Module 사용
+import styles from "../../css/user/CompletedMatches.module.css";
+import api from "../../hooks/axiosInstance";
 
 export default function CompletedMatches() {
   const [matches, setMatches] = useState([]);
   const [filteredMatches, setFilteredMatches] = useState([]);
   const [query, setQuery] = useState({
-    startDate: "2025-01-01",
-    endDate: "2025-12-31",
+    startDate: "",
+    endDate: "",
     region: "",
     field: "",
   });
 
-  // 🧭 데이터 로드
+  // ✅ 완료 경기 불러오기 (API)
   useEffect(() => {
-    setMatches(completeMatches);
-    setFilteredMatches(completeMatches);
+    (async () => {
+      try {
+        const { data } = await api.get("/myinfo/completed-matches");
+        setMatches(data); // 전체 데이터
+        setFilteredMatches(data); // 초기 상태 = 전체
+      } catch (err) {
+        console.error("완료 경기 불러오기 실패:", err);
+      }
+    })();
   }, []);
 
-  // 🔍 검색
+  // ✅ 🔍 검색 필터
   const handleSearch = () => {
     const { startDate, endDate, region, field } = query;
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate ? new Date(endDate) : null;
 
     const filtered = matches.filter((m) => {
-      const date = new Date(m.date);
+      const matchDate = new Date(m.matchDate); // ✅ 백엔드 JSON 필드 기준
       return (
-        date >= start &&
-        date <= end &&
-        (region === "" || m.stadium.includes(region)) &&
-        (field === "" || m.stadium.includes(field))
+        (!start || matchDate >= start) &&
+        (!end || matchDate <= end) &&
+        (region === "" || m.stadium?.includes(region)) &&
+        (field === "" || m.stadium?.includes(field))
       );
     });
 
     setFilteredMatches(filtered);
   };
 
-  // 입력 핸들러
+  // ✅ 입력 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setQuery((prev) => ({ ...prev, [name]: value }));
@@ -93,15 +100,18 @@ export default function CompletedMatches() {
       <div className={styles.matchList}>
         {filteredMatches.length > 0 ? (
           filteredMatches.map((match) => (
-            <div className={styles.matchCard} key={match.matchNum}>
+            <div className={styles.matchCard} key={match.matchNo}>
               <div className={styles.matchHeader}>
                 <span className={styles.matchDate}>
-                  {match.date} {match.start}
+                  {match.matchDate} {match.matchTime}
                 </span>
                 <span className={styles.matchField}>{match.stadium}</span>
               </div>
 
-              <div className={styles.matchTeam}>{match.team}</div>
+              <div className={styles.matchTeam}>
+                <p>결과: {match.homeScore} : {match.awayScore}</p>
+                <p>승자: {match.winner || "무승부"}</p>
+              </div>
             </div>
           ))
         ) : (

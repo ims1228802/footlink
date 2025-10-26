@@ -5,7 +5,8 @@ import MatchGrid from "../../components/Match/Matchgrid";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 const levelData = [
     { name: '비기너', min: 1, max: 3 },
@@ -19,8 +20,8 @@ function HomePage() {
     const [filteredMatchList, setFilteredMatchList] = useState([]);
     const [province, setProvince] = useState([]);
     const navigate = useNavigate();
-
-    // 1. 날짜 상태를 HomePage에서 관리
+    const { data: user, isLoading } = useUser();
+    const location = useLocation();
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [filters, setFilters] = useState({
@@ -37,6 +38,7 @@ function HomePage() {
                 setOriginalMatchList(response.data.matchList);
                 console.log(response.data.matchList);
                 setProvince(response.data.pro);
+                
             } catch (error) {
                 console.error("API 호출 중 오류 발생:", error);
                 setOriginalMatchList([]);
@@ -46,14 +48,11 @@ function HomePage() {
         fetchData();
     }, []);
 
-    // 2. 필터링 로직에 'selectedDate'를 추가
     useEffect(() => {
         let list = [...originalMatchList];
 
-        // 날짜 필터링 (가장 먼저 적용하여 목록 크기를 줄이는 것이 효율적)
-        // match.matchDate가 "YYYY-MM-DD" 형식의 문자열이라고 가정
         list = list.filter(match => {
-            if (!match.matchDate) return false; // 날짜 정보가 없는 데이터는 제외
+            if (!match.matchDate) return false; 
             const matchDate = new Date(match.matchDate);
             return matchDate.getFullYear() === selectedDate.getFullYear() &&
                    matchDate.getMonth() === selectedDate.getMonth() &&
@@ -87,7 +86,7 @@ function HomePage() {
         }
 
         setFilteredMatchList(list);
-    }, [filters, selectedDate, originalMatchList]); // selectedDate가 변경될 때도 이 useEffect가 실행됨
+    }, [filters, selectedDate, originalMatchList]); 
 
     const handleFilterChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -96,7 +95,15 @@ function HomePage() {
             [name]: type === 'checkbox' ? checked : value
         }));
     };
-
+    const handleMatchRegistrationClick = () => {
+        if (user) {
+            navigate('/selectfield');
+        } else {
+            if (window.confirm('로그인이 필요한 기능입니다. 로그인 페이지로 이동하시겠습니까?')) { 
+                navigate('/login', { state: { from: location.pathname } });
+            }
+        }
+    };
     const List = filteredMatchList.map(matchInfo => {
         return (
             <Link to={`/match/${matchInfo.matchNo}`} key={matchInfo.matchNo} className="match-card-link">
@@ -114,7 +121,7 @@ function HomePage() {
                         <hr />
                         <h2 onClick={() => navigate("/end")}>결과</h2>
                     </div>
-                    {/* 3. DateNavigator에 상태와 함수를 props로 전달 */}
+
                     <DateNavigator
                         selectedDate={selectedDate}
                         onDateChange={setSelectedDate}
@@ -156,11 +163,20 @@ function HomePage() {
                                 <option value="혼성">혼성</option>
                             </select>
                         </div>
-                        <div>
-                            <Link to="/selectfield">
-                                <button className="match-add">매치등록</button>
-                            </Link>
-                        </div>
+                        <>
+                            {user && user.role === 'atrt_01' ? (
+                                <Link to="/adminMatch">
+                                    <button className="registration-match">결과 등록</button>
+                                </Link>
+                            ) : null}
+                            <button 
+                                className="match-add" 
+                                onClick={handleMatchRegistrationClick} 
+                                disabled={isLoading}
+                            >
+                                {isLoading ? '로딩중...' : '매치등록'}
+                            </button>
+                        </>
                     </div>
                     <div className="match-content">
                         {List.length > 0 ? List : <p>해당 조건의 매치가 없습니다.</p>}
