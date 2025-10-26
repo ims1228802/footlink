@@ -25,6 +25,7 @@ import SelectDetail from "../pages/match/SelectDetail.jsx";
 import MatchDetailPage from "../pages/match/MatchDetail.jsx";
 import AdminMatch from "../pages/match/adminMatch.jsx";
 import AddResult from "../pages/match/AddResult.jsx";
+import EditResult from "../pages/match/MatchResultEdit.jsx";
 //user
 import LoginPage from "../pages/user/LoginPage.jsx";
 import SignUp from "../pages/user/SignUp.jsx";
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
   { path: "/end/:matchNo", element :<ResultPage /> },
   { path: "/adminMatch", element :<AdminMatch /> },
   { path: "/addResult/:matchNo", element :<AddResult /> },
+  { path: "/editResult/:matchNo", element :<EditResult /> },
   {
     path: "/user",
     element: (

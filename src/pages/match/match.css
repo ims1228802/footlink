@@ -1,5 +1,4 @@
 
-
 .top-content {
     display: flex;
     align-items: center;
@@ -86,8 +85,16 @@
     height: 33px;
     align-content: center;
     font-size: 16px;
-    border: none; /* button 태그일 경우를 대비해 border 제거 */
+    border: none; 
     cursor: pointer;
+}
+.match-card img {
+    width: 100%;  
+    height: 200px; 
+    object-fit: cover; 
+    display: block;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 
@@ -126,4 +133,25 @@
 
 .match-filter select:invalid {
     color: #f0f0f0; 
+}
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; 
+}
+
+.calendar-header h2 {
+    margin: 0 16px; 
+    font-size: 24px;  
+    color: #333;
+}
+
+.calendar-header button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px; 
+    color: #555;
+    padding: 8px; 
 }

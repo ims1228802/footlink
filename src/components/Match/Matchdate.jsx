@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Matchdate.css';
 
-// 부모 컴포넌트로부터 selectedDate와 onDateChange 함수를 props로 받습니다.
+
 function DateNavigator({ selectedDate, onDateChange }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -21,7 +21,7 @@ function DateNavigator({ selectedDate, onDateChange }) {
     });
   };
 
-  // 요일을 한글로 변환
+
   const getDayName = (date) => {
     const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
     return dayNames[date.getDay()];
@@ -70,7 +70,6 @@ function DateNavigator({ selectedDate, onDateChange }) {
         {filteredDays.map((day, index) => (
           <div key={index} className="date-item">
             <button
-              // className 비교 시, props로 받은 selectedDate를 사용합니다.
               className={
                 day.getFullYear() === selectedDate.getFullYear() &&
                 day.getMonth() === selectedDate.getMonth() &&
@@ -78,7 +77,6 @@ function DateNavigator({ selectedDate, onDateChange }) {
                   ? "active"
                   : ""
               }
-              // 클릭 시, props로 받은 onDateChange 함수를 호출하여 부모의 상태를 변경합니다.
               onClick={() => onDateChange(day)}
             >
               <span className="day">{getDayName(day)}</span>
