@@ -96,7 +96,7 @@ export default function TeamList() {
                 <div className='team_recruit_div'>
                     <TeamSubMenu selectMenu={menu}/>
                     {filterList.length > 0 ? 
-                        filterList.map((list) => list.isTemp == "정석" ? (
+                        filterList.map((list) => list.isTemp == "정석" && list.recruitCount > 0 ? (
                         <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
                                 <img src={teamImg} />
@@ -137,7 +137,7 @@ export default function TeamList() {
                         </Link>
                         ) :
                         undefined) : 
-                    <div className='team_div'>팀 정보가 존재하지 않습니다.</div>}
+                    <div className='team_div'>모집중인 팀 정보가 존재하지 않습니다.</div>}
                 </div>
             );
         }

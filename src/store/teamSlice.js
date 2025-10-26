@@ -133,6 +133,33 @@ export const teamEditPut = createAsyncThunk(
         });
     });
 
+export const teamRecruitPut = createAsyncThunk(
+    'teamEdit/put',async (_,{ getState, rejectWithValue }) => {
+        const state = getState().teamCreate;
+
+        const field = {
+            ...state.step1_team_recruit_info,
+            ...state.step2_team_recruit_contents
+        }
+
+        console.log('api 요청 시작');
+
+        await axios.put('http://localhost/api/team/editTeamRecruit', field)
+        .then(response=> {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error(`api 요청중 에러 발생: ${error}`);
+            alert('알 수 없는 오류로 인해 등록에 실패했습니다.');
+
+            if (error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error.message);
+        });
+    });
+
 //slice 정의
 const teamSlice = createSlice({
     name: 'teamCreate',

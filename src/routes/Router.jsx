@@ -15,6 +15,12 @@ import Team from "../pages/team/Team";
 import TeamDetail from "../pages/team/TeamDetail";
 import NewTeam from "../pages/team/NewTeam";
 import NewTeamNext from "../pages/team/NewTeamNext";
+import NewTeamRecruit from "../pages/team/NewTeamRecruit.jsx";
+import NewTeamRecruitNext from "../pages/team/NewTeamRecruitNext.jsx";
+import EditTeam from "../pages/team/EditTeam.jsx";
+import EditTeamNext from "../pages/team/EditTeamNext.jsx";
+import EditTeamRecruit from "../pages/team/EditTeamRecruit.jsx";
+import EditTeamRecruitNext from "../pages/team/EditTeamRecruitNext.jsx";
 //match
 import HomePage from "../pages/match/Match.jsx";
 import ResultPage from "../pages/match/result.jsx";
@@ -38,8 +44,6 @@ import MyTeam from "../pages/user/MyTeam.jsx";
 import LikeMatches from "../pages/user/LikeMatches.jsx";
 import CompletedMatches from "../pages/user/CompletedMatches.jsx";
 import AppliedMatches from "../pages/user/AppliedMatches.jsx";
-import NewTeamRecruit from "../pages/team/NewTeamRecruit.jsx";
-import NewTeamRecruitNext from "../pages/team/NewTeamRecruitNext.jsx";
 import Notice from "../pages/user/Notice.jsx";
 import NoticeDetail from "../pages/user/NoticeDetail.jsx";
 import Faq from "../pages/user/Faq.jsx";
@@ -48,8 +52,6 @@ import Settings from "../pages/user/Settings.jsx";
 import UserLevel from "../pages/user/UserLevel.jsx";
 import PhoneEdit from "../pages/user/PhoneEdit.jsx";
 import PasswordReset from "../pages/user/PasswordReset.jsx";
-import EditTeam from "../pages/team/EditTeam.jsx";
-import EditTeamNext from "../pages/team/EditTeamNext.jsx";
 
 
 const router = createBrowserRouter([
@@ -66,9 +68,11 @@ const router = createBrowserRouter([
   { path: "/newTeam", element: <NewTeam /> },
   { path: "/editTeam", element: <EditTeam /> },
   { path: "/newTeamRecruit", element: <NewTeamRecruit /> },
+  { path: "/editTeamRecruit", element: <EditTeamRecruit /> },
   { path: "/newTeamNext", element: <NewTeamNext /> },
   { path: "/editTeamNext", element: <EditTeamNext /> },
   { path: "/newTeamRecruitNext", element: <NewTeamRecruitNext /> },
+  { path: "/editTeamRecruitNext", element: <EditTeamRecruitNext /> },
   { path: "/match", element: <HomePage /> },
   { path: "/result", element: <ResultPage /> },
   { path: "/end", element: <EndPage /> },
