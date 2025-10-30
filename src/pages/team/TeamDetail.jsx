@@ -450,7 +450,7 @@ export default function TeamDetail() {
                     <div className="side-div">
                         <div className="team-info">
                             <div className="team-icon">
-                                <img src={logo} />
+                                <img src={data.teamImage ? data.teamImage : logo} />
                             </div>
                             <div className="team-text">
                                 <p>{data.teamName}</p>

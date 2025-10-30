@@ -10,6 +10,7 @@ import axios from "axios";
 import { useUser } from "../../hooks/useUser";
 import StadiumSearch from "../../components/team/StadiumSearch";
 import { step1_team_info } from "../../store/teamSlice";
+import Upload from "../../components/Upload";
 
 export default function NewTeam(){
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ export default function NewTeam(){
     const [ isModalOpen, setModalOpen ] = useState(false);
     const [ selectModal, setSelectModel ] = useState('');
     const [ team, setTeam ] = useState(teamSelector);
+    const [ selectImgUrl, setSelectImgUrl ] = useState('');
+    const [ selectFile, setSelectFile ] = useState(null);
     const { data: user, isLoading } = useUser();
 
     useEffect(() => {
@@ -54,7 +57,9 @@ export default function NewTeam(){
         if (route == 'pre'){
             navigate('/teamList');
         }else{
-            navigate('/newTeamNext');
+            navigate('/newTeamNext', {state: {
+                files: selectFile
+            }});
         }
     }
 
@@ -77,10 +82,15 @@ export default function NewTeam(){
                 );
             case 'upload':
                 return(
-                <>
-                    <h2>엠블렘 사진 업로드</h2>
-                    <button type="button" onClick={closeModel}>닫기</button>
-                </>
+                    <Upload  
+                        onClose={closeModel}
+                        setTeam={setTeam}
+                        team={team}
+                        selectImgUrl={selectImgUrl}
+                        setSelectImgUrl={setSelectImgUrl}
+                        selectFile={selectFile}
+                        setSelectFile={setSelectFile}
+                    />
                 );
             case 'search':
                 return(
@@ -183,7 +193,7 @@ export default function NewTeam(){
                         <p>팀 엠블렘</p>
                         <div className="emblem-div">
                             <div className="icon-div">
-                                <img src={teamIcon} />
+                                <img src={selectImgUrl == '' ? teamIcon : selectImgUrl} />
                             </div>
                             <div className="button-div">
                                 <button type="button" className="fill-btn" onClick={() => openModel('upload')}>엠블렘 사진 업로드</button>
