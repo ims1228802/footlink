@@ -1,7 +1,7 @@
 import Layout from "../../layout/Layout";
-import Level from "../../components/team/level";
+import Level from "../../components/team/Level";
 import "../../css/team/NewTeamNext.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { step2_team_state, cleanForm, teamCreatePost } from "../../store/teamSlice";
@@ -16,13 +16,19 @@ import {
     Tooltip,
     Legend
     } from "chart.js";
+import axios from "axios";
 
 export default function NewTeamNext() {
+    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const files = location.state.files;
     const state = useSelector(state => state.teamCreate.state);
+    const teamCode = useSelector(state => state.teamCreate.step1_team_info.teamCode);
     const teamStateSelector = useSelector(state => state.teamCreate.step2_team_state);
     const [ teamState, setTeamState ] = useState(teamStateSelector);
+
+    console.log(files);
 
     useEffect(() => {
         if(state == 'succeeded'){
@@ -68,6 +74,21 @@ export default function NewTeamNext() {
             ],
         }
 
+    const filesSubmit = () => {
+        const formData = new FormData();
+        console.log(files);
+        formData.append('files', files);
+        formData.append('teamCode', teamCode);
+
+        axios.post('http://localhost/api/team/addTeamEmblem', formData)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
+
     const navigateHandler = (route) => {
         console.log(route);
 
@@ -94,6 +115,7 @@ export default function NewTeamNext() {
         console.log(teamState);
         dispatch(step2_team_state(teamState));
         dispatch(teamCreatePost());
+        filesSubmit();
     }
 
     return(

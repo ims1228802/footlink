@@ -14,7 +14,7 @@ const initialState = {
         week: [],
         activeTime: '',
         age: '',
-        userId: ''
+        userId: '',
     },
     // 팀 레벨, 데이터
     step2_team_state: {

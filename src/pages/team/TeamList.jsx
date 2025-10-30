@@ -54,7 +54,7 @@ export default function TeamList() {
                         filterList.map((list) => list.isTemp == "정석" ? (
                         <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
-                                <img src={teamImg} />
+                                <img src={list.teamImage ? list.teamImage : teamImg} />
                             </div>
                             <div className='team_info'>
                                 <div className='team_name'>
@@ -99,7 +99,7 @@ export default function TeamList() {
                         filterList.map((list) => list.isTemp == "정석" && list.recruitCount > 0 ? (
                         <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
-                                <img src={teamImg} />
+                                <img src={list.teamImage ? list.teamImage : teamImg} />
                             </div>
                             <div className='team_info'>
                                 <div className='team_name'>
