@@ -85,23 +85,30 @@ export default function Sidebar() {
                 <span>소속한 팀</span>
               </Link>
             </li>
-            <li
-              className={`sidebar-item ${openMenu === "match" ? "open" : ""}`}
-            >
+
+            <li className="sidebar-item">
               <button
                 type="button"
                 onClick={() => toggleMenu("match")}
-                className="sidebar-link sidebar-toggle"
+                className={`sidebar-link sidebar-toggle ${
+                  openMenu === "match" ? "is-open" : ""
+                }`}
+                aria-expanded={openMenu === "match"}
+                aria-controls="match-sublist"
               >
                 <img src={Handshake} alt="매치정보" className="sidebar-icon" />
                 <span>매치정보</span>
                 <span className="sidebar-arrow">
-                  {openMenu === "match" ? "▾" : "▸"}
                 </span>
               </button>
+            </li>
 
-              {openMenu === "match" && (
-                <ul className="sidebar-sublist">
+            {openMenu === "match" && (
+              <li
+                className="sidebar-sublist-wrap"
+                aria-hidden={openMenu !== "match"}
+              >
+                <ul id="match-sublist" className="sidebar-sublist">
                   <li
                     className={`sidebar-item ${
                       isActive("/user/like-matches") ? "active" : ""
@@ -111,10 +118,9 @@ export default function Sidebar() {
                       to="/user/like-matches"
                       className="sidebar-link sidebar-sublink"
                     >
-                      <span>- 찜한 매치</span>
+                      - 찜한 매치
                     </Link>
                   </li>
-
                   <li
                     className={`sidebar-item ${
                       isActive("/user/applied-matches") ? "active" : ""
@@ -124,25 +130,24 @@ export default function Sidebar() {
                       to="/user/applied-matches"
                       className="sidebar-link sidebar-sublink"
                     >
-                      <span>- 신청한 매치</span>
+                      - 신청한 매치
                     </Link>
                   </li>
-
                   <li
                     className={`sidebar-item ${
-                      isActive("/user/completed-matches") ? "active" : ""
+                      isActive("/user/finished-matches") ? "active" : ""
                     }`}
                   >
                     <Link
-                      to="/user/completed-matches"
+                      to="/user/finished-matches"
                       className="sidebar-link sidebar-sublink"
                     >
-                      <span>- 완료된 매치</span>
+                      - 완료된 매치
                     </Link>
                   </li>
                 </ul>
-              )}
-            </li>
+              </li>
+            )}
           </ul>
         </div>
 

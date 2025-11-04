@@ -3,26 +3,27 @@ import google from "../../assets/login/google.svg";
 import kakao from "../../assets/login/kakao.svg";
 import naver from "../../assets/login/naver.svg";
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../../css/user/LoginPage.css";
 import useForm from "../../hooks/useForm";
-import axios from "axios";
-import { useNavigate, useLocation  } from "react-router-dom";
 import axiosInstance from "../../hooks/axiosInstance";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const location = useLocation();
-  
-  const from = location.state?.from || '/';
-  // 유효성 검사 함수
+
+  const from = location.state?.from || "/";
+
+  // ✅ 유효성 검사
   const validate = (values) => {
     const errors = {};
     const emailRegex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const passwordRegex = /^.{8,}$/;
+
     if (!emailRegex.test(values.email)) {
       errors.email = "올바른 이메일을 입력 해주세요";
     }
@@ -32,12 +33,13 @@ export default function LoginPage() {
     return errors;
   };
 
+  // ✅ useForm 훅으로 폼 상태 관리
   const { values, errors, handleChange, handleSubmit, setValues } = useForm(
-    { email: "", password: "", remember: false }, // 초기값
+    { email: "", password: "", remember: false },
     validate
   );
 
-  // 아이디 저장 불러오기
+  // ✅ 페이지 진입 시 localStorage에서 이메일 불러오기
   useEffect(() => {
     const savedEmail = localStorage.getItem("savedEmail");
     if (savedEmail) {
@@ -49,7 +51,7 @@ export default function LoginPage() {
     }
   }, [setValues]);
 
-  // 로그인 요청
+  // ✅ 로그인 처리 함수
   const onSubmit = async (formData) => {
     try {
       const response = await axiosInstance.post("/login", {
@@ -59,10 +61,16 @@ export default function LoginPage() {
 
       if (response.data.message === "로그인 성공") {
         const token = response.data.token;
-
         localStorage.setItem("accessToken", token);
 
-        // ✅ React Query 캐시 초기화 (로그인 상태 반영)
+        // ✅ remember 체크 상태에 따라 이메일 저장/삭제
+        if (formData.remember) {
+          localStorage.setItem("savedEmail", formData.email);
+        } else {
+          localStorage.removeItem("savedEmail");
+        }
+
+        // ✅ React Query 캐시 갱신
         queryClient.invalidateQueries(["user"]);
 
         navigate(from, { replace: true });
@@ -86,6 +94,7 @@ export default function LoginPage() {
       <p className="login-text">로그인하고 팀을 만나세요.</p>
 
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        {/* 이메일 */}
         <input
           type="email"
           name="email"
@@ -97,6 +106,7 @@ export default function LoginPage() {
         />
         {errors.email && <div className="error-message">{errors.email}</div>}
 
+        {/* 비밀번호 */}
         <input
           type="password"
           name="password"
@@ -110,6 +120,7 @@ export default function LoginPage() {
           <div className="error-message">{errors.password}</div>
         )}
 
+        {/* ✅ 아이디 저장 */}
         <div className="checkbox-wrapper">
           <label className="checkbox-label">
             <input
@@ -124,10 +135,12 @@ export default function LoginPage() {
           </label>
         </div>
 
+        {/* 로그인 버튼 */}
         <button type="submit" className="login-button">
           로 그 인
         </button>
 
+        {/* 링크 그룹 */}
         <div className="link-group">
           <ul className="link-group">
             <li>
@@ -136,24 +149,18 @@ export default function LoginPage() {
               </Link>
             </li>
             <li>
-              <Link to="/FindEmail" className="link">
+              <Link to="/find-Email" className="link">
                 계정 찾기
               </Link>
             </li>
             <li>
-              <Link to="/FindPassword" className="link">
+              <Link to="/find-Password" className="link">
                 비밀번호 찾기
               </Link>
             </li>
           </ul>
         </div>
       </form>
-
-      <div className="social-login">
-        <img src={kakao} className="social-icon" alt="카카오 로그인" />
-        <img src={google} className="social-icon" alt="구글 로그인" />
-        <img src={naver} className="social-icon" alt="네이버 로그인" />
-      </div>
     </div>
   );
 }

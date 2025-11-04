@@ -1,96 +1,124 @@
-.level-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
+.userlevel-container {
   text-align: center;
   font-family: "Pretendard", sans-serif;
+  padding: 40px 20px;
 }
 
-.page-title {
+.userlevel-header {
+  text-align: left;
+}
+
+.userlevel-header-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.userlevel-header-sub {
+  font-size: 14px;
+  color: #777;
+}
+
+.userlevel-section {
+  margin-top: 60px;
+  padding-bottom: 37px;
+}
+
+.userlevel-info-title {
   font-size: 20px;
   font-weight: 600;
-  margin: 20px 0;
 }
 
-.level-select-text h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.level-select-text p {
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.level-select {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.select-area {
-  width: 32px;
-  height: 12px;
-  border-radius: 4px;
-  background-color: #e0e0e0;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.select-area.fill {
-  background-color: #06b6d4; /* 메인 포인트 컬러 (하늘색 느낌) */
-}
-
-.position-section {
-  margin-top: 20px;
-}
-
-.section-title {
-  font-size: 14px;
-  color: #444;
-  margin: 10px 0;
-}
-
-.position-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.pos-btn {
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
-  background-color: white;
-  padding: 6px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.pos-btn:hover,
-.pos-btn.active {
-  background-color: #dff8ff;
-  border-color: #06b6d4;
-  color: #06b6d4;
-}
-
-.save-btn {
-  margin-top: 30px;
-  background-color: #e0f9ff;
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  width: 100%;
-  color: #666;
+.userlevel-info-name {
   font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #333;
 }
 
-.save-btn:hover {
-  background-color: #baf0ff;
+.userlevel-info-desc {
+  font-size: 13px;
+  margin-top: 3px;
+  color: #555;
+}
+
+.userlevel-select {
+  position: relative;
+  margin-top: 43px;
+  display: flex;
+  gap: 11px;
+  justify-content: center;
+}
+
+.userlevel-select-box {
+  background-color: #EAEAEA;
+  width: 75px;
+  height: 47px;
+  border-radius: 10px;
+  border-bottom: 1px solid #D4DAE2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.userlevel-select-box:hover {
+  transform: scale(1.08);
+}
+
+.userlevel-line {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 11px; 
+  justify-content: center;
+  pointer-events: none; 
+}
+
+.userlevel-line-segment {
+  width: 75px;
+  height: 9px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.userlevel-line-beginner {
+  width: 248px;
+  height: 9px;
+  background-color: #00E58A;
+  border-radius: 10px 0 0 10px;
+}
+
+.userlevel-line-amateur {
+  width: 420px;
+  height: 9px;
+  background-color: #1570FF;
+}
+
+.userlevel-line-semi {
+  width: 248px;
+  height: 9px;
+  background-color: #FF4029;
+}
+
+.userlevel-line-pro {
+  width: 75px;
+  height: 9px;
+  background-color: #212121;
+  border-radius: 0 10px 10px 0;
+}
+
+.userlevel-btn {
+  background-color: #48e5f0;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 12px 28px;
+  margin-top: 50px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.25s ease;
+}
+
+.userlevel-btn:hover {
+  background-color: #00ADB5;
 }

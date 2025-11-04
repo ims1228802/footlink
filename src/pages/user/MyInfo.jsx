@@ -24,6 +24,27 @@ export default function MyInfo() {
 
   const navigate = useNavigate();
 
+  // 공유 버튼 클릭
+  const handleShare = async () => {
+    const id = user?.id ?? user?.userId ?? "me";
+    const shareUrl = `${window.location.origin}/u/${id}`;
+    try {
+      if ("share" in navigator) {
+        await navigator.share({
+          title: "내 페이지",
+          text: "내 페이지를 공유합니다",
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(shareUrl);
+        alert("링크가 복사되었습니다.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("공유를 완료할 수 없습니다. 다시 시도해 주세요.");
+    }
+  };
+
   // 수정 버튼 클릭
   const handleModify = () => {
     navigate("/modify");
@@ -79,7 +100,7 @@ export default function MyInfo() {
           <button className="myinfo-modify-btn" onClick={handleModify}>
             <img src={Edit} alt="수정" />
           </button>
-          <button className="myinfo-share-btn">
+          <button className="myinfo-share-btn" onClick={handleShare}>
             <img src={Share} alt="공유하기" />
           </button>
         </div>
@@ -134,7 +155,7 @@ export default function MyInfo() {
                     <span>등록된 내역이 없습니다.</span>
                     <button
                       className="myinfo-register-btn"
-                      onClick={() => navigate("/user/user-level")}
+                      onClick={() => navigate("/user-level")}
                     >
                       등록하기
                     </button>
