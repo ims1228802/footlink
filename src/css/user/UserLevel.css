@@ -1,0 +1,124 @@
+.userlevel-container {
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+  padding: 40px 20px;
+}
+
+.userlevel-header {
+  text-align: left;
+}
+
+.userlevel-header-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.userlevel-header-sub {
+  font-size: 14px;
+  color: #777;
+}
+
+.userlevel-section {
+  margin-top: 60px;
+  padding-bottom: 37px;
+}
+
+.userlevel-info-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.userlevel-info-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #333;
+}
+
+.userlevel-info-desc {
+  font-size: 13px;
+  margin-top: 3px;
+  color: #555;
+}
+
+.userlevel-select {
+  position: relative;
+  margin-top: 43px;
+  display: flex;
+  gap: 11px;
+  justify-content: center;
+}
+
+.userlevel-select-box {
+  background-color: #EAEAEA;
+  width: 75px;
+  height: 47px;
+  border-radius: 10px;
+  border-bottom: 1px solid #D4DAE2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.userlevel-select-box:hover {
+  transform: scale(1.08);
+}
+
+.userlevel-line {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 11px; 
+  justify-content: center;
+  pointer-events: none; 
+}
+
+.userlevel-line-segment {
+  width: 75px;
+  height: 9px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.userlevel-line-beginner {
+  width: 248px;
+  height: 9px;
+  background-color: #00E58A;
+  border-radius: 10px 0 0 10px;
+}
+
+.userlevel-line-amateur {
+  width: 420px;
+  height: 9px;
+  background-color: #1570FF;
+}
+
+.userlevel-line-semi {
+  width: 248px;
+  height: 9px;
+  background-color: #FF4029;
+}
+
+.userlevel-line-pro {
+  width: 75px;
+  height: 9px;
+  background-color: #212121;
+  border-radius: 0 10px 10px 0;
+}
+
+.userlevel-btn {
+  background-color: #48e5f0;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 12px 28px;
+  margin-top: 50px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.25s ease;
+}
+
+.userlevel-btn:hover {
+  background-color: #00ADB5;
+}

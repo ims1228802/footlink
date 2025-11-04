@@ -51,8 +51,8 @@ import PasswordReset from "../pages/user/PasswordReset.jsx";
 import EditTeam from "../pages/team/EditTeam.jsx";
 import EditTeamNext from "../pages/team/EditTeamNext.jsx";
 import FindEmailNext from "../pages/user/FindEmailNext.jsx";
-import FindPasswordNext from "../pages/user/FindPasswordNext.jsx"; 
-
+import FindPasswordNext from "../pages/user/FindPasswordNext.jsx";
+import PublicUserInfo from "../pages/user/PublicUserInfo.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/main" /> },
@@ -77,13 +77,15 @@ const router = createBrowserRouter([
   { path: "/selectfield", element: <SelectField /> },
   { path: "/selectmatch", element: <SelectMatch /> },
   { path: "/selectdetail", element: <SelectDetail /> },
-  { path: "/match/:matchNo", element :<MatchDetailPage /> },
-  { path: "/end/:matchNo", element :<ResultPage /> },
-  { path: "/adminMatch", element :<AdminMatch /> },
-  { path: "/addResult/:matchNo", element :<AddResult /> },
+  { path: "/match/:matchNo", element: <MatchDetailPage /> },
+  { path: "/end/:matchNo", element: <ResultPage /> },
+  { path: "/adminMatch", element: <AdminMatch /> },
+  { path: "/addResult/:matchNo", element: <AddResult /> },
   { path: "/find-Email-Next", element: <FindEmailNext /> },
   { path: "/find-Password-Next", element: <FindPasswordNext /> },
-  { path: "/editResult/:matchNo", element :<EditResult /> },
+  { path: "/editResult/:matchNo", element: <EditResult /> },
+  { path: "user-level", element: <UserLevel /> },
+  { path: "/u/:id", element: <PublicUserInfo /> },
   {
     path: "/user",
     element: (
@@ -103,12 +105,10 @@ const router = createBrowserRouter([
       { path: "faq", element: <Faq /> },
       { path: "faq/:id", element: <FaqDetail /> },
       { path: "settings", element: <Settings /> },
-      { path: "user-level", element: <UserLevel /> }, 
-      { path: "edit-phone", element :<PhoneEdit /> },
-      { path: "reset-password", element: <PasswordReset /> },       
+      { path: "edit-phone", element: <PhoneEdit /> },
+      { path: "reset-password", element: <PasswordReset /> },
     ],
   },
- 
 ]);
 
 export default function Router() {

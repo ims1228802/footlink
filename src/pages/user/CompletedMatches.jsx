@@ -12,11 +12,11 @@ export default function CompletedMatches() {
     field: "",
   });
 
-  // ✅ 완료 경기 불러오기 (API)
+  // 완료 경기 불러오기 
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await api.get("/myinfo/completed-matches");
+        const { data } = await api.get("/completed-matches");
         setMatches(data); // 전체 데이터
         setFilteredMatches(data); // 초기 상태 = 전체
       } catch (err) {
@@ -25,7 +25,7 @@ export default function CompletedMatches() {
     })();
   }, []);
 
-  // ✅ 🔍 검색 필터
+  // 검색 필터
   const handleSearch = () => {
     const { startDate, endDate, region, field } = query;
     const start = startDate ? new Date(startDate) : null;
@@ -44,7 +44,7 @@ export default function CompletedMatches() {
     setFilteredMatches(filtered);
   };
 
-  // ✅ 입력 핸들러
+  //  입력 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setQuery((prev) => ({ ...prev, [name]: value }));
@@ -54,7 +54,6 @@ export default function CompletedMatches() {
     <div className={styles.container}>
       <h1 className={styles.title}>완료된 매치</h1>
 
-      {/* 🔍 검색 필터 */}
       <div className={styles.filterBox}>
         <div className={styles.filterRow}>
           <label>기간</label>
@@ -96,7 +95,6 @@ export default function CompletedMatches() {
         />
       </div>
 
-      {/* 📋 매치 리스트 */}
       <div className={styles.matchList}>
         {filteredMatches.length > 0 ? (
           filteredMatches.map((match) => (

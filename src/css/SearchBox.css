@@ -1,0 +1,120 @@
+/* 래퍼 */
+.sb {
+  position: relative;
+  width: 100%;
+}
+
+/* 입력창 */
+.sb-input {
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;            /* 아이콘 여백 고려 */
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 40px;
+  color: #111827;             /* 약한 진회색 */
+}
+
+/* 드롭다운 패널 */
+.sb-panel {
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(100% + 4px);
+  max-height: 288px;          /* 72 * 4 (대략) */
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  z-index: 1100;              /* 헤더(1000)보다 위 */
+}
+
+/* 섹션 라벨 */
+.sb-label {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B7280;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+/* 안내 문구 */
+.sb-hint {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #6B7280;
+}
+
+/* 항목 */
+.sb-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+}
+
+.sb-item:hover {
+  background: #F9FAFB;
+}
+
+.sb-item.is-active {
+  background: #F3F4F6;
+}
+
+/* 항목 내 타입 뱃지 영역 */
+.sb-item-type {
+  width: 28px;                /* “구장/팀” 레이블 영역 */
+  margin-right: 8px;
+  font-size: 11px;
+  color: #6B7280;
+  flex: 0 0 auto;
+}
+
+/* 항목 텍스트 */
+.sb-item-text {
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 검색 입력창 커스텀 */
+.sb-input::-webkit-search-cancel-button,
+.sb-input::-webkit-search-decoration,
+.sb-input::-webkit-search-results-button,
+.sb-input::-webkit-search-results-decoration { appearance:none; -webkit-appearance:none; display:none; }
+.sb-input::-ms-clear { display:none; width:0; height:0; }
+.sb-input { padding-right: 36px; }
+
+/* 커스텀 X 버튼 */
+.sb-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: none;                 /* 기본 비노출 → 값 있을 때만 보이기 */
+}
+.sb-clear img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 입력값이 있을 때 보이도록 */
+.sb.has-value .sb-clear { display: block; }

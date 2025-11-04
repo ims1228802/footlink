@@ -108,6 +108,7 @@
 /* 인증요청 / 인증확인 버튼 */
 .findemail-sendbtn,
 .findemail-verifybtn {
+  width: 83px;
   height: 44px;
   display: flex;
   align-items: center;
