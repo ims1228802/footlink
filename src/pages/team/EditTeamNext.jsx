@@ -1,5 +1,5 @@
 import Layout from "../../layout/Layout.jsx";
-import Level from "../../components/team/level.jsx";
+import Level from "../../components/team/Level.jsx";
 import "../../css/team/NewTeamNext.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -17,6 +17,7 @@ import {
     Tooltip,
     Legend
     } from "chart.js";
+import axios from "axios";
 
 export default function EditTeamNext() {
     const location = useLocation();
@@ -27,6 +28,7 @@ export default function EditTeamNext() {
     const [ teamState, setTeamState ] = useState(teamStateSelector);
     const selectedState = location.state.chartData;
     const teamInfo = location.state.data;
+    const files = location.state.files;
 
     //console.log(teamState);
     console.log(selectedState);
@@ -93,6 +95,21 @@ export default function EditTeamNext() {
             ],
         }
 
+    const filesSubmit = () => {
+        const formData = new FormData();
+        console.log(files);
+        formData.append('files', files);
+        formData.append('teamCode', teamInfo.teamCode);
+
+        axios.put('http://localhost/api/team/editTeamEmblem', formData)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    }
+
     const navigateHandler = (route) => {
         console.log(route);
 
@@ -124,6 +141,7 @@ export default function EditTeamNext() {
         console.log(teamState);
         dispatch(step2_team_state(teamState));
         dispatch(teamEditPut());
+        filesSubmit();
     }
 
     return(

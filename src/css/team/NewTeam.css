@@ -337,3 +337,30 @@ main h2{
     width: 49%;
     padding: 6px;
 }
+
+input[type='file']{
+    border: 1px solid #D4DAE2;
+    padding: 5px 7px;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 34px;
+}
+
+input::-webkit-file-upload-button{
+    border: 1px solid #46A663;
+    color: #46A663;
+    padding: 3px 5px;
+    border-radius: 8px;
+    margin-right: 9px;
+}
+
+.preview{
+    width: 100%;
+    border: 1px solid #D4DAE2;
+    margin-top: 20px;
+    min-height: 300px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

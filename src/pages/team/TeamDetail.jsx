@@ -25,6 +25,7 @@ import {
     } from "chart.js";
 import Modal from "../../components/Modal.jsx";
 import Calendar from "../../components/team/Calendar.jsx";
+import CalendarDetail from "../../components/team/CalendarDetail.jsx";
 
 export default function TeamDetail() {
         const urlLocation = useLocation();
@@ -37,6 +38,9 @@ export default function TeamDetail() {
         const [ button, setButton ] = useState('overview');
         const [ isModalOpen, setModalOpen ] = useState(false);
         const [ teamCode, setTeamCode ] = useState('');
+        const [ recruitCount, setRecruitCount ]  = useState(0);
+        const [ selectModal, setSelectModal ] = useState('');
+        const [ teamDateCode, setTeamDateCode ] = useState('');
         const navigator = useNavigate();
 
         let isUser = false;
@@ -50,6 +54,14 @@ export default function TeamDetail() {
             axios.get(`http://localhost/api/team/teamDetail?teamCode=${teamCode}`)
                 .then(response => {
                     setData(response.data);
+                })
+                .catch(error => {
+                    console.log(`Error feching data: ${error}`);
+            });
+
+            axios.get(`http://localhost/api/team/teamRecruitCnt?teamCode=${teamCode}`)
+                .then(response => {
+                    setRecruitCount(response.data);
                 })
                 .catch(error => {
                     console.log(`Error feching data: ${error}`);
@@ -149,12 +161,14 @@ export default function TeamDetail() {
             });
         }
 
-        const openModel = () => {
+        const openModel = (select, code) => {
             document.body.style.cssText = `
             position: fixed;
             top: -${window.scrollY}px;
             overflow-y: scroll;
             width: 100%;`;
+            setSelectModal(select);
+            setTeamDateCode(code);
             setModalOpen(true);
         }
 
@@ -165,10 +179,29 @@ export default function TeamDetail() {
             window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
         }
 
-        const onClickHandler = (select) => {
+        const onClickHandler = (select, code) => {
             switch(select){
                 case 'recruit':
                     navigator(`/newTeamRecruit?teamCode=${teamCode}`);
+                break;
+                case 'recruitEdit':
+                    navigator(`/editTeamRecruit?teamCode=${teamCode}`);
+                break;
+                case 'recruitEnd':
+                    if(confirm('팀원 모집을 종료하시겠습니까?')){
+                        axios.delete('http://localhost/api/team/deleteRecruit', {
+                            params: {
+                                teamCode: teamCode,
+                            }
+                        })
+                        .then(response => {
+                            alert('모집이 종료되었습니다.');
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                    }
                 break;
                 case 'teamEdit':
                     navigator(`/editTeam`, 
@@ -197,6 +230,11 @@ export default function TeamDetail() {
                     }
                 break;
                 case 'outTeam':
+                    if(author == '팀장'){
+                        alert('팀장은 탈퇴할 수 없습니다.');
+                        return;
+                    }
+
                     if(confirm('정말로 팀을 탈퇴하시겠습니까?')){
                         axios.delete('http://localhost/api/team/outTeam', {
                             params: {
@@ -213,6 +251,26 @@ export default function TeamDetail() {
                             console.error(error);
                         });
                         // console.log('팀 삭제 완료');
+                    }
+                break;
+                case 'joinTeam':
+                    if(recruitCount == 0){
+                        alert('모집중인 팀이 아닙니다.');
+                        return;
+                    }
+
+
+                break;
+                case 'deleteCalendar':
+                    if(confirm('해당 일정을 삭제하시겠습니까?')){
+                        axios.delete(`http://localhost/api/team/deleteCalendar?teamDateCode=${code}`)
+                        .then(response => {
+                            alert('일정이 삭제되었습니다.');
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
                     }
                 break;
             }
@@ -295,7 +353,7 @@ export default function TeamDetail() {
                         <div className="team-member">
                             <div className="profile-title">
                                 <p>일정</p>
-                                <button className="calendar-btn" onClick={() => openModel()}>일정추가</button>
+                                <button className="calendar-btn" onClick={() => openModel('newCalendar')}>일정추가</button>
                             </div>
                             <div className="calendar-box">
                                 <p>8월 3일</p>
@@ -326,7 +384,7 @@ export default function TeamDetail() {
                                 <div className="calendar-box">
                                     <p>{date}</p>
                                     {reduceDate[date].map(item => (
-                                        <div className="calendar-div" key={item.teamDateCode}>
+                                        <div className="calendar-div" key={item.teamDateCode} onClick={() => openModel('calendarDetail', item.teamDateCode)}>
                                             <div className="time-state">
                                                 <p>{item.startTime}</p>
                                             </div>
@@ -338,6 +396,11 @@ export default function TeamDetail() {
                                                     <span>진행시간: {item.startTime} - {item.endTime}</span>
                                                 </div>
                                             </div>
+                                            {author == '팀관리자' || author == '팀장' ? (
+                                            <div>
+                                                <button type="button" className="delete-btn" onClick={() => onClickHandler('deleteCalendar', item.teamDateCode)}>일정 삭제</button>
+                                            </div>
+                                        ) : undefined}
                                         </div>
                                     ))}
                                 </div>
@@ -366,6 +429,19 @@ export default function TeamDetail() {
             }
         }
 
+    const ModalContent = () => {
+        switch(selectModal){
+            case 'newCalendar':
+                return(
+                    <Calendar onClose={closeModel} teamCode={teamCode} />
+                )
+            case 'calendarDetail':
+                return(
+                    <CalendarDetail onClose={closeModel} teamDateCode={teamDateCode}/>
+                )
+        }
+    }
+
 
     return(
          <Layout>
@@ -374,7 +450,7 @@ export default function TeamDetail() {
                     <div className="side-div">
                         <div className="team-info">
                             <div className="team-icon">
-                                <img src={logo} />
+                                <img src={data.teamImage ? data.teamImage : logo} />
                             </div>
                             <div className="team-text">
                                 <p>{data.teamName}</p>
@@ -400,7 +476,12 @@ export default function TeamDetail() {
                                     {(author == '팀장' || author == '팀관리자') ? (
                                     <>
                                         <button type="button">모집 신청 내역</button>
-                                        <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>
+                                        {recruitCount > 0 ? (
+                                            <>
+                                                <button type="button" onClick={() => onClickHandler('recruitEdit')}>모집 수정하기</button>
+                                                <button type="button" onClick={() => onClickHandler('recruitEnd')}>모집 종료하기</button>
+                                            </>
+                                            ) : <button type="button" onClick={() => onClickHandler('recruit')}>팀원 모집하기</button>}
                                         <button type="button" onClick={() => onClickHandler('teamEdit')}>팀 정보 수정하기</button>
                                     </>
                                     ) : undefined }
@@ -408,7 +489,7 @@ export default function TeamDetail() {
                                 </>
                             ) : (
                                 <>
-                                    <button type="button" onClick={() => onClickHandler('outTeam')}>가입 신청하기</button>
+                                    <button type="button" onClick={() => onClickHandler('joinTeam')}>가입 신청하기</button>
                                 </>
                             )}
                         </div>) : undefined}
@@ -432,7 +513,7 @@ export default function TeamDetail() {
                 </div>
             </main>
             <Modal isOpen={isModalOpen} onClose={closeModel}>
-                <Calendar onClose={closeModel} teamCode={teamCode} />
+                <ModalContent />
             </Modal>
         </Layout>
     );
