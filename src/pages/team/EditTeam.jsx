@@ -28,6 +28,7 @@ export default function EditTeam(){
     const engWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const selectedWeek = teamInfo.activeDoWeek.split(',');
     const selectedWeekIdx = [];
+    const springUrl = 'http://localhost';
     let selectGender = '';
     let selectTime = '';
     let selectAge = '';
@@ -269,7 +270,7 @@ export default function EditTeam(){
                         <p>팀 엠블렘</p>
                         <div className="emblem-div">
                             <div className="icon-div">
-                                {selectFile ? <img src={selectImgUrl}/> : <img src={teamInfo.teamImage ? teamInfo.teamImage : teamIcon}/>}
+                                {selectFile ? <img src={selectImgUrl}/> : <img src={teamInfo.teamImage ? springUrl + teamInfo.teamImage : teamIcon}/>}
                             </div>
                             <div className="button-div">
                                 <button type="button" className="fill-btn" onClick={() => openModel('upload')}>엠블렘 사진 업로드</button>
