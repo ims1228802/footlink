@@ -52,8 +52,6 @@ import Settings from "../pages/user/Settings.jsx";
 import UserLevel from "../pages/user/UserLevel.jsx";
 import PhoneEdit from "../pages/user/PhoneEdit.jsx";
 import PasswordReset from "../pages/user/PasswordReset.jsx";
-import EditTeam from "../pages/team/EditTeam.jsx";
-import EditTeamNext from "../pages/team/EditTeamNext.jsx";
 import FindEmailNext from "../pages/user/FindEmailNext.jsx";
 import FindPasswordNext from "../pages/user/FindPasswordNext.jsx";
 import PublicUserInfo from "../pages/user/PublicUserInfo.jsx";
