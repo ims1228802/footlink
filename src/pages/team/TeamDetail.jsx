@@ -26,6 +26,9 @@ import {
 import Modal from "../../components/Modal.jsx";
 import Calendar from "../../components/team/Calendar.jsx";
 import CalendarDetail from "../../components/team/CalendarDetail.jsx";
+import TeamDelegate from "../../components/team/teamDelegate.jsx";
+import AddRecruit from "../../components/team/AddRecruit.jsx";
+import RecruitApp from "../../components/team/RecruitApp.jsx";
 
 export default function TeamDetail() {
         const urlLocation = useLocation();
@@ -42,6 +45,7 @@ export default function TeamDetail() {
         const [ selectModal, setSelectModal ] = useState('');
         const [ teamDateCode, setTeamDateCode ] = useState('');
         const navigator = useNavigate();
+        const springUrl = 'http://localhost';
 
         let isUser = false;
         let author = '';
@@ -259,7 +263,7 @@ export default function TeamDetail() {
                         return;
                     }
 
-
+                    openModel('joinTeam');
                 break;
                 case 'deleteCalendar':
                     if(confirm('해당 일정을 삭제하시겠습니까?')){
@@ -439,6 +443,18 @@ export default function TeamDetail() {
                 return(
                     <CalendarDetail onClose={closeModel} teamDateCode={teamDateCode}/>
                 )
+            case 'teamDelegate':
+                return(
+                    <TeamDelegate onClose={closeModel} membersData={userData} teamCode={teamCode}/>
+                )
+            case 'joinTeam':
+                return(
+                    <AddRecruit onClose={closeModel} teamCode={teamCode}/>
+                )
+            case 'recruitApp':
+                return(
+                    <RecruitApp onClose={closeModel} teamCode={teamCode}/>
+                )
         }
     }
 
@@ -450,7 +466,7 @@ export default function TeamDetail() {
                     <div className="side-div">
                         <div className="team-info">
                             <div className="team-icon">
-                                <img src={data.teamImage ? data.teamImage : logo} />
+                                <img src={data.teamImage ? springUrl + data.teamImage : logo} />
                             </div>
                             <div className="team-text">
                                 <p>{data.teamName}</p>
@@ -472,10 +488,10 @@ export default function TeamDetail() {
                                 <>
                                     <button type="button" onClick={() => alert('기능 준비중입니다.')}>초대링크 복사</button>
                                     <button type="button" onClick={() => onClickHandler('outTeam')}>팀 탈퇴하기</button>
-                                    {author == '팀장' ? <button type="button">팀 위임하기</button> : undefined}
+                                    {author == '팀장' ? <button type="button" onClick={() => openModel('teamDelegate')}>팀 위임하기</button> : undefined}
                                     {(author == '팀장' || author == '팀관리자') ? (
                                     <>
-                                        <button type="button">모집 신청 내역</button>
+                                        <button type="button" onClick={() => openModel('recruitApp')}>모집 신청 내역</button>
                                         {recruitCount > 0 ? (
                                             <>
                                                 <button type="button" onClick={() => onClickHandler('recruitEdit')}>모집 수정하기</button>

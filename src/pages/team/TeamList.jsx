@@ -18,6 +18,7 @@ export default function TeamList() {
     const [ data, setData ] = useState([]);
     const [ menu, setMenu ] = useState('teamList');
     const [ searchText, setSearchText ] = useState('');
+    const springUrl = 'http://localhost';
 
     function selectMenu(selectMenu){
       setMenu(selectMenu);
@@ -54,7 +55,7 @@ export default function TeamList() {
                         filterList.map((list) => list.isTemp == "정석" ? (
                         <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
-                                <img src={list.teamImage ? list.teamImage : teamImg} />
+                                <img src={list.teamImage ? springUrl + list.teamImage : teamImg} />
                             </div>
                             <div className='team_info'>
                                 <div className='team_name'>
@@ -99,7 +100,7 @@ export default function TeamList() {
                         filterList.map((list) => list.isTemp == "정석" && list.recruitCount > 0 ? (
                         <Link className='team_div' key={list.teamCode} to={`/teamDetail?teamCode=${list.teamCode}`}>
                             <div className='team_img'>
-                                <img src={list.teamImage ? list.teamImage : teamImg} />
+                                <img src={list.teamImage ? springUrl + list.teamImage : teamImg} />
                             </div>
                             <div className='team_info'>
                                 <div className='team_name'>
