@@ -1,113 +1,157 @@
-.like-container {
-  flex: 1;
+/* container */
+.like-container{
+  background:#fff;
+  min-height:100%;
+  padding: 4px 0;
 }
 
-.like-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 40px;
+.like-title{
+  font-size:20px;
+  font-weight:700;
+  margin: 0 0 24px;
 }
 
-.like-date-group {
-  margin-bottom: 30px;
+.like-date-group{ margin-bottom:24px; }
+.like-date{
+  font-size:14px;
+  font-weight:600;
+  color:#6b7280; /* gray-500 */
+  margin: 0 0 10px;
 }
 
-.like-date {
-  font-size: 15px;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
+/* list & card */
+.like-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.like-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 16px;
+  background:#fff;
+  border:1px solid #e5e7eb; /* gray-200 */
+  border-radius:12px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
 }
 
-.like-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+/* left cluster (applied-left/right도 동일 규칙 적용) */
+.like-left,
+.applied-left{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  flex:1 1 auto;
+}
+
+/* time + status */
+.like-time{
+  display:flex;
+  align-items:center;
   flex-direction: column;
-  gap: 12px;
+  gap:8px;
+  flex:0 0 88px; /* fixed column */
+}
+.like-time .time{
+  font-weight:700;
+  font-size:16px;
+  color:#111827; /* gray-900 */
+  min-width:56px;
 }
 
-.like-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  border-radius: 10px;
+/* status badge (Applied와 동일 키워드: open/urgent/closed) */
+.status{
+  display:inline-block;
+  padding:1px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:500;
+  line-height:20px;
+  white-space:nowrap;
+}
+.status.open   { background:#46A663; color:#FFFFFF; }  /* green */
+.status.urgent { background:#EF4444; color:#FFFFFF; }  /* red */
+.status.closed { background:#A7A7A7; color:#FFFFFF; }  /* gray */
+
+/* info block */
+.like-info{ flex:1 1 auto; min-width:0; }
+.like-info .stadium{
+  font-weight:700;
+  color:#111827;
+  margin-bottom:2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.like-info .meta{
+  font-size:13px;
+  color:#6b7280;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.like-time-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70px;
+/* right cluster */
+.like-right,
+.applied-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex:0 0 auto;
+}
+.like-recruit{
+  font-size:14px;
+  color:#111827;
+  white-space:nowrap;
 }
 
-.like-time {
-  font-weight: 600;
-  color: #222;
-  font-size: 15px;
+/* heart button */
+.like-action-btn{
+  background:none;
+  border:0;
+  cursor:pointer;
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  transition:background .15s ease;
+}
+.like-action-btn:hover{ background:#f3f4f6; }   /* gray-100 */
+.like-action-btn:active{ background:#e5e7eb; }  /* gray-200 */
+.like-action-btn[disabled]{ opacity:.6; cursor:wait; }
+
+/* empty state */
+.no-match{
+  color:#6b7280;
+  font-size:14px;
+  padding: 12px 2px;
 }
 
-.like-status {
-  font-size: 12px;
-  padding: 3px 8px;
-  border-radius: 12px;
-  margin-bottom: 4px;
-  font-weight: 500;
+/* separators between date groups (optional) */
+.like-date-group + .like-date-group{
+  padding-top: 10px;
+  border-top:1px dashed #e5e7eb;
 }
 
-.like-status.모집중 {
-  background-color: #e8f7ee;
-  color: #2b9d54;
+/* responsive */
+@media (max-width: 640px){
+  .like-card{ padding:12px; }
+  .like-time{ flex-basis:72px; }
+  .like-right{ gap:8px; }
+  .like-recruit{ font-size:13px; }
+  .like-time .time{ font-size:15px; min-width:52px; }
 }
 
-.like-status.진행중 {
-  background-color: #e6efff;
-  color: #376fff;
-}
-
-.like-status.마감 {
-  background-color: #fceaea;
-  color: #d62c2c;
-}
-
-.like-info {
-  flex: 1;
-  margin-left: 12px;
-}
-.like-state-group {
-  display: flex;
-}
-
-.like-stadium {
-  font-size: 15px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-.like-tags {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 2px;
-}
-
-.like-meta,
-.like-organizer {
-  font-size: 13px;
-  color: #888;
-}
-
-.like-btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.like-btn img {
-  width: 20px;
-  height: 20px;
+/* a11y focus */
+.like-action-btn:focus-visible{
+  outline:2px solid #2563eb; /* blue-600 */
+  outline-offset:2px;
+  box-shadow:0 0 0 2px rgba(37,99,235,.15);
 }

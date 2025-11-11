@@ -114,9 +114,10 @@
 }
 
 /* hover 효과 */
-.sidebar-item:hover .sidebar-link {
+.sidebar-link:hover {
   background-color: #eef3f8;
 }
+
 
 /* 활성화(active) 상태 */
 .sidebar-item.active .sidebar-link {

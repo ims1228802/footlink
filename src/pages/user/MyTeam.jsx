@@ -60,7 +60,7 @@ export default function MyTeam() {
             <li
               key={team.teamCd}
               className="myteam-item"
-              onClick={() => navigate(`/teamDetail?teamCd=${team.teamCd}`)}
+              onClick={() => navigate(`/teamDetail?teamCode=${team.teamCd}`)}
             >
               {/* 팀 이미지 */}
               <div className="myteam-img-wrap">

@@ -1,0 +1,198 @@
+.findemail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 20px;
+  font-family: "Pretendard", sans-serif;
+}
+
+.findemail-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 뒤로가기 */
+.findemail-backlink {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  display: inline-flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.findemail-backicon {
+  width: 20px;
+  height: 20px;
+}
+
+/* 제목 */
+.findemail-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+/* 설명 */
+.findemail-description {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* 입력 영역 */
+.findemail-phonebox,
+.findemail-verifybox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* ✅ input wrapper: 타이머를 input 내부에 배치 */
+.findemail-verifyinputwrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* 입력창 */
+.findemail-phoneinput,
+.findemail-verifyinput {
+  width: 376px; /* ✅ 요청사항 반영 */
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.findemail-phoneinput:focus,
+.findemail-verifyinput:focus {
+  border-color: #00c2a0;
+  box-shadow: 0 0 0 2px rgba(0, 194, 160, 0.2);
+  outline: none;
+}
+
+/* ✅ 타이머 input 내부 오른쪽 */
+.findemail-timer {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4d4f;
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* 인증요청 / 인증확인 버튼 */
+.findemail-sendbtn,
+.findemail-verifybtn {
+  width: 83px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 6px;
+  border: none;
+  background: #00c2a0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.findemail-sendbtn:hover,
+.findemail-verifybtn:hover {
+  background: #00a68a;
+}
+
+.findemail-sendbtn:disabled,
+.findemail-verifybtn:disabled {
+  background: #e5e7eb;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* 다음 버튼 */
+.findemail-nextbtn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  background: #00c2a0;
+  color: white;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+
+.findemail-nextbtn:disabled {
+  background: #e6f9f7;
+  color: #00a89a;
+  cursor: not-allowed;
+}
+
+.findemail-nextbtn:hover:not(:disabled) {
+  background: #00a68a;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+  .findemail-form {
+    padding: 28px 20px;
+  }
+
+  .findemail-backlink {
+    top: 20px;
+    left: 20px;
+  }
+
+  .findemail-phonebox,
+  .findemail-verifybox {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .findemail-phoneinput,
+  .findemail-verifyinput {
+    width: 100%;
+  }
+
+  .findemail-sendbtn,
+  .findemail-verifybtn {
+    width: 100%;
+  }
+
+  .findemail-nextbtn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
